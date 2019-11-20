@@ -23,6 +23,8 @@ wp-content/backups/
 #Composer files
 /vendor/
 
+#Lando files
+/db-backups/
 
 # BackstopJS Files
 backstop_data/ 

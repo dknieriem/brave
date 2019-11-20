@@ -18,6 +18,19 @@
  * @package WordPress
  */
 
+/**
+ * Local configuration information.
+ *
+ * If you are working in a local/desktop development environment and want to
+ * keep your config separate, we recommend using a 'wp-config-local.php' file,
+ * which you should also make sure you .gitignore.
+ */
+if (file_exists(dirname(__FILE__) . '/wp-config-local.php') && !isset($_ENV['PANTHEON_ENVIRONMENT'])):
+  # IMPORTANT: ensure your local config does not include wp-settings.php
+  require_once(dirname(__FILE__) . '/wp-config-local.php');
+
+else:
+
 // ** MySQL settings ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME','dannahgr_b2bb_st3');
@@ -65,6 +78,7 @@ define('NONCE_SALT',       '*jPULt&[<1&p+C&UV c~%+F%@Fn*Qh%&4T1qkmFL[]Sj%`YZy9;z
 define('WP_CACHE_KEY_SALT', 'jhudjIjIx2DOSWI39HqGug');
 $table_prefix = 'wp_';
 
+endif;
 
 
 

@@ -1,0 +1,4 @@
+name: born-to-be-brave
+recipe: wordpress
+config:
+  webroot: .
