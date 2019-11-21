@@ -1,10 +1,10 @@
 Born to Be Brave
 ================
 
-
-
 Local setup
 -----------
+
+See https://docs.lando.dev/config/wordpress.html#getting-started
 
 1. Install Lando
 2. run 
