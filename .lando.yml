@@ -1,4 +1,6 @@
-name: born-to-be-brave
+name: brave
 recipe: wordpress
 config:
+  database: mysql
   webroot: .
+  xdebug: true
