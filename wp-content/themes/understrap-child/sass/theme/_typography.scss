@@ -1,0 +1,268 @@
+@each $font, $src in $fonts {
+    @font-face {
+        font-family:$font;
+        src:url($src);
+    }
+}
+
+// Added this hardcoded @font-face rule because I wanted any text with the font-family "GoudySans Md BT" to use the bold font at font-weight 900, rather than needing to specify a different font-family. 
+// DON: maybe a smarter way to do this with your newly implemented settings-based font specifications?
+@font-face {
+    font-family: "GoudySans Md BT";
+    src: url('../fonts/GoudySansBoldBT.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face{font-family:"Font Awesome 5 Free";font-style:normal;font-weight:900;
+    src:url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.eot);
+    src:url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"),url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.woff) format("woff"),url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.ttf) format("truetype"),url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.svg#fontawesome) format("svg");
+}
+
+@each $name, $family in $fontnames {
+    .font-#{$name}, .text-#{$name} {
+        font-family: $family !important;
+    }
+}
+
+body{
+    color:$body-color;
+    font-family: $body-font;
+    font-weight:300;
+    line-height: 1.2;
+}
+
+a
+{
+    text-decoration: none !important;
+}
+
+.section-subtitle
+{
+    margin: 2rem auto 3rem auto;
+    &__inner-content
+    {
+        color:$pink;
+        text-transform: uppercase;
+        border-style: dotted;
+        padding-bottom:.7rem;
+        
+        border-image-source: url('../img/dots-pink.svg');
+        border-image-slice: 33% 33%;
+        border-image-repeat: round;
+        border-width: 0 0 9px 0;
+        border-color: $pink;
+        font-size:1.5rem;
+        font-weight:300;
+        letter-spacing: .1rem;
+    }
+    &__inner-content--white
+    {
+        color:white;
+        border-image-source: url('../img/dots-white.svg');
+    }
+}
+
+
+p
+{
+    line-height:1.2;
+    font-weight:300;
+}
+
+@each $color, $hex in $colors {
+   .text-#{$color} {
+    color: $hex;
+   }
+}
+
+.heading
+{
+    font-family:$header-font;
+    color:$teal;
+    margin-top:1rem;
+    margin-bottom:1rem;
+    text-transform: uppercase;
+    
+    &--lg
+    {
+        font-size:3.5rem;
+        margin-top:3rem;
+        margin-bottom:3rem;
+        @media (max-width: 768px) {
+            font-size:2.91rem;
+        }
+    }
+    &--sm
+    {
+        font-size:1.5rem;
+    }
+
+    &--white
+    {
+        color:$white;
+    }
+
+    &--pink
+    {
+        color:$pink;
+    }
+
+    &--yellow
+    {
+        color: $yellow;
+    }
+
+    &__on-pink
+    {
+        color: $white;
+        background-color: $pink;
+        font-size: 1.5rem;
+        line-height: 42px;
+        padding: 6px 0 3px;
+        letter-spacing: 3px;
+        box-shadow: 10px 0 0 $pink, -6px 0 0 $pink;
+    }
+
+    &__on-pink-inner {
+        // position: relative; 
+        // left: 0.5em;
+    }
+
+    &--white-on-pink
+    {
+        background-color: $pink;
+        color: $white;
+        letter-spacing: 3px;
+        padding: 8px 15px;
+    }
+
+    &--white-on-dark-pink
+    {
+        background-color: $dark-pink;
+        color: $white;
+        letter-spacing: 3px;
+        padding: 8px 15px;
+    }
+
+    &__on-teal
+    {
+        background-color: $teal;
+        color: $white;
+    }
+
+    &__on-yellow
+    {
+        background-color: $yellow;
+        color: $white;
+    }
+
+    &__on-white
+    {
+        background-color: $white;
+    }
+
+    &.background-circle
+    {
+        border-radius: 50%;
+        margin: 1rem auto;
+        width: 3rem;
+    }
+}
+
+h1
+{
+    color: $white;
+    font-family: $header-font;
+    font-weight: 300;
+}
+
+h2,h3,h4
+{
+    color: $teal;
+    font-family: $body-font;
+}
+
+h5
+{
+    color: $teal;
+    font-weight:300;
+    text-transform: uppercase;
+}
+
+.entry-content ul li, .entry-content ol li
+{
+    margin-bottom:.5rem;
+    margin-top:.5rem;
+}
+
+.entry-content {
+
+    ol {
+        list-style: none;
+        counter-reset: list-counter;
+        padding-inline-start: 0;
+      }
+
+    @for $i from 1 through 10 {
+        ol[start="#{$i}"] {
+            counter-reset: lis $i ;
+        }
+    }
+}
+
+ol>li {
+    counter-increment: list-counter;
+    font-weight:300;
+
+    &::before {
+        content: counter(list-counter) ". ";
+        color: $black;
+        font-weight: 600;
+        font-size:2rem;
+        //font-family:$header-font;
+      }
+
+    &>h2:first-child, &>h3:first-child, &>h4:first-child, &>h5:first-child 
+    {
+        display: inline;
+    }
+}
+
+.entry-content ul>li {
+    font-weight:600; 
+}
+  
+/* Generic modifier classes */
+
+
+.light
+{
+    color:white;
+}
+
+.text-left
+{
+    text-align: left;
+}
+
+.text-right
+{
+    text-align: right;
+}
+
+.text-center
+{
+    text-align: center;
+}
+
+.text-bold, .font-bold 
+{
+    font-weight: bold;
+}
+
+.all-caps
+{
+    text-transform: uppercase;
+}
+

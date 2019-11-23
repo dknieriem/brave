@@ -1,0 +1,115 @@
+.footer
+{
+    background-color: $footer-background-color;
+    padding:4rem 50px 1rem;
+
+    &__copyright
+    {
+        color: $gray;
+        font-size: 0.8rem;
+        margin-top:2.5rem;
+    }
+
+    &__link
+    {
+        color: $gray;
+        transition: color 0.5s ease;
+        font-size:0.8rem;
+
+        &:hover
+        {
+            color:white;
+        }
+    }
+
+    &__heading
+    {
+        font-family:$body-font;
+        font-size:1rem;
+        color: $gray;
+        font-weight:400;
+        font-size:0.8rem;
+        text-transform: uppercase;
+    }
+
+    &__list
+    {
+        padding-left:0px;
+    }
+
+    &__list-item
+    {
+        list-style: none;
+        margin-left:0;
+        padding-left:0;
+        font-weight:300;
+        font-size:0.8rem;
+    }
+
+    &__social-link
+    {
+        color: $gray;
+        font-size: 1.5rem;
+        display: inline-block;
+        margin-right:1rem;
+        transition: color 0.5s ease;
+
+        &:hover
+        {
+            color: $gray;
+        }
+    }
+    
+    &__email-signup-form
+    {
+        //@extend .form-inline;
+        display: flex;
+        flex-direction: row;
+        margin-bottom:1rem;
+    }
+
+    &__input
+    {
+        //@extend .form-control;
+        border-radius:0px;
+        flex-basis:70%;
+        border:none;
+        font-size:0.8rem;
+        padding:.75rem 1rem;
+        @extend .shadowed;
+    }
+
+    &__submit-button
+    {
+        flex-basis:20%;
+        //background-color:$rose;
+        //color:white;
+        border:none;
+        font-weight:300;
+        @extend .shadowed;  
+    }
+
+    &__text
+    {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        color: $gray;
+    }
+    
+    &__logo
+    {
+        @extend .img-fluid;
+        /*max-width:200px;*/
+        max-height:125px;
+        margin-bottom:2rem;
+        @media (max-width: 768px) {
+            margin-top: 3rem;
+        }
+    }
+}
+
+#wrapper-footer-full,
+#wrapper-static-hero 
+{ 
+    background-color: $footer-background-color; 
+}

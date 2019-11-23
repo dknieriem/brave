@@ -1,0 +1,88 @@
+.post-card
+{
+    @extend .card;
+    background-color: unset;
+    border: none;
+
+    //grid-column: 1/span 3;
+
+    @include media-breakpoint-up(md) {
+        //grid-column: unset;
+    }
+
+    &__heading {
+        @extend .text-center;
+        width: 100%;
+        padding-top: 75%;
+    }
+    
+    &__body
+    {
+        @extend .card-body;
+        display: flex;
+        flex-direction: column;
+    }
+    &__title
+    {
+        @extend .card-title;
+        @extend .font-goudysans;
+        @extend .text-center;
+        font-size:1.3rem;
+        color:$black;
+        text-transform: uppercase;
+        line-height: 1.0em;
+
+    }
+    &__text
+    {
+        @extend .card-text;
+        @extend .font-goudysans;
+        @extend .text-center;
+        font-size:0.8rem;
+        flex-grow:1;
+        padding: 0 2.5%;
+        line-height: 1.15em;    
+    }
+    &__link
+    {
+        color:$black;
+    }
+    &__card-button
+    {
+        @extend .button;
+        @extend .button--small;
+        display: inline-block;
+    }
+}
+
+.post-card-row
+{
+
+    grid-template-columns: 1fr 1fr;
+    
+    justify-content: center;
+    // flex-wrap: wrap;
+    // display:flex;
+    // @extend .row;
+    
+    display: grid;
+    grid-gap: 25px; /* blog style hack - by tim */
+    margin: 20px; /* blog style hack - by tim */
+	
+    @include media-breakpoint-up(md) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* blog style hacks - by tim */
+
+/*.blog .post-card__heading {
+	width: 100%;
+	padding-top: 75%;
+}*/
+
+.fill {
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}

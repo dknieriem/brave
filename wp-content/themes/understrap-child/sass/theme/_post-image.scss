@@ -1,0 +1,21 @@
+.post-image
+{
+    @extend .img-fluid;
+    margin-top:2rem;
+    margin-bottom:2rem;
+    border-radius:6px;
+
+    &--full-width
+    {
+
+    }
+
+}
+
+.page-section__single-column.no-inner-margin, .row.no-inner-margin {
+	.post-image
+	{
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
