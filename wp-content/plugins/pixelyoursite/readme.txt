@@ -1,14 +1,14 @@
-===PixelYourSite - Facebook Pixel, Google Analytics, Head & Footer (WooCommerce, EDD, Events)===
+===PixelYourSite - Your smart PIXEL (TAG) Manager===
 Contributors: PixelYourSite, themister
 Tags: Facebook Pixel, New Facebook Pixel, Facebook Conversion Pixel, Facebook Pixel Events, Facebook, New Facebook Pixel Events, Dynamic Events, Standard Events, Facebook Events, Facebook Standard Events, Facebook Dynamic Product Ads, WooCommerce, WooCommerce Facebook Pixel, Facebook Custom Events, Facebook Conversion Value, WooCommerce Affiliate Products, Easy Digital Downloads Pixel, Easy Digital Downloads Google Analytics, Head & Footer scripts, Enhanced Ecommerce, Pinterest tag
 Requires at least: 3.0.1
 Requires PHP: 5.4
-Tested up to: 5.2
-Stable tag: 7.0.5
+Tested up to: 5.3
+Stable tag: 7.1.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Facebook Pixel, Google Analytics, plus ANY other script. WooCommerce and EDD with Facebook Dynamic Product Ads and Google Enhanced Ecommerce. Track any action with events. Pinterest Tag support via a free add-on.
+Facebook Pixel, Google Analytics, plus ANY other script. WooCommerce and EDD with Facebook Dynamic Product Ads and Google Enhanced Ecommerce. Track any action with events. Pinterest Tag support via a free add-on. Dedicated paid Bing Tag add-on.
 
 == Description ==
 **Manage your Facebook Pixel or Google Analytics code with a single plugin and add ANY other script (Head & Footer feature). The Pinterest Tag can be implemented via [free add-on](https://www.pixelyoursite.com/pinterest-tag).**
@@ -30,6 +30,7 @@ Google Analytics: one click install
 ANY script: add any other script with our flexible Head & Footer option
 The Pinterest Tag: via [free add-on](https://www.pixelyoursite.com/pinterest-tag)
 Google Ads (formerly AdWords) [pro feature](https://www.pixelyoursite.com/google-ads-tag)
+Microsoft (BING) UET tag [paid add-on](https://www.pixelyoursite.com/bing-tag)
 
 **Want to learn about your Facebook Pixel? We've put toghether [this help page](https://www.pixelyoursite.com/how-to-use-facebook-pixel)**
 
@@ -130,9 +131,9 @@ Dynamic Remarketing vertical custom dimensions (Retail or Custom vertical). Usef
 
 EVEN MORE HEAD & FOOTER OPTIONS:
 
-The pro version [Head & Footer](https://www.pixelyoursite.com/head-footer-scripts) lets you use dynamic values: [id], [title], [categories], [email], [first_name], [last_name]. 
+The pro version [Head & Footer](https://www.pixelyoursite.com/head-footer-scripts) lets you use dynamic values: [id], [title], [categories], [email], [first_name], [last_name].
 
-For WooCommerce you’ll have some additional dynamic values: [order_number], [order_subtotal], [order_total], [currency]. 
+For WooCommerce you’ll have some additional dynamic values: [order_number], [order_subtotal], [order_total], [currency].
 
 EVEN MORE WOOCOMMERCE FEATURES:
 
@@ -150,7 +151,7 @@ For more info on how the pro version can help you with your Facebook Pixel, [vis
 
 GOOGLE ADS TAG (FORMER ADWORDS):
 
-The Pro version will implement the [Google Ads Tag](https://www.pixelyoursite.com/google-ads-tag) with Dynamic Retargeting support for WooCommerce and Easy Digital Downloads. 
+The Pro version will implement the [Google Ads Tag](https://www.pixelyoursite.com/google-ads-tag) with Dynamic Retargeting support for WooCommerce and Easy Digital Downloads.
 
 Each Global event will be sent to Google Ads too, and you can configure Google Ads conversions.
 
@@ -334,17 +335,33 @@ There are a few you should consider:
 
 *It won’t work with LeadPages or any similar system because those pages are generated outside WordPress.
 
-*Some clients reported problems with Thrive landing pages. This happens because Thrive removes other plugins JS files. 
+*Some clients reported problems with Thrive landing pages. This happens because Thrive removes other plugins JS files.
 
 There's a strange solution: it appears that if you have the Yoast plugin installed the problem will go away.
 
 *Upsell plugins can cause problems with purchase tracking. If they add an intermediary page after the transaction, we have [a filter their developer can use to call our default Purchase event](https://bitbucket.org/snippets/the_mister/zeaXya)
 
+**Are there any situations when the plugin will connect to outside sources?**
+
+Yes, there are, and we will explain them here:
+
+*We offer you the possibility to voluntarily subscribe to our newsletter and get valuable tips.  We manage our newsletter using ActiveCampaing. When you subscribe, we will call our server that intermediates the API connection, and then the data is sent to ActiveCampaign. The information that is passed: the name you provide and the email. If you check the "I use WooCommerce" checkbox, we will add this information as a tag, to give you better tips in the future. 
+
+*Add-on updates: the plugin works with free or paid add-ons (for Pinterest, Bing, etc) that we provide and host on our server. When you install such an add-on, we will do checks for updates. If you have a valid license for the add-on, we will automatically download the latest version of the add-on from our servers. The core plugin (PixelYourSite itself) updates are provided using WordPress own servers.
+
+*When you install a pixel or a tag (like the Facebook Pixel or Google Analytics), the script will call for their specific files. These scripts are hosted on their servers (Facebook's servers, Google's servers).
+
+*If you install scripts using our Head & Footer option, these scripts may load files from third-party servers. You can check this using your browser's Console.
+
+**Do you record data about the websites' traffic**
+
+NO, absolutely not! We don't track any type of data about your website. We simply implement the pixel/tag code. 
+
 
 
 == Screenshots ==
 
-1. Add your Facebook pixel ID, Google Analytics ID, or Pinterest ID. 
+1. Add your Facebook pixel ID, Google Analytics ID, or Pinterest ID.
 2. You don’t have to copy/paste all the Facebook pixel code, but just the pixel ID. You can find it in your Ads Manager, under the Pixels link.
 3. You just need your Google Analytics Tracking ID, not the full code.
 4. You simply need your Pinterest Tag ID.
@@ -370,6 +387,58 @@ There's a strange solution: it appears that if you have the Yoast plugin install
 
 
 == Changelog ==
+
+= PixelYourSite 7.1.4 =
+
+* Minor code changes to declare compatibility with WordPress 5.3 and WooCommerce 3.8.
+
+
+= PixelYourSite 7.1.3 =
+
+* Adding new options for WooCommerce and EDD events IDs: select between ID or SKU, use prefixes and postfixes, treat variable products like simple products. These features will work with the Pinterest add-on v2.0.8 (free), and the Bing add-on v1.0.2 (paid).
+
+* Fix for an old bug related to how On Page Events triggers work. In previous versions, final slashes were ignored for both “URL Match” and “URL Contains” conditions. This was fixed with this release.
+Recommendation: if you have manually added events using the On-Page trigger, test them to make sure they work as expected.
+
+* Fix for a bug related to the Pinterest add-on. In previous versions, the WooCommerce Checkout and PageVisit events could not be turned ON/OFF.
+
+
+
+= PixelYourSite 7.1.2 =
+
+* Name change - we removed "Facebook" from the plugin title, as per Facebook's request. The plugin will still offer great Facebook Pixel integration.
+
+* Banner update - we removed "Facebook" from our banners, as per Facebook's request.
+
+* Security and code improvements
+
+
+= PixelYourSite 7.1.1 =
+
+* Compatibility with WooCommerce 3.7
+
+* New structure for the Form and Comment events. It will help you better identify what actions have fired the events. 
+
+Form Event for the Facebook Pixel and the Pinterest Tag:
+
+- form_class: a new parameter pulling the CSS class when it exits.
+- form_id: a new parameter pulling the CSS ID when it exits.
+
+Form event on Google Analytics:
+
+- event_categoty: Form.
+- event_action: the CSS class or ID (makes easier for you to identify the form).
+- event_label: the text on the form’s button.
+
+Comment event  on Google Analytics:
+
+- event_categoty: Comment.
+- event_action: the “post type” (page, products, post, etc) comment.
+- event_label: the URL where the comment was posted.
+
+= PixelYourSite 7.1.0 =
+
+* This update ads support for our paid Microsoft (BING) UET Tag add-on.
 
 = PixelYourSite 7.0.5 =
 
@@ -422,7 +491,7 @@ There's a strange solution: it appears that if you have the Yoast plugin install
 
 * The Pinterest Tag supports Enhanced Matching.
 
-* Google Analytics supports Enhanced Link Attribution and Anonymize IP. 
+* Google Analytics supports Enhanced Link Attribution and Anonymize IP.
 
 * The WooCommerce integrations tracks remove from cart as an event and has support for Google Enhanced Ecommerce tracking.
 
@@ -682,5 +751,3 @@ This is a major release, with a new design and new features:
 = 5.0 =
 
 Version 5.0 comes with full Easy Digital Downloads integrations plus the ability to give each WooCommerce and EDD event a global value.
-
-

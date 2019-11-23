@@ -130,6 +130,16 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         </div>
 
+        <?php if ( Bing()->enabled() ) : ?>
+            <div class="row">
+                <div class="col">
+                    <?php Bing()->render_switcher_input( 'general_event_enabled' ); ?>
+                    <h4 class="switcher-label">Enable on Bing</h4>
+                    <?php Bing()->renderAddonNotice(); ?>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <div class="row my-3">
             <div class="col form-inline">
                 <label>Custom name</label>
@@ -269,6 +279,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 			    <?php renderProBadge('https://www.pixelyoursite.com/google-ads-tag/?utm_source=pys-free-plugin&utm_medium=pro-badge&utm_campaign=pro-feature') ?>
             </div>
         </div>
+
+        <?php if ( Bing()->enabled() ) : ?>
+            <div class="row">
+                <div class="col">
+                    <?php Bing()->render_switcher_input( 'search_event_enabled' ); ?>
+                    <h4 class="switcher-label">Enable the Search event on Bing</h4>
+                    <?php Bing()->renderAddonNotice(); ?>
+                </div>
+            </div>
+        <?php endif; ?>
         
 	    <?php if ( Pinterest()->enabled() ) : ?>
             <div class="row">
@@ -340,6 +360,16 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         <?php endif; ?>
 
+        <?php if ( Bing()->enabled() ) : ?>
+            <div class="row">
+                <div class="col">
+                    <?php Bing()->render_switcher_input( 'form_event_enabled' ); ?>
+                    <h4 class="switcher-label">Enable the Form event on Bing</h4>
+                    <?php Bing()->renderAddonNotice(); ?>
+                </div>
+            </div>
+        <?php endif; ?>
+
     </div>
 </div>
 
@@ -400,6 +430,16 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
 		<?php endif; ?>
 
+        <?php if ( Bing()->enabled() ) : ?>
+            <div class="row">
+                <div class="col">
+                    <?php Bing()->render_switcher_input( 'comment_event_enabled' ); ?>
+                    <h4 class="switcher-label">Enable the Comment event on Bing</h4>
+                    <?php Bing()->renderAddonNotice(); ?>
+                </div>
+            </div>
+        <?php endif; ?>
+
     </div>
 </div>
 
@@ -452,7 +492,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
         
         <?php if ( Pinterest()->enabled() ) : ?>
-            <div class="row mb-3">
+            <div class="row">
                 <div class="col">
                     <?php Pinterest()->render_switcher_input( 'download_event_enabled' ); ?>
                     <h4 class="switcher-label">Enable the Download event on Pinterest</h4>
@@ -461,7 +501,17 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         <?php endif; ?>
 
-        <div class="row">
+        <?php if ( Bing()->enabled() ) : ?>
+            <div class="row">
+                <div class="col">
+                    <?php Bing()->render_switcher_input( 'download_event_enabled' ); ?>
+                    <h4 class="switcher-label">Enable the Download event on Bing</h4>
+                    <?php Bing()->renderAddonNotice(); ?>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <div class="row mt-3">
             <div class="col">
                 <h4 class="label">Extension of files to track as downloads:</h4>
                 <?php PYS()->render_tags_select_input( 'download_event_extensions' ); ?>
@@ -530,6 +580,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <h4 class="switcher-label">Enable the ClickEvent on Pinterest</h4>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col">
+                <?php renderDummySwitcher(); ?>
+                <h4 class="switcher-label">Enable the ClickEvent on Bing</h4>
+            </div>
+        </div>
         
     </div>
 </div>
@@ -580,6 +637,13 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="col">
 			    <?php renderDummySwitcher(); ?>
                 <h4 class="switcher-label">Enable the WatchVideo event on Pinterest</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <?php renderDummySwitcher(); ?>
+                <h4 class="switcher-label">Enable the ClickEvent on Bing</h4>
             </div>
         </div>
 
@@ -647,7 +711,14 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <h4 class="switcher-label">Enable the Signup event on Pinterest</h4>
             </div>
         </div>
-     
+
+        <div class="row">
+            <div class="col">
+                <?php renderDummySwitcher(); ?>
+                <h4 class="switcher-label">Enable the ClickEvent on Bing</h4>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -679,6 +750,13 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="col">
 			    <?php renderDummySwitcher(); ?>
                 <h4 class="switcher-label">Enable the AdSense event on Pinterest</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <?php renderDummySwitcher(); ?>
+                <h4 class="switcher-label">Enable the ClickEvent on Bing</h4>
             </div>
         </div>
         

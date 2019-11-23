@@ -35,6 +35,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @property string ga_event_label
  * @property string ga_event_value
  * @property bool   ga_non_interactive
+ *
+ * @property bool   bing_enabled
+ * @property string bing_event_action
+ * @property string bing_event_category
+ * @property string bing_event_label
+ * @property string bing_event_value
  */
 class CustomEvent {
 
@@ -69,6 +75,12 @@ class CustomEvent {
 		'ga_event_label'         => null,
 		'ga_event_value'         => null,
 		'ga_non_interactive'     => true,
+
+        'bing_enabled' => false,
+        'bing_event_action' => null,
+        'bing_event_category' => null,
+        'bing_event_label' => null,
+        'bing_event_value' => null,
 	);
 
 	public function __construct( $post_id = null ) {
@@ -377,7 +389,17 @@ class CustomEvent {
 		$this->data['ga_event_value']     = ! empty( $args['ga_event_value'] ) ? sanitize_text_field( $args['ga_event_value'] ) : null;
 		$this->data['ga_non_interactive'] = isset( $args['ga_non_interactive'] ) && $args['ga_non_interactive'] ? true : false;
 
-		update_post_meta( $this->post_id, '_pys_event_data', $this->data );
+        /**
+         * BING
+         */
+
+        $this->data['bing_enabled'] = isset($args['bing_enabled']) && $args['bing_enabled'] ? true : false;
+        $this->data['bing_event_action'] = !empty($args['bing_event_action']) ? sanitize_text_field($args['bing_event_action']) : null;
+        $this->data['bing_event_category'] = !empty($args['bing_event_category']) ? sanitize_text_field($args['bing_event_category']) : null;
+        $this->data['bing_event_label'] = !empty($args['bing_event_label']) ? sanitize_text_field($args['bing_event_label']) : null;
+        $this->data['bing_event_value'] = !empty($args['bing_event_value']) ? sanitize_text_field($args['bing_event_value']) : null;
+
+        update_post_meta( $this->post_id, '_pys_event_data', $this->data );
 
 	}
 
@@ -477,5 +499,8 @@ class CustomEvent {
 	public function getGoogleAnalyticsAction() {
 		return $this->ga_event_action == '_custom' ? $this->ga_custom_event_action : $this->ga_event_action;
 	}
-	
+
+    public function isBingEnabled() {
+        return (bool) $this->bing_enabled;
+    }
 }

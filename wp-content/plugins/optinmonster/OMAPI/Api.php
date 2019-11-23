@@ -7,6 +7,17 @@
  * @package OMAPI
  * @author  Thomas Griffin
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Api class.
+ *
+ * @since 1.0.0
+ */
 class OMAPI_Api {
 
 	/**
@@ -16,7 +27,7 @@ class OMAPI_Api {
 	 *
 	 * @var string
 	 */
-	public $base = OPTINMONSTER_APP_API_URL;
+	public $base = OPTINMONSTER_APP_URL;
 
 	/**
 	 * Current API route.
@@ -82,6 +93,15 @@ class OMAPI_Api {
 	public $plugin = false;
 
 	/**
+	 * The Api Version (v1 or v2) for this request.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @var string
+	 */
+	public $version = 'v1';
+
+	/**
 	 * Additional data to add to request body
 	 *
 	 * @since 1.0.0
@@ -118,18 +138,40 @@ class OMAPI_Api {
 	public $response_body = null;
 
 	/**
+	 * Builds the API Object
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param string $version The Api Version (v1 or v2)
+	 * @param string $endpoint The Api Endpoint
+	 * @param string $method The Request method
+	 *
+	 * @return self
+	 */
+	public static function build( $version, $route, $method = 'POST' ) {
+		$creds  = OMAPI::get_instance()->get_api_credentials();
+		// Check if we have the new API and if so only use it
+		if ( $creds['apikey'] ) {
+			return new OMAPI_Api( $route, array( 'apikey' => $creds['apikey'] ), $method, $version );
+		}
+
+		return new OMAPI_Api( $route, array( 'user' => $creds['user'], 'key' => $creds['key'] ), $method, $version);
+	}
+
+	/**
 	 * Primary class constructor.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $route  The API route to target.
-	 * @param array $creds   Array of API credentials.
-	 * @param string $method The API method.
+	 * @param string $route   The API route to target.
+	 * @param array $creds    Array of API credentials.
+	 * @param string $method  The API method.
+	 * @param string $version The version number of our API
 	 */
-	public function __construct( $route, $creds, $method = 'POST' ) {
+	public function __construct( $route, $creds, $method = 'POST', $version = 'v1' ) {
 		// Set class properties.
 		$this->route    = $route;
-		$this->url      = $this->base . $this->route . '/';
+		$this->version  = $version;
 		$this->method   = $method;
 		$this->user     = ! empty( $creds['user'] ) ? $creds['user'] : '';
 		$this->key      = ! empty( $creds['key'] ) ? $creds['key'] : '';
@@ -161,8 +203,11 @@ class OMAPI_Api {
 			$body['omapi-data'] = maybe_serialize( $this->additional_data );
 		}
 
-		$body   = wp_parse_args( $args, $body );
-		$string = http_build_query( $body, '', '&' );
+		$body = wp_parse_args( $args, $body );
+		$url  = in_array( $this->method, array( 'GET', 'DELETE' ), true )
+			? add_query_arg( $body, $this->getUrl() )
+			: $this->getUrl();
+		$url  = esc_url_raw( $url );
 
 		// Build the headers of the request.
 		$headers = array(
@@ -170,6 +215,7 @@ class OMAPI_Api {
 			'Cache-Control'         => 'no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0',
 			'Pragma'                => 'no-cache',
 			'Expires'               => 0,
+			'Origin'                => site_url(),
 			'OMAPI-Referer'         => site_url(),
 			'OMAPI-Sender'          => 'WordPress',
 		);
@@ -183,22 +229,27 @@ class OMAPI_Api {
 			'headers'   => $headers,
 			'body'      => $body,
 			'timeout'   => 3000,
-			'sslverify' => false
+			'sslverify' => false,
+			'method'    => $this->method,
 		);
 
 		// Perform the query and retrieve the response.
-		$this->response      = 'GET' == $this->method ? wp_remote_get( esc_url_raw( $this->url ) . '?' . $string, $data ) : wp_remote_post( esc_url_raw( $this->url ), $data );
-		$this->response_code = wp_remote_retrieve_response_code( $this->response );
-		$this->response_body = json_decode( wp_remote_retrieve_body( $this->response ) );
-		//return new WP_Error( 'debug', '<pre>' . var_export( $this->response, true ) . '</pre>' );
+		$this->response = wp_remote_request( $url, $data );
 
 		// Bail out early if there are any errors.
-		if ( is_wp_error( $this->response_body ) ) {
-			return $this->response_body;
+		if ( is_wp_error( $this->response ) ) {
+			return $this->response;
 		}
 
+		// Get the response code and response body.
+		$this->response_code = wp_remote_retrieve_response_code( $this->response );
+		$this->response_body = json_decode( wp_remote_retrieve_body( $this->response ) );
+
+		// Get the correct success response code to check against.
+		$response_code = 'DELETE' === $this->method ? 204 : 200;
+
 		// If not a 200 status header, send back error.
-		if ( 200 != $this->response_code ) {
+		if ( $response_code != $this->response_code ) {
 			$type  = ! empty( $this->response_body->type ) ? $this->response_body->type : 'api-error';
 			$error = ! empty( $this->response_body->message ) ? stripslashes( $this->response_body->message ) : '';
 			if ( empty( $error ) ) {
@@ -213,6 +264,17 @@ class OMAPI_Api {
 
 		// Return the json decoded content.
 		return $this->response_body;
+	}
+
+	/**
+	 * The gets the URL based on our base, endpoint and version
+	 *
+	 * @since 1.8.0
+	 *
+	 * @return string The API url.
+	 */
+	public function getUrl() {
+		return $this->base . '/' . $this->version . '/' . $this->route;
 	}
 
 	/**
@@ -239,27 +301,4 @@ class OMAPI_Api {
 	public function set_additional_data( array $data ) {
 		$this->additional_data = array_merge( $this->additional_data, $data );
 	}
-
-	/**
-	 * Checks for SSL for making API requests.
-	 *
-	 * @since 1.0.0
-	 *
-	 * return bool True if SSL is enabled, false otherwise.
-	 */
-	public function is_ssl() {
-		// Use the base is_ssl check first.
-		if ( is_ssl() ) {
-			return true;
-		} else if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && 'https' == $_SERVER['HTTP_X_FORWARDED_PROTO'] ) {
-			// Also catch proxies and load balancers.
-			return true;
-		} else if ( defined( 'FORCE_SSL_ADMIN' ) && FORCE_SSL_ADMIN ) {
-			return true;
-		}
-
-		// Otherwise, return false.
-		return false;
-	}
-
 }

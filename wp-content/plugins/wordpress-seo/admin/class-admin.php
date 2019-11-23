@@ -9,6 +9,7 @@
  * Class that holds most of the admin functionality for Yoast SEO.
  */
 class WPSEO_Admin {
+
 	/**
 	 * The page identifier used in WordPress to register the admin page.
 	 *
@@ -17,6 +18,7 @@ class WPSEO_Admin {
 	 * @var string
 	 */
 	const PAGE_IDENTIFIER = 'wpseo_dashboard';
+
 	/**
 	 * Array of classes that add admin functionality.
 	 *
@@ -91,8 +93,7 @@ class WPSEO_Admin {
 		}
 
 		$this->admin_features = array(
-			'google_search_console' => new WPSEO_GSC(),
-			'dashboard_widget'      => new Yoast_Dashboard_Widget(),
+			'dashboard_widget' => new Yoast_Dashboard_Widget(),
 		);
 
 		if ( WPSEO_Metabox::is_post_overview( $pagenow ) || WPSEO_Metabox::is_post_edit( $pagenow ) ) {
@@ -109,6 +110,9 @@ class WPSEO_Admin {
 		$integrations[] = new WPSEO_MyYoast_Proxy();
 		$integrations[] = new WPSEO_MyYoast_Route();
 		$integrations[] = new WPSEO_Schema_Person_Upgrade_Notification();
+		$integrations[] = new WPSEO_Tracking( 'https://tracking.yoast.com/stats', ( WEEK_IN_SECONDS * 2 ) );
+		$integrations[] = new WPSEO_Admin_Settings_Changed_Listener();
+		$integrations[] = new WPSEO_Admin_Banner();
 
 		$integrations = array_merge(
 			$integrations,
@@ -117,7 +121,6 @@ class WPSEO_Admin {
 			$this->initialize_cornerstone_content()
 		);
 
-		/** @var WPSEO_WordPress_Integration $integration */
 		foreach ( $integrations as $integration ) {
 			$integration->register_hooks();
 		}

@@ -117,8 +117,19 @@ function adminGetCurrentPromoNotice() {
         } else {
             return false;
         }
-    
-        if ( ! is_array( $notices ) || empty( $notices ) ) {
+
+        if (!is_array($notices) || empty($notices)) {
+            $next = isset($set['next']) ? $set['next'] : false;
+
+            if (!$next) {
+                return false;
+            }
+
+            $path = PYS_FREE_PATH . '/notices/' . $next . '.php';
+            if (file_exists($path)) {
+                update_user_meta( $user_id, 'pys_free_current_promo_notices_set', $next );
+            }
+
             return false;
         }
     

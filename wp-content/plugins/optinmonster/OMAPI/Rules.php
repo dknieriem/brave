@@ -7,6 +7,17 @@
  * @package OMAPI
  * @author  Justin Sternberg
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Rules exception base class.
+ *
+ * @since 1.5.0
+ */
 class OMAPI_Rules_Exception extends Exception {
 	protected $bool = null;
 	public function __construct( $message = null, $code = 0, Exception $previous = null ) {
@@ -298,7 +309,7 @@ class OMAPI_Rules {
 
 		if ( $rules_debug ) {
 			$option = OMAPI::get_instance()->get_option();
-			$rules_debug = ! empty( $option['api']['omwpdebug'] ) || is_user_logged_in() && apply_filters( 'optin_monster_api_menu_cap', 'manage_options' );
+			$rules_debug = ! empty( $option['api']['omwpdebug'] ) || is_user_logged_in() && apply_filters( 'optin_monster_api_menu_cap', 'manage_options', '' );
 		}
 
 		// If query var is set and user can manage OM, output debug data.

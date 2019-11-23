@@ -95,7 +95,7 @@ final class PYS extends Settings implements Plugin {
 		    PYS_FREE_PATH . '/includes/options_defaults.json'
 	    );
 
-	    // register pixels and plugins (addons)
+	    // register pixels and plugins (add-ons)
 	    do_action( 'pys_register_pixels', $this );
 	    do_action( 'pys_register_plugins', $this );
 
@@ -104,6 +104,12 @@ final class PYS extends Settings implements Plugin {
 		    /** @noinspection PhpIncludeInspection */
 		    require_once PYS_FREE_PATH . '/modules/pinterest/pinterest.php';
 	    }
+
+        // load dummy Bing plugin for admin UI
+        if ( ! array_key_exists( 'bing', $this->registeredPlugins ) ) {
+            /** @noinspection PhpIncludeInspection */
+            require_once PYS_FREE_PATH . '/modules/bing/bing.php';
+        }
 
         // maybe disable Facebook for WooCommerce pixel output
 	    if ( isWooCommerceActive() && $this->getOption( 'woo_enabled' )
@@ -205,7 +211,7 @@ final class PYS extends Settings implements Plugin {
 	    }
 
 	    // at least one pixel should be configured
-	    if ( ! Facebook()->configured() && ! GA()->configured() && ! Pinterest()->configured() ) {
+	    if ( ! Facebook()->configured() && ! GA()->configured() && ! Pinterest()->configured() && ! Bing()->configured() ) {
 
 		    add_action( 'wp_head', function() {
 			    echo "<script type='text/javascript'>console.warn('PixelYourSite: no pixel configured.');</script>\r\n";
@@ -227,6 +233,7 @@ final class PYS extends Settings implements Plugin {
 		    'facebook_disabled_by_api'  => apply_filters( 'pys_disable_facebook_by_gdpr', false ),
 		    'analytics_disabled_by_api' => apply_filters( 'pys_disable_analytics_by_gdpr', false ),
 		    'pinterest_disabled_by_api' => apply_filters( 'pys_disable_pinterest_by_gdpr', false ),
+            'bing_disabled_by_api' => apply_filters( 'pys_disable_bing_by_gdpr', false ),
 	    ) );
 
     }
@@ -276,15 +283,13 @@ final class PYS extends Settings implements Plugin {
 
         if ( in_array( getCurrentAdminPage(), $this->adminPagesSlugs ) ) {
 
-	        wp_register_style( 'select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css' );
-	        wp_register_script( 'select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
-		        array( 'jquery' ) );
 
-	        wp_deregister_script( 'jquery' );
-	        wp_enqueue_script( 'jquery', '//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js' );
+            wp_register_style( 'select2', PYS_FREE_URL . '/dist/styles/select2.min.css' );
+            wp_enqueue_script( 'select2', PYS_FREE_URL . '/dist/scripts/select2.min.js',
+                array( 'jquery' ) );
 
-	        wp_enqueue_script( 'popper', '//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js', 'jquery' );
-	        wp_enqueue_script( 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js', 'jquery',
+	        wp_enqueue_script( 'popper', PYS_FREE_URL . '/dist/scripts/popper.min.js', 'jquery' );
+	        wp_enqueue_script( 'bootstrap', PYS_FREE_URL . '/dist/scripts/bootstrap.min.js', 'jquery',
 		        'popper' );
 
             wp_enqueue_style( 'pys', PYS_FREE_URL . '/dist/styles/admin.css', array( 'select2' ), PYS_FREE_VERSION );
@@ -368,7 +373,12 @@ final class PYS extends Settings implements Plugin {
 
 			$nonce   = isset( $_REQUEST['_wpnonce'] ) ? $_REQUEST['_wpnonce'] : null;
 			$action  = $_REQUEST['action'];
-			$post_id = isset( $_REQUEST['pys']['event']['post_id'] ) ? $_REQUEST['pys']['event']['post_id'] : false;
+			if(isset( $_REQUEST['pys']['event']['post_id'] )) {
+                $post_id =  sanitize_key($_REQUEST['pys']['event']['post_id']) ;
+            } else {
+                $post_id = false;
+            }
+
 
 			if ( $action == 'update' && wp_verify_nonce( $nonce, 'pys_update_event' ) ) {
 
@@ -376,7 +386,12 @@ final class PYS extends Settings implements Plugin {
 					$event = CustomEventFactory::getById( $post_id );
 					$event->update( $_REQUEST['pys']['event'] );
 				} else {
-					CustomEventFactory::create( $_REQUEST['pys']['event'] );
+				    if(isset( $_REQUEST['pys']['event']) && is_array($_REQUEST['pys']['event'])) {
+                        CustomEventFactory::create( $_REQUEST['pys']['event'] );
+                    } else {
+                        CustomEventFactory::create( [] );
+                    }
+
 				}
 
 			} elseif ( $action == 'enable' && $post_id && wp_verify_nonce( $nonce, 'pys_enable_event' ) ) {
@@ -454,8 +469,14 @@ final class PYS extends Settings implements Plugin {
 	    }
 
         if ( wp_verify_nonce( $_REQUEST['_wpnonce'], 'pys_save_settings' ) ) {
-    
-            $core_options = isset( $_POST['pys']['core'] ) ? $_POST['pys']['core'] : array();
+
+            if(isset( $_POST['pys']['core'] ) && is_array($_POST['pys']['core'])) {
+                $core_options = $_POST['pys']['core'];
+            } else {
+                $core_options =  array();
+            }
+
+
     
             $gdpr_ajax_enabled = isset( $core_options['gdpr_ajax_enabled'] )
                 ? $core_options['gdpr_ajax_enabled']        // value from form data

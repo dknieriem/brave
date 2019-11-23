@@ -12,8 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Allows plugins to use their own update API.
  *
+ * This is used strictly for add-on updates, NOT for updating the core plugin itself (PixelYourSite).
+ * If you decide to download and install free or paid add-ons from our site (Pinterest Tag, Bing Tag), we will perform checks for updates.
+ * If you hold a valid license for the add-on, we will download the update from our server.
+ *
+ *
  * @author  Easy Digital Downloads
  * @version 1.6.14
+ *
  */
 class Plugin_Updater {
 	
@@ -417,8 +423,8 @@ class Plugin_Updater {
 			wp_die( __( 'You do not have permission to install plugin updates', 'easy-digital-downloads' ),
 				__( 'Error', 'easy-digital-downloads' ), array( 'response' => 403 ) );
 		}
-		
-		$data         = $edd_plugin_data[ $_REQUEST['slug'] ];
+		$slag = sanitize_title($_REQUEST['slug']);
+		$data         = $edd_plugin_data[ $slag ];
 		$beta         = ! empty( $data['beta'] ) ? true : false;
 		$cache_key    = md5( 'edd_plugin_' . sanitize_key( $_REQUEST['plugin'] ) . '_' . $beta . '_version_info' );
 		$version_info = $this->get_cached_version_info( $cache_key );
@@ -429,7 +435,7 @@ class Plugin_Updater {
 				'edd_action' => 'get_version',
 				'item_name'  => isset( $data['item_name'] ) ? $data['item_name'] : false,
 				'item_id'    => isset( $data['item_id'] ) ? $data['item_id'] : false,
-				'slug'       => $_REQUEST['slug'],
+				'slug'       => $slag,
 				'author'     => $data['author'],
 				'url'        => home_url(),
 				'beta'       => ! empty( $data['beta'] )

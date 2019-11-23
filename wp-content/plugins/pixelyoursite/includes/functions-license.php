@@ -120,7 +120,12 @@ function updateLicense( $plugin ) {
 	}
 
 	$license_action = $_POST['pys'][ $slug ]['license_action'];
-	$license_key    = isset( $_POST['pys'][ $slug ]['license_key'] ) ? $_POST['pys'][ $slug ]['license_key'] : '';
+	if(isset( $_POST['pys'][ $slug ]['license_key'] )) {
+        $license_key    =  sanitize_text_field($_POST['pys'][ $slug ]['license_key']);
+    } else {
+        $license_key    =   '';
+    }
+
 
 	// activate/deactivate license
 	if ( $license_action == 'activate' ) {

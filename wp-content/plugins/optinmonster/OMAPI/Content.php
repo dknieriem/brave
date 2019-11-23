@@ -7,6 +7,17 @@
  * @package OMAPI
  * @author  Thomas Griffin
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Content class.
+ *
+ * @since 1.0.0
+ */
 class OMAPI_Content {
 
 	/**
@@ -63,6 +74,7 @@ class OMAPI_Content {
 		add_action( 'optin_monster_api_content_settings', array( $this, 'settings' ), 10, 2 );
 		add_action( 'optin_monster_api_content_support', array( $this, 'support' ), 10, 2 );
 		add_action( 'optin_monster_api_content_migrate', array( $this, 'migrate' ), 10, 2 );
+		add_action( 'optin_monster_api_content_woocommerce', array( $this, 'woocommerce' ), 10, 2 );
 
 	}
 
@@ -125,11 +137,11 @@ class OMAPI_Content {
 	 * @since 1.0.0
 	 */
 	public function form_end() {
-
+		$hide_submit_button_class = apply_filters( 'omapi_hide_submit_buttom', false ) ? 'omapi-hidden' : '';
 		// Load different form buttons based on if credentials have been supplied or not.
 		if ( ! $this->base->get_api_credentials() && 'support' !== $this->view ) :
 		?>
-			<p class="submit">
+			<p class="submit <?php echo $hide_submit_button_class; ?>">
 				<input class="button button-primary" type="submit" name="omapi_submit" value="<?php esc_attr_e( 'Connect to OptinMonster', 'optin-monster-api' ); ?>" tabindex="749" />
 			</p>
 		</form>
@@ -157,17 +169,30 @@ class OMAPI_Content {
 		<?php
 		elseif ( 'support' == $this->view ) :
 
-			//you get nothing
+			// You get nothing.
 
-		else :
+		elseif ( 'woocommerce' === $this->view ) :
 		?>
 			<p class="submit">
+				<?php if ( OMAPI_WooCommerce::is_minimum_version() ) : ?>
+					<?php if ( OMAPI_WooCommerce::is_connected() ) : ?>
+						<input class="button button-primary" type="submit" name="omapi_woocommerce_disconnect" value="<?php esc_attr_e( 'Disconnect WooCommerce', 'optin-monster-api' ); ?>" tabindex="749" />
+					<?php else : ?>
+						<input class="button button-primary" type="submit" name="omapi_woocommerce_connect" value="<?php esc_attr_e( 'Connect WooCommerce', 'optin-monster-api' ); ?>" tabindex="749" />&nbsp;
+						<input class="button button-secondary" type="submit" name="omapi[woocommerce][autogenerate]" value="<?php esc_attr_e( 'Auto-Generate Keys', 'optin-monster-api' ); ?>" tabindex="749" />
+					<?php endif; ?>
+				<?php endif; ?>
+			</p>
+		</form>
+		<?php
+		else :
+		?>
+			<p class="submit <?php echo $hide_submit_button_class; ?>">
 				<input class="button button-primary" type="submit" name="submit" value="<?php esc_attr_e( 'Save Settings', 'optin-monster-api' ); ?>" tabindex="749" />
 			</p>
 		</form>
 		<?php
 		endif;
-
 	}
 
 	/**
@@ -278,6 +303,18 @@ class OMAPI_Content {
 
 	}
 
+	/**
+	 * Loads the content output for the WooCommerce panel.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param string $panel  The panel name we are targeting.
+	 * @param object $object The menu object (useful for settings helpers).
+	 */
+	public function woocommerce( $panel, $object ) {
+		echo $object->get_setting_ui( 'woocommerce', 'settings' ); // WPCS: XSS ok.
+	}
+
 	public function support( $panel, $object ) {
 
 		echo $object->get_setting_ui( 'support', 'video' );
@@ -346,7 +383,6 @@ class OMAPI_Content {
 					echo $object->get_setting_ui( 'optins', 'is_wc_product_tag' );
 					echo $object->get_setting_ui( 'toggle', 'woocommerce-end');
 				}
-
 
 				// Advanced Settings
 				echo $object->get_setting_ui( 'toggle', 'advanced-start' );

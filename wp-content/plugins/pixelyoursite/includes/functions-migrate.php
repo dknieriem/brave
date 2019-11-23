@@ -18,8 +18,15 @@ function maybeMigrate() {
 	
 	$pys_free_7_version = get_option( 'pys_core_version', false );
 	$v5_free = get_option( 'pixel_your_site' );
-	
-	if ( ! $pys_free_7_version && is_array( $v5_free ) ) {
+
+    if ($pys_free_7_version && version_compare($pys_free_7_version, '7.1.0', '<')) {
+
+        migrate_7_1_0_bing_defaults();
+
+        update_option( 'pys_core_version', PYS_FREE_VERSION );
+        update_option( 'pys_updated_at', time() );
+
+    } elseif ( ! $pys_free_7_version && is_array( $v5_free ) ) {
 		// migrate from FREE 5.x
 		
 		migrate_v5_free_options();
@@ -36,6 +43,19 @@ function maybeMigrate() {
 		
 	}
 	
+}
+
+function migrate_7_1_0_bing_defaults() {
+
+    $bing_defaults = array(
+        'gdpr_bing_prior_consent_enabled' => true,
+        'gdpr_cookiebot_bing_consent_category' => 'marketing',
+    );
+
+    // update settings
+    PYS()->updateOptions( $bing_defaults );
+    PYS()->reloadOptions();
+
 }
 
 function migrate_v5_free_options() {

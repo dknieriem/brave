@@ -7,6 +7,17 @@
  * @package OMAPI
  * @author  Erik Jonasson
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Admin Pointer class.
+ *
+ * @since 1.6.5
+ */
 class OMAPI_Pointer {
 	/**
 	 * Holds the class object.

@@ -95,6 +95,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                     be GDPR compliant)</h4>
             </div>
         </div>
+        <div class="row mt-3">
+            <div class="col">
+                <?php PYS()->render_switcher_input( 'gdpr_bing_prior_consent_enabled' ); ?>
+                <h4 class="switcher-label">Enable the Bing Tag tracking before consent is capture (this might not
+                    be GDPR compliant)</h4>
+            </div>
+        </div>
 	</div>
 </div>
 
@@ -159,6 +166,15 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
             <div class="col-4">
 			    <?php PYS()->render_text_input( 'gdpr_cookiebot_pinterest_consent_category',
+                    'Enter consent category', ! isCookiebotPluginActivated() ); ?>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-4">
+                <label class="label-inline">Bing consent category:</label>
+            </div>
+            <div class="col-4">
+                <?php PYS()->render_text_input( 'gdpr_cookiebot_bing_consent_category',
                     'Enter consent category', ! isCookiebotPluginActivated() ); ?>
             </div>
         </div>
@@ -285,8 +301,8 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="col">
                 <p>Use following filters to control each pixel:
                     <code>pys_disable_by_gdpr</code>, <code>pys_disable_facebook_by_gdpr</code>,
-                    <code>pys_disable_analytics_by_gdpr</code>, <code>pys_disable_google_ads_by_gdpr</code>
-                    or <code>pys_disable_pinterest_by_gdpr</code>.
+                    <code>pys_disable_analytics_by_gdpr</code>, <code>pys_disable_google_ads_by_gdpr</code>,
+                    <code>pys_disable_pinterest_by_gdpr</code> or <code>pys_disable_bing_by_gdpr</code>.
                 </p>
                 <p class="mb-0">First filter will disable all pixels, other can be used to disable particular pixel.
                     Simply pass <code>TRUE</code> value to disable a pixel.

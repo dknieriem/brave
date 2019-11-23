@@ -7,6 +7,17 @@
  * @package OMAPI
  * @author  Justin Sternberg
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Utils class.
+ *
+ * @since 1.3.6
+ */
 class OMAPI_Utils {
 
 	/**

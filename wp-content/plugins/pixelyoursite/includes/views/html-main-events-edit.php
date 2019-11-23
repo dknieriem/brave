@@ -8,7 +8,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$event = isset( $_REQUEST['id'] ) ? CustomEventFactory::getById( $_REQUEST['id'] ) : new CustomEvent();
+if(isset( $_REQUEST['id'] )) {
+    $id = sanitize_key($_REQUEST['id']);
+    $event = CustomEventFactory::getById($id );
+} else {
+    $event =  new CustomEvent();
+}
+
 
 ?>
 
@@ -549,6 +555,10 @@ $event = isset( $_REQUEST['id'] ) ? CustomEventFactory::getById( $_REQUEST['id']
 
 <?php if ( Pinterest()->enabled() ) : ?>
     <?php Pinterest()->renderCustomEventOptions( $event ); ?>
+<?php endif; ?>
+
+<?php if ( Bing()->enabled() ) : ?>
+    <?php Bing()->renderCustomEventOptions( $event ); ?>
 <?php endif; ?>
 
 <div class="card card-static card-disabled">

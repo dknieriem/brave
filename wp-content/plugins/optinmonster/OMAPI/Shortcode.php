@@ -7,6 +7,17 @@
  * @package OMAPI
  * @author  Thomas Griffin
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Shortcode class.
+ *
+ * @since 1.0.0
+ */
 class OMAPI_Shortcode {
 
 	/**

@@ -107,9 +107,74 @@ if (!Array.prototype.includes) {
 
     }();
 
+    var dummyBing = function () {
+
+        /**
+         * Public API
+         */
+        return {
+
+            isEnabled: function () {
+            },
+
+            disable: function () {
+            },
+
+            loadPixel: function () {
+            },
+
+            fireEvent: function (name, data) {
+                return false;
+            },
+
+            onAdSenseEvent: function () {
+            },
+
+            onClickEvent: function (params) {
+            },
+
+            onWatchVideo: function (params) {
+            },
+
+            onCommentEvent: function () {
+            },
+
+            onFormEvent: function (params) {
+            },
+
+            onDownloadEvent: function (params) {
+            },
+
+            onWooAddToCartOnButtonEvent: function (product_id) {
+            },
+
+            onWooAddToCartOnSingleEvent: function (product_id, qty, is_variable, is_external, $form) {
+            },
+
+            onWooRemoveFromCartEvent: function (cart_item_hash) {
+            },
+
+            onWooAffiliateEvent: function (product_id) {
+            },
+
+            onWooPayPalEvent: function () {
+            },
+
+            onEddAddToCartOnButtonEvent: function (download_id, price_index, qty) {
+            },
+
+            onEddRemoveFromCartEvent: function (item) {
+            }
+
+        }
+
+    }();
+
     var Utils = function (options) {
 
         var Pinterest = dummyPinterest;
+
+        var Bing = dummyBing;
 
         var gtag_loaded = false;
 
@@ -129,6 +194,9 @@ if (!Array.prototype.includes) {
                     Pinterest.loadPixel();
                 }
 
+                if (!options.gdpr.bing_disabled_by_api) {
+                    Bing.loadPixel();
+                }
             }
 
         }
@@ -141,6 +209,11 @@ if (!Array.prototype.includes) {
             setupPinterestObject: function () {
                 Pinterest = window.pys.Pinterest || Pinterest;
                 return Pinterest;
+            },
+
+            setupBingObject: function () {
+                Bing = window.pys.Bing || Bing;
+                return Bing;
             },
 
             // Clone all object members to another and return it
@@ -184,6 +257,8 @@ if (!Array.prototype.includes) {
                                     fired = Analytics.fireEvent(eventName, eventData);
                                 } else if ('pinterest' === pixel) {
                                     fired = Pinterest.fireEvent(eventName, eventData);
+                                } else if ('bing' === pixel) {
+                                    fired = Bing.fireEvent(eventName, eventData);
                                 }
 
                                 // prevent event double event firing
@@ -253,6 +328,7 @@ if (!Array.prototype.includes) {
                                 options.gdpr.analytics_disabled_by_api = res.data.analytics_disabled_by_api;
                                 options.gdpr.google_ads_disabled_by_api = res.data.google_ads_disabled_by_api;
                                 options.gdpr.pinterest_disabled_by_api = res.data.pinterest_disabled_by_api;
+                                options.gdpr.bing_disabled_by_api = res.data.bing_disabled_by_api;
 
                             }
 
@@ -378,12 +454,17 @@ if (!Array.prototype.includes) {
                             Pinterest.loadPixel();
                         }
 
+                        if (Cookiebot.consent[options.gdpr.cookiebot_bing_consent_category]) {
+                            bing.loadPixel();
+                        }
+
                     };
 
                     Cookiebot.ondecline = function () {
                         Facebook.disable();
                         Analytics.disable();
                         Pinterest.disable();
+                        Bing.disable();
                     };
 
                 }
@@ -399,10 +480,12 @@ if (!Array.prototype.includes) {
                             Facebook.loadPixel();
                             Analytics.loadPixel();
                             Pinterest.loadPixel();
+                            Bing.loadPixel();
                         } else {
                             Facebook.disable();
                             Analytics.disable();
                             Pinterest.disable();
+                            Bing.disable();
                         }
 
                     });
@@ -411,6 +494,7 @@ if (!Array.prototype.includes) {
                         Facebook.disable();
                         Analytics.disable();
                         Pinterest.disable();
+                        Bing.disable();
                     });
 
                 }
@@ -424,12 +508,14 @@ if (!Array.prototype.includes) {
                         Facebook.loadPixel();
                         Analytics.loadPixel();
                         Pinterest.loadPixel();
+                        Bing.loadPixel();
                     });
 
                     $(document).onFirst('click', '#cookie_action_close_header_reject', function () {
                         Facebook.disable();
                         Analytics.disable();
                         Pinterest.disable();
+                        Bing.disable();
                     });
 
                 }
@@ -1020,6 +1106,7 @@ if (!Array.prototype.includes) {
     $(document).ready(function () {
 
         var Pinterest = Utils.setupPinterestObject();
+        var Bing = Utils.setupBingObject();
 
         Utils.setupGdprCallbacks();
 
@@ -1038,6 +1125,7 @@ if (!Array.prototype.includes) {
                         Facebook.onWooAddToCartOnButtonEvent(product_id);
                         Analytics.onWooAddToCartOnButtonEvent(product_id);
                         Pinterest.onWooAddToCartOnButtonEvent(product_id);
+                        Bing.onWooAddToCartOnButtonEvent(product_id);
                     }
 
                 });
@@ -1073,6 +1161,7 @@ if (!Array.prototype.includes) {
                     Facebook.onWooAddToCartOnSingleEvent(product_id, qty, is_variable, $form);
                     Analytics.onWooAddToCartOnSingleEvent(product_id, qty, is_variable, $form);
                     Pinterest.onWooAddToCartOnSingleEvent(product_id, qty, is_variable, false, $form);
+                    Bing.onWooAddToCartOnSingleEvent(product_id, qty, is_variable, false, $form);
 
                 });
 
@@ -1099,6 +1188,7 @@ if (!Array.prototype.includes) {
                             Facebook.onWooRemoveFromCartEvent(item_hash);
                             Analytics.onWooRemoveFromCartEvent(item_hash);
                             Pinterest.onWooRemoveFromCartEvent(item_hash);
+                            Bing.onWooRemoveFromCartEvent(item_hash);
                         }
 
                     }
@@ -1192,6 +1282,7 @@ if (!Array.prototype.includes) {
                         Facebook.onEddAddToCartOnButtonEvent(download_id, price_index, q);
                         Analytics.onEddAddToCartOnButtonEvent(download_id, price_index, q);
                         Pinterest.onEddAddToCartOnButtonEvent(download_id, price_index, q);
+                        Bing.onEddAddToCartOnButtonEvent(download_id, price_index, q);
 
                     });
 
@@ -1216,6 +1307,7 @@ if (!Array.prototype.includes) {
                         Facebook.onEddRemoveFromCartEvent(item);
                         Analytics.onEddRemoveFromCartEvent(item);
                         Pinterest.onEddRemoveFromCartEvent(item);
+                        Bing.onEddRemoveFromCartEvent(item);
 
                     }
 
@@ -1233,6 +1325,7 @@ if (!Array.prototype.includes) {
                 Facebook.onCommentEvent();
                 Analytics.onCommentEvent();
                 Pinterest.onCommentEvent();
+                Bing.onCommentEvent();
 
             });
 
@@ -1277,6 +1370,7 @@ if (!Array.prototype.includes) {
                         Facebook.onDownloadEvent(params);
                         Analytics.onDownloadEvent(params);
                         Pinterest.onDownloadEvent(params);
+                        Bing.onDownloadEvent(params);
 
                     }
 
@@ -1317,6 +1411,7 @@ if (!Array.prototype.includes) {
                 Facebook.onFormEvent(params);
                 Analytics.onFormEvent(params);
                 Pinterest.onFormEvent(params);
+                Bing.onFormEvent(params);
 
             });
 
@@ -1331,6 +1426,7 @@ if (!Array.prototype.includes) {
                 Facebook.onFormEvent(params);
                 Analytics.onFormEvent(params);
                 Pinterest.onFormEvent(params);
+                Bing.onFormEvent(params);
 
             });
 

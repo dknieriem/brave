@@ -7,6 +7,17 @@
  * @package OMAPI
  * @author  Devin Vinson
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Review class.
+ *
+ * @since 1.1.4.5
+ */
 class OMAPI_Review {
 
 	/**
@@ -123,7 +134,7 @@ class OMAPI_Review {
 			__( 'OptinMonster', 'optin-monster-api' ), //parent slug
 			__( 'Review OptinMonster', 'optin-monster-api' ), //page title,
 			__( 'Thank you for your Review', 'optin-monster-api'),
-			apply_filters( 'optin_monster_api_menu_cap', 'manage_options' ), //cap
+			apply_filters( 'optin_monster_api_menu_cap', 'manage_options', 'optin-monster-api-review' ), //cap
 			'optin-monster-api-review', //slug
 			array($this, 'callback_to_display_page') //callback
 		);
@@ -146,7 +157,6 @@ class OMAPI_Review {
 		add_filter( 'admin_footer_text', array( $this, 'footer' ) );
 		add_action( 'in_admin_header', array( $this->base->menu, 'output_plugin_screen_banner') );
 
-
 	}
 
 	/**
@@ -159,9 +169,7 @@ class OMAPI_Review {
 		wp_register_style( $this->base->plugin_slug . '-settings', plugins_url( '/assets/css/settings.css', OMAPI_FILE ), array(), $this->base->version );
 		wp_enqueue_style( $this->base->plugin_slug . '-settings' );
 
-
 	}
-
 
 	/**
 	 * Customizes the footer text on the OptinMonster settings page.
@@ -185,7 +193,6 @@ class OMAPI_Review {
 	 * @since 1.1.4.5
 	 */
 	public function callback_to_display_page() {
-
 
 		// Get any saved meta
 		$review_meta = get_user_meta( get_current_user_id(), 'omapi_review_data', true );
@@ -323,7 +330,6 @@ class OMAPI_Review {
 		// Save everything passed in to user meta as well
 		update_user_meta( $user_id, 'omapi_review_data', $data_array );
 
-
 		// Check for Name, Review, Email
 		if (  $user_name === '' || $user_review === '' || $user_email === '' ) {
 			$message = 'required-fields';
@@ -391,7 +397,7 @@ class OMAPI_Review {
 				'time'      => $time,
 				'dismissed' => false
 			);
-			$load = true;
+			update_option( 'omapi_review', $review );
 		} else {
 			// Check if it has been dismissed or not.
 			if ( (isset( $review['dismissed'] ) && ! $review['dismissed']) && (isset( $review['time'] ) && (($review['time'] + DAY_IN_SECONDS) <= $time)) ) {
@@ -403,9 +409,6 @@ class OMAPI_Review {
 		if ( ! $load ) {
 			return;
 		}
-
-		// Update the review option now.
-		update_option( 'omapi_review', $review );
 
 		// Run through optins on the site to see if any have been loaded for more than a week.
 		$valid  = false;

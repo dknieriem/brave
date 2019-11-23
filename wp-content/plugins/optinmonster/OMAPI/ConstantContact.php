@@ -1,11 +1,22 @@
 <?php
 /**
- * Review class.
+ * Constant Contact class.
  *
  * @since 1.6.0
  *
  * @package OMAPI
- * @author  Devin Vinson
+ * @author  Justin Sternberg
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Constant Contact class.
+ *
+ * @since 1.6.0
  */
 class OMAPI_ConstantContact {
 
@@ -87,13 +98,15 @@ class OMAPI_ConstantContact {
 	 * @since 1.6.0
 	 */
 	public function register_cc_page() {
+		$slug = 'optin-monster-constant-contact';
+		$is_current = isset( $_GET['page'] ) && $slug === $_GET['page'];
 
 		$this->hook = add_submenu_page(
-			'optin-monster-api-settings-no-menu', // parent slug
+			$is_current ? 'optin-monster-api-settings' : 'optin-monster-api-settings-no-menu', //parent slug
 			__( 'OptinMonster with Constant Contact', 'optin-monster-api' ), // page title,
-			__( 'OptinMonster with Constant Contact', 'optin-monster-api' ),
-			apply_filters( 'optin_monster_api_menu_cap', 'manage_options' ), // cap
-			'optin-monster-constant-contact', // slug
+			__( 'OptinMonster + Constant Contact', 'optin-monster-api' ),
+			apply_filters( 'optin_monster_api_menu_cap', 'manage_options', $slug ), // cap
+			$slug, // slug
 			array( $this, 'display_page' ) // callback
 		);
 
@@ -206,7 +219,6 @@ class OMAPI_ConstantContact {
 		<?php
 	}
 
-
 	/**
 	 * Dismiss the Constant Contact admin notice.
 	 *
@@ -237,7 +249,6 @@ class OMAPI_ConstantContact {
 	public function styles() {
 		wp_enqueue_style( $this->base->plugin_slug . '-settings', plugins_url( '/assets/css/settings.css', OMAPI_FILE ), array(), $this->base->version );
 	}
-
 
 	/**
 	 * Customizes the footer text on the OptinMonster settings page.

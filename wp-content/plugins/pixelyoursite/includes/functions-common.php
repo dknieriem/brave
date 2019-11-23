@@ -62,6 +62,36 @@ function isSuperPackActive( $checkCompatibility = true ) {
     
 }
 
+function isBingActive( $checkCompatibility = true ) {
+
+    if ( ! function_exists( 'is_plugin_active' ) ) {
+        include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    }
+
+    $active = is_plugin_active( 'pixelyoursite-bing/pixelyoursite-bing.php' );
+
+    if ( $checkCompatibility ) {
+        return $active && ! isBingVersionIncompatible()
+            && function_exists( 'PixelYourSite\Bing' )
+            && Bing() instanceof Plugin; // false for dummy
+    } else {
+        return $active;
+    }
+
+}
+
+function isBingVersionIncompatible() {
+
+    if ( ! function_exists( 'get_plugin_data' ) ) {
+        include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    }
+
+    $data = get_plugin_data( WP_PLUGIN_DIR . '/pixelyoursite-bing/pixelyoursite-bing.php', false, false );
+
+    return ! version_compare( $data['Version'], PYS_FREE_BING_MIN_VERSION, '>=' );
+
+}
+
 /**
  * Check if WooCommerce plugin installed and activated.
  *
@@ -467,7 +497,7 @@ function endsWith( $haystack, $needle ) {
 }
 
 function getCurrentPageUrl() {
-    return untrailingslashit( $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
+    return  $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ;
 }
 
 function removeProtocolFromUrl( $url ) {
@@ -490,7 +520,7 @@ function removeProtocolFromUrl( $url ) {
     $url = str_replace( array( 'http://', 'https://', 'http://www.', 'https://www.', 'www.' ), '', $url );
     $url = trim( $url );
     $url = ltrim( $url, '/' );
-    $url = rtrim( $url, '/' );
+    //$url = rtrim( $url, '/' );
     
     return $url;
     

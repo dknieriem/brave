@@ -451,8 +451,8 @@ class Facebook extends Settings implements Pixel {
 		if ( ! $this->getOption( 'woo_purchase_enabled' ) ) {
 			return false;
 		}
-        
-        $order_id = (int) wc_get_order_id_by_order_key( $_REQUEST['key'] );
+        $key = sanitize_key($_REQUEST['key']);
+        $order_id = (int) wc_get_order_id_by_order_key( $key );
         $order    = new \WC_Order( $order_id );
         
         $content_ids        = array();
