@@ -1,11 +1,11 @@
 <script type="text/javascript">
 	(function() {
 		var turnOff = function() {
-			window.setUserSetting( 'om_cybermonday_notice', 'off' )
+			window.setUserSetting( 'om_cybermonday_notice', 'off' );
 		};
 		if ( jQuery ) {
 			jQuery( function( $ ) {
-				$('#om-cybermonday-notice .notice-dismiss').on( 'click', turnOff);
+				$('#om-cybermonday-notice').on( 'click', '.notice-dismiss', turnOff );
 			});
 		} else {
 			var el = document.getElementById( 'om-cybermonday-notice' );

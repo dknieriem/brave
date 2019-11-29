@@ -4,7 +4,7 @@ Tags: popup, popup plugin, wordpress popup plugin, wordpress popup, lightbox pop
 Requires at least: 4.7.0
 Tested up to: 5.3.0
 Requires PHP: 5.3
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 License: GNU General Public License v2.0 or later
 
 OptinMonster is the best WordPress popup plugin, helping you grow your email list and sales with email popups, exit intent popups, floating bars and more!
@@ -269,6 +269,9 @@ Thomas Griffin
 > Chris Lema - VP of Product at Liquid Web
 
 == Changelog ==
+
+= 1.9.1 =
+* Fix issue where closing Cyber Monday notification would not prevent it from showing again.
 
 = 1.9.0 =
 * Improves compatibility when WordPress is installed in a subdirectory or uses multisite with paths.
