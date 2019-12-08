@@ -4,7 +4,6 @@
 
     &__heading
     {
-        @extend .text-goudysans;
         @extend .mb-2;
         @extend .text-left;
         letter-spacing: 3px;
@@ -41,8 +40,6 @@
 
     &__title
     {
- 
-        color: $dark-gray;
         font-size:1rem;
         text-align: left;
         margin-top:0.5rem;

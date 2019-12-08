@@ -67,7 +67,7 @@
 
 		    .number {
 		    	color: color(teal);
-				font-family: font(goudysans);
+				//font-family: font(goudysans);
 				font-weight: 900;
 				font-size: 1rem; //24px;
 				text-align: left;
@@ -81,7 +81,7 @@
 		    .count-title {
 		    	color: color(teal);
 				grid-column: 1 / span 2;
-				font-family: font(goudysans);
+				//font-family: font(goudysans);
 			    letter-spacing: 2px;
 			    font-weight: 400;
 			    margin-top: 20px;
@@ -112,7 +112,7 @@
 	//number container
 	.wpsm_number {
 		
-		font-family: font(goudysans);
+		//font-family: font(goudysans);
 		font-weight: 900;
 		font-size: 24px;
 		text-align: left;
@@ -125,7 +125,7 @@
 	//text container
 	.wpsm_count-title {
 		grid-column: 1 / span 2;
-		font-family: font(goudysans);
+		//font-family: font(goudysans);
 	}
 }
 

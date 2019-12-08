@@ -31,40 +31,38 @@ $container-max-widths: (
 // Color system
 //
 
-$pink: #c83b94;
-$dark-pink: #B94691;
-$teal: #00bcd6;
-$yellow: #fdbD10;
-$light-teal: #E5F5F8;
 $white: #ffffff;
 $light-gray: #c9c9c9;
 $form-gray: #939495;
 $author-background: #e2e2e2;
 $form-background: #EFEFF0;
 $form-button: #6F6F6F;
-$gray: #525252;
+$gray: #4d4d4f;
 $dark-gray: #282828;
 $black: #000000;
 
-$primary: $teal;
-$alternate: $pink;
+$red: #d64541;
+$blue: #0d3657;
+$light-blue: lighten($blue, 25%);
+
+$primary: $blue;
+$alternate: $red;
 
 
-$body-color: $gray;
-$feature-color: $teal;
+$body-color: $blue;
+$feature-color: $white;
 $header-color: $white;
-$header-bg-color: $pink;
+$header-bg-color: rgba(0,0,0,0);
 $button-color: $white;
-$button-bg-color: $yellow;
-$footer-background-color: $white;
+$button-bg-color: $red;
+$footer-background-color: $blue;
+$footer-color: $white;
 
 $colors: (
-	pink: #c83b94,
-	dark-pink: #b94691,
-	teal: #00bcd6,
-	light-teal: #E5F5F8,
-	yellow: #fdbD10,
-	gray: #525252,
+	red: #d64541,
+	blue: #0d3657,
+	light-blue: $light-blue,
+	gray: #4d4d4f,
 	light-gray: #c9c9c9,
 	form-gray: #939495,
 	form-background: #EFEFF0,
@@ -84,21 +82,22 @@ $colors: (
 	@return null;
 }
 
-$body-font:"GoudySans Md BT";
+$body-font:"Ubuntu Medium";
 
-$header-font:"Shark Random Funnyness";
+$header-font:"Bebas Neue Regular";
 
+$alternate-font:"Bangers";
+$button-font:"Bangers";
 $fonts: (
-	"GoudySans Md BT": "../fonts/GoudySansMediumBT.ttf",
-	"GoudySans Bold BT": "../fonts/GoudySansBoldBT.ttf",
-	"Shark Random Funnyness": "../fonts/Shark_Random_Funnyness.ttf",
-	"Impervious": "../fonts/impervious.ttf"
+	"Ubuntu Medium": 	  "../fonts/Ubuntu-M.ttf",
+	"Bebas Neue Regular": "../fonts/BebasNeue-Regular.ttf",
+	"Bangers": 			  "../fonts/Bangers-Regular.ttf",
 );
 
 $fontnames: (
-	goudysans:	"GoudySans Md BT",
-	shark:		"Shark Random Funnyness",
-	impervious: "Impervious"
+	ubuntu:	 "Ubuntu Medium",
+	bebas:	 "Bebas Neue Regular",
+	bangers: "Bangers"
 );
 
 @function font($key) {

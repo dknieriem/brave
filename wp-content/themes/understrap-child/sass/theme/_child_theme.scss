@@ -38,8 +38,8 @@
 @import "events";
 @import "faq";
 @import "landing-page";
-@import "tgn-page";
-@import "wp-shopify";
+//@import "tgn-page";
+//@import "wp-shopify";
 @import "search-page";
 @import "slick";
 @import "../assets/slick";
@@ -51,7 +51,7 @@
 body
 {
     padding-top:96px;
-    background-color: $teal;
+    background-color: color(white);
     line-height: 1.2;
 
 
@@ -102,11 +102,11 @@ body
 // WordPress-specific Styling
 figcaption.wp-caption-text
 {
-    color:$primary;
-    font-weight:300;
+    color: $primary;
+    font-weight: 300;
     font-style: italic;
-    padding:.8rem 0;
-    font-size:0.8rem;
+    padding: 0.8rem 0;
+    font-size: 0.8rem;
 }
 
 #content {
@@ -155,8 +155,8 @@ figcaption.wp-caption-text
 
 .page-item.active .page-link
 {
-    background-color:$pink;
-    border-color:$pink;
+    background-color: $pink;
+    border-color: $pink;
 }
 
 li.page-item {
@@ -165,7 +165,7 @@ li.page-item {
 
 .page-link
 {
-    color:$pink;
+    color: $pink;
     border: none;
     padding:.5em 1em;
 }
@@ -182,7 +182,7 @@ li.page-item {
 // Basic Table Styles - DON: We should pull out into a _table.scss file and BEMify to the extent possible
 table.table-borderless {
     td {
-        color:$teal;
+        color: $teal;
         padding:1rem;
 
         @include media-breakpoint-down(sm)
@@ -373,17 +373,13 @@ strong
     {
         color: color(white);
         display: table-cell;
-        font-family: font(shark);
+        font-family: $header-font;
         font-size : 48px;
         margin-bottom: 0;
         text-transform: uppercase;
         vertical-align: middle;
         padding: 2rem 5rem;
-        letter-spacing: 6px; 
-        // DON: I don't like hardcoding letter-spacing as part of the theme, 
-        // but it's pretty necessary when using that Shark font to align with the comps. 
-        // Maybe we pull into a setting?
-
+    
         @media (max-width: 1200px )
         {
             font-size:40px;
@@ -433,13 +429,11 @@ strong
         //<small> inside of section header shortcode
         small
         {
-            font-family: font(goudysans);
+            font-family: $header-font;
             font-size: 24px;
         }
-
     }
 }
-
 
 .mejs-audio
 {

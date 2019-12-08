@@ -5,15 +5,6 @@
     }
 }
 
-// Added this hardcoded @font-face rule because I wanted any text with the font-family "GoudySans Md BT" to use the bold font at font-weight 900, rather than needing to specify a different font-family. 
-// DON: maybe a smarter way to do this with your newly implemented settings-based font specifications?
-@font-face {
-    font-family: "GoudySans Md BT";
-    src: url('../fonts/GoudySansBoldBT.ttf') format('truetype');
-    font-weight: 900;
-    font-style: normal;
-}
-
 @font-face{font-family:"Font Awesome 5 Free";font-style:normal;font-weight:900;
     src:url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.eot);
     src:url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"),url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.woff) format("woff"),url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.ttf) format("truetype"),url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.svg#fontawesome) format("svg");
@@ -37,7 +28,7 @@ a
     text-decoration: none !important;
 }
 
-.section-subtitle
+/*.section-subtitle
 {
     margin: 2rem auto 3rem auto;
     &__inner-content
@@ -61,7 +52,7 @@ a
         color:white;
         border-image-source: url('../img/dots-white.svg');
     }
-}
+}*/
 
 
 p
@@ -79,7 +70,7 @@ p
 .heading
 {
     font-family:$header-font;
-    color:$teal;
+    color:$black;
     margin-top:1rem;
     margin-bottom:1rem;
     text-transform: uppercase;
@@ -103,63 +94,14 @@ p
         color:$white;
     }
 
-    &--pink
+    &--blue
     {
-        color:$pink;
+        color:$blue;
     }
 
     &--yellow
     {
         color: $yellow;
-    }
-
-    &__on-pink
-    {
-        color: $white;
-        background-color: $pink;
-        font-size: 1.5rem;
-        line-height: 42px;
-        padding: 6px 0 3px;
-        letter-spacing: 3px;
-        box-shadow: 10px 0 0 $pink, -6px 0 0 $pink;
-    }
-
-    &__on-pink-inner {
-        // position: relative; 
-        // left: 0.5em;
-    }
-
-    &--white-on-pink
-    {
-        background-color: $pink;
-        color: $white;
-        letter-spacing: 3px;
-        padding: 8px 15px;
-    }
-
-    &--white-on-dark-pink
-    {
-        background-color: $dark-pink;
-        color: $white;
-        letter-spacing: 3px;
-        padding: 8px 15px;
-    }
-
-    &__on-teal
-    {
-        background-color: $teal;
-        color: $white;
-    }
-
-    &__on-yellow
-    {
-        background-color: $yellow;
-        color: $white;
-    }
-
-    &__on-white
-    {
-        background-color: $white;
     }
 
     &.background-circle
@@ -170,23 +112,10 @@ p
     }
 }
 
-h1
+h1,h2,h3,h4,h5
 {
-    color: $white;
+    /*color: $white;*/
     font-family: $header-font;
-    font-weight: 300;
-}
-
-h2,h3,h4
-{
-    color: $teal;
-    font-family: $body-font;
-}
-
-h5
-{
-    color: $teal;
-    font-weight:300;
     text-transform: uppercase;
 }
 

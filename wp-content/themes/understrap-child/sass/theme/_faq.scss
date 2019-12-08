@@ -7,11 +7,10 @@
 
 	&__header
 	{
-		@extend .text-teal;
-		@extend .text-goudysans;
+		@extend .h2;
 		//@extend .text-center;
 
-		border-bottom: 3px solid color(teal);
+		border-bottom: 3px solid color(blue);
 		display: inline;
 	    margin: auto;
 	}
@@ -27,18 +26,15 @@
 	{
 
 		@extend .d-inline-block; 
-		@extend .h2;
+		@extend .h1;
 		@extend .heading;
 		//@extend .heading-normal;
-		@extend .heading--white-on-pink;
 
 	    z-index: 999;
 	    position: relative;
 	    margin: auto;
-	    text-align: center;
+	    //text-align: center;
 	    letter-spacing: 3px;
-
-
 
 		&__image 
 		{
@@ -66,8 +62,7 @@
 	{
 		//@extend .btn;
 		@extend .btn-link;
-		@extend .text-goudysans;
-		@extend .text-pink;
+		@extend .text-bangers;
 		@extend .text-bold;
 
 		font-size: 2.375rem;
@@ -76,14 +71,12 @@
 
 		&:hover, &:focus
 		{
-			color: $dark-pink;
+			color: $light-blue;
 			text-decoration: none;
 		}
 
 		&--q
 		{
-			@extend .text-shark;
-			@extend .text-pink;
 			font-weight: normal;
 			font-size: 3rem;
 			margin-left: 0.5rem;
@@ -95,7 +88,7 @@
 	&__icon
 	{
 
-		@extend .fa-minus-square;
+		@extend .fa-times;
 
 		vertical-align: text-top;
 	}
@@ -111,8 +104,6 @@
 
 		&--a
 		{
-			@extend .text-shark;
-			@extend .text-teal;
 			font-weight: normal;
 			font-size: 3rem;
 			margin-left: 1.6rem;
@@ -125,8 +116,6 @@
 
 			p
 			{
-				@extend .text-teal;
-
 				font-size: 1.5rem;
 				font-weight: bold;
 				line-height: 1.2;

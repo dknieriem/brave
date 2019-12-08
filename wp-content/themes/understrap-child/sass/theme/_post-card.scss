@@ -25,7 +25,6 @@
     &__title
     {
         @extend .card-title;
-        @extend .font-goudysans;
         @extend .text-center;
         font-size:1.3rem;
         color:$black;
@@ -36,7 +35,6 @@
     &__text
     {
         @extend .card-text;
-        @extend .font-goudysans;
         @extend .text-center;
         font-size:0.8rem;
         flex-grow:1;

@@ -8,12 +8,8 @@ body.single
 
 #single-wrapper
 {
-
-
-
     &>#content 
     {
-
         padding-top: 3rem;
 
         @include media-breakpoint-up(md)
@@ -50,7 +46,6 @@ body.single
     h1,h2,h3,h4,h5,
     .h1, .h2, .h3, .h4, .h5
     {
-    	@extend .text-goudysans;
     	color: $black;
     }
 
