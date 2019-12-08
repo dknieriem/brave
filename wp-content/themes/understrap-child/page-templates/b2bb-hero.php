@@ -39,19 +39,19 @@ $container   = get_theme_mod( 'understrap_container_type' );
 
 					</footer><!-- .entry-footer -->
 
-				</article><!-- #post-## -->
+				</article><!-- /#post-## -->
 
 				<?php endwhile; // end of the loop. ?>
 
-			</main><!-- #main -->
+			</main><!-- /#main -->
 
-		</div><!-- .col-12 -->
+		</div><!-- /.col-12 -->
 
-	</div><!-- .row -->
+	</div><!-- /.row -->
 
-</div><!-- Container end -->
+</div><!-- /.container -->
 
-</div><!-- Wrapper end -->
+</div><!-- /.wrapper end -->
 
 <?php get_footer(); ?>
 

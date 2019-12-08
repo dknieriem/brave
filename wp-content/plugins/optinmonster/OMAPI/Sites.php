@@ -47,11 +47,33 @@ class OMAPI_Sites {
 		}
 
 		$body  = $api->request();
-		$sites = array();
+		$sites = array(
+			'ids'          => array(),
+			'customApiUrl' => ''
+		);
 
 		if ( ! is_wp_error( $body ) && ! empty( $body->data ) ) {
 			foreach ( $body->data as $site ) {
-				$sites[] = (int) $site->numericId;
+				$checkCnames    = true;
+				$sites['ids'][] = (int) $site->numericId;
+
+				$homeUrl = str_replace( 'https://', '', esc_url_raw( home_url( '', 'https' ) ) );
+
+				// If we have a custom CNAME, let's enable it and add the data to the output array.
+				// We need to make sure that it matches the home_url to ensure that the correct domain
+				// is loaded.
+				$wildcardDomain = '*.' === substr( $site->domain, 0, 2 );
+				if ( ( $homeUrl === $site->domain || $wildcardDomain ) && $site->settings->enableCustomCnames && $checkCnames ) {
+					if ( ! $wildcardDomain ) {
+						$checkCnames = false;
+					}
+					if ( $site->settings->cdnCname && $site->settings->cdnCnameVerified ) {
+						$sites['customApiUrl'] = 'https://' . $site->settings->cdnUrl . '/app/js/api.min.js';
+					} else if ( $site->settings->apiCname && $site->settings->apiCnameVerified ) {
+						// Not sure if this will wreak havoc during verification of the domains, so leaving it commented out for now.
+						// $sites['customApiUrl'] = 'https://' . $site->settings->apiUrl . '/a/app/js/api.min.js';
+					}
+				}
 			}
 		}
 

@@ -161,10 +161,11 @@ class OMAPI_Refresh {
 
 		// Update the option to remove stale error messages.
 		$option = $this->base->get_option();
-		$option['is_invalid']  = false;
-		$option['is_expired']  = false;
-		$option['is_disabled'] = false;
-		$option['siteIds']     = $sites;
+		$option['is_invalid']   = false;
+		$option['is_expired']   = false;
+		$option['is_disabled']  = false;
+		$option['siteIds']      = $sites['ids'];
+		$option['customApiUrl'] = $sites['customApiUrl'];
 
 		update_option( 'optin_monster_api', $option );
 
