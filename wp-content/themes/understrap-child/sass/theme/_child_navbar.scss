@@ -18,7 +18,7 @@
 
     //move nav background to container
     .navbar-container {
-        background-image: url(../img/background-icons.png);
+        //background-image: url(../img/background-icons.png);
         background-position: center top;
         background-repeat: repeat-y;
         background-size: 100%;
@@ -36,7 +36,7 @@
         justify-content: space-between;
 
         @include media-breakpoint-up(lg){
-            height: 96px; //DON set this to be a defined height
+            height: 96px;
         }
     }
 
@@ -60,9 +60,9 @@ body.admin-bar .fixed-top
 
 .nav-link, .dropdown-item
 {
-    color: $white;
+    color: $blue;
     font-weight:300 !important;
-    //text-transform: uppercase !important;
+    text-transform: uppercase !important;
     font-size:1.3rem; 
 
     @include media-breakpoint-up(md){
@@ -198,7 +198,7 @@ body.admin-bar .fixed-top
 
 /* Nav Button */
 .navbar {
-    a[title='get tickets!'] {
+    a[title='Get Tickets'] {
         @extend .button;
         @extend .shadow;
 
