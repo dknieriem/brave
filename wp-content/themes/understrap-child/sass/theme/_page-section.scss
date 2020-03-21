@@ -153,8 +153,12 @@
 
     &__overlay-image
     {
+        min-width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center center;
         position: absolute;
-        top: 0;
+        
         @media (max-width:993px)
         {
             display: none;

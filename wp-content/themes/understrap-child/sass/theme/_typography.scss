@@ -1,9 +1,9 @@
-@each $font, $src in $fonts {
+/*@each $font, $src in $fonts {
     @font-face {
         font-family:$font;
         src:url($src);
     }
-}
+}*/
 
 @font-face{font-family:"Font Awesome 5 Free";font-style:normal;font-weight:900;
     src:url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.eot);
@@ -27,33 +27,6 @@ a
 {
     text-decoration: none !important;
 }
-
-/*.section-subtitle
-{
-    margin: 2rem auto 3rem auto;
-    &__inner-content
-    {
-        color:$pink;
-        text-transform: uppercase;
-        border-style: dotted;
-        padding-bottom:.7rem;
-        
-        border-image-source: url('../img/dots-pink.svg');
-        border-image-slice: 33% 33%;
-        border-image-repeat: round;
-        border-width: 0 0 9px 0;
-        border-color: $pink;
-        font-size:1.5rem;
-        font-weight:300;
-        letter-spacing: .1rem;
-    }
-    &__inner-content--white
-    {
-        color:white;
-        border-image-source: url('../img/dots-white.svg');
-    }
-}*/
-
 
 p
 {

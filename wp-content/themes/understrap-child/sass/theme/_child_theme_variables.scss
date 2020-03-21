@@ -41,8 +41,8 @@ $gray: #4d4d4f;
 $dark-gray: #282828;
 $black: #000000;
 
-$red: #d64541;
-$blue: #0d3657;
+$red: #bf2821; //#d64541;
+$blue: #0c3657; //
 $light-blue: lighten($blue, 25%);
 
 $primary: $blue;
@@ -59,17 +59,17 @@ $footer-background-color: $blue;
 $footer-color: $white;
 
 $colors: (
-	red: #d64541,
-	blue: #0d3657,
+	red: $red,
+	blue: $blue,
 	light-blue: $light-blue,
-	gray: #4d4d4f,
-	light-gray: #c9c9c9,
-	form-gray: #939495,
-	form-background: #EFEFF0,
-	form-button: #6F6F6F,
-	dark-gray: #282828,
-	white: #ffffff,
-	black: #000000
+	gray: $gray,
+	light-gray: $light-gray,
+	form-gray: $form-gray,
+	form-background: $form-background,
+	form-button: $form-button,
+	dark-gray: $dark-gray,
+	white: $white,
+	black: $black
 );
 
 // _functions.scss
@@ -82,22 +82,20 @@ $colors: (
 	@return null;
 }
 
-$body-font:"Ubuntu Medium";
+$body-font:"Ubuntu";
 
-$header-font:"Bebas Neue Regular";
+$hero-font:"Oswald";
+$header-font:"Bebas Neue";
 
 $alternate-font:"Bangers";
 $button-font:"Bangers";
-$fonts: (
-	"Ubuntu Medium": 	  "../fonts/Ubuntu-M.ttf",
-	"Bebas Neue Regular": "../fonts/BebasNeue-Regular.ttf",
-	"Bangers": 			  "../fonts/Bangers-Regular.ttf",
-);
+
 
 $fontnames: (
-	ubuntu:	 "Ubuntu Medium",
-	bebas:	 "Bebas Neue Regular",
-	bangers: "Bangers"
+	oswald: ('Oswald', sans-serif),
+	bebas: ('Bebas Neue', cursive),
+	ubuntu: ('Ubuntu', sans-serif),
+	bangers: ('Bangers', cursive),
 );
 
 @function font($key) {
