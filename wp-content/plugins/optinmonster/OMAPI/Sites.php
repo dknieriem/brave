@@ -57,7 +57,7 @@ class OMAPI_Sites {
 				$checkCnames    = true;
 				$sites['ids'][] = (int) $site->numericId;
 
-				$homeUrl = str_replace( 'https://', '', esc_url_raw( home_url( '', 'https' ) ) );
+				$homeUrl = str_replace( array( 'https://', 'www.' ), '', esc_url_raw( home_url( '', 'https' ) ) );
 
 				// If we have a custom CNAME, let's enable it and add the data to the output array.
 				// We need to make sure that it matches the home_url to ensure that the correct domain

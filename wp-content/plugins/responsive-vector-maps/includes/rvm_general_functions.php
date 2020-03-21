@@ -3,6 +3,7 @@
  * GENERAL FUNCTIONS
  * ----------------------------------------------------------------------------
  */
+
 //Get rid of last character in a  string
 function rvm_delete_last_character( $str ) {
                 $output_temp = substr( $str, 0, -1 );
@@ -46,10 +47,17 @@ function rvm_check_is_html_in_array( $array_to_check ) //check if numeric, used 
                 } //$rvm_checked_html_array as $key => $rvm_single_value
                 return $rvm_checked_html_array;
 }
+//Retrieve data of custom maps
 function rvm_retrieve_custom_maps_options( ) {
                 // Retrieve all user options from DB
                 $rvm_custom_maps_options = get_option( 'rvm_custom_maps_options' );
                 return $rvm_custom_maps_options;
+}
+//Retrieve data of custom maps in new format ( installed as plugin since dec 2019 )
+function rvm_retrieve_custom_maps_options_for_plugin_path_system() {
+                // Retrieve all user options from DB
+                $rvm_custom_maps_options_for_plugin_path_system = get_option( 'rvm_custom_maps_options_for_plugin_path_system' );
+                return $rvm_custom_maps_options_for_plugin_path_system;
 }
 //Get first part of map name
 function rvm_retrieve_custom_map_name( $map_name ) {
@@ -114,6 +122,21 @@ function rvm_is_custom_map( $postid ) {
                 } //!empty( $rvm_custom_maps_options ) && !empty( $rvm_custom_map_name )
                 return $rvm_is_custom_map;
 }
+// Check if we are in a custom map with new plugin system ( since dec 2019 )
+function rvm_is_custom_map_plugin_path_system( $postid ) {
+                $rvm_is_custom_map       = false;
+                $rvm_custom_map_name     = get_post_meta( $postid, '_rvm_mbe_select_map', true );
+                $rvm_custom_maps_options_for_plugin_path_system = rvm_retrieve_custom_maps_options_for_plugin_path_system();
+                if ( !empty( $rvm_custom_maps_options_for_plugin_path_system ) && !empty( $rvm_custom_map_name ) ) {
+                                $rvm_custom_maps_options_for_plugin_path_system = array_reverse( $rvm_custom_maps_options_for_plugin_path_system );
+                                foreach ( $rvm_custom_maps_options_for_plugin_path_system as $key => $value ) {
+                                                if ( $key === trim( $rvm_custom_map_name ) ) {
+                                                                $rvm_is_custom_map = true;
+                                                } //$key === trim( $rvm_custom_map_name )
+                                } //$rvm_custom_maps_options as $key => $value
+                } //!empty( $rvm_custom_maps_options ) && !empty( $rvm_custom_map_name )
+                return $rvm_is_custom_map;
+}
 function rvm_region_match_when_numeric( $value ) {
                 if ( substr( trim( $value ), 0, 4 ) === PREFIX ) {
                                 $path = substr( trim( $value ), 4 );
@@ -156,9 +179,33 @@ function rvm_include_custom_map_settings( $map_id, $rvm_selected_map ) {
                                                 } //$key === trim( $rvm_selected_map )
                                 } //$rvm_custom_maps_options as $key => $value
                 } //if ( rvm_is_custom_map( $map_id ) || rvm_retrieve_custom_maps_options() )
-                if ( !isset( $rvm_custom_maps_found_in_option ) ) {
+
+                // Check for active maps plugin using plugin name both for front and back end
+				if( in_array($rvm_selected_map . '/' . $rvm_selected_map . '.php', apply_filters( 'active_plugins', get_option('active_plugins') ) ) ) { 
+				    //plugin is activated
+				
+	                if( rvm_is_custom_map( $map_id ) || rvm_retrieve_custom_maps_options_for_plugin_path_system() ) {
+	                    $rvm_custom_maps_options_for_plugin_path_system = rvm_retrieve_custom_maps_options_for_plugin_path_system();
+	                    // get last value entered temporally
+	                    $rvm_custom_maps_options_for_plugin_path_system = array_reverse ( $rvm_custom_maps_options_for_plugin_path_system );
+	                    // Sort regions alphabetically
+	                    ksort( $rvm_custom_maps_options_for_plugin_path_system );
+	                    foreach ( $rvm_custom_maps_options_for_plugin_path_system as $key => $value ) {
+	                        if ( $key === trim( $rvm_selected_map ) ) {
+	                            @include RVM_GENERAL_PLUGIN_DIR_PATH . $key . '/rvm-cm-settings.php';
+	                            $rvm_custom_maps_found_in_option = true;
+	                        }
+
+
+	                    }// foreach ( $rvm_custom_maps_options_for_plugin_path_system as $key => $value
+	                }
+
+                }
+
+
+                if ( !isset( $rvm_custom_maps_found_in_option ) ) {//load default maps in regions folder
                                 if( file_exists( RVM_INC_PLUGIN_DIR . '/regions/' . $rvm_selected_map . '-regions.php') ) {
-                                    include RVM_INC_PLUGIN_DIR . '/regions/' . $rvm_selected_map . '-regions.php';
+                                    @include RVM_INC_PLUGIN_DIR . '/regions/' . $rvm_selected_map . '-regions.php';
                                     return $regions;
                                 }
 
@@ -258,5 +305,18 @@ function rvm_is_marker_module_in_download_dir_yet( $rvm_marker_module_name ) {
                                 $rvm_marker_module_still_in_upload_dir = false;
                 }
                 return $rvm_marker_module_still_in_upload_dir;
+}
+//Check if maps installed via plugin are still active
+function rvm_is_plugin_active ( $plugin_path ) {
+	// We need to include plugin.php to get is_plugin_active() in front end
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    $rvm_is_plugin_active = is_plugin_active( $plugin_path );
+    if( $plugin_path && $rvm_is_plugin_active ) {
+        $rvm_is_plugin_active = true;
+    }
+    else {
+        $rvm_is_plugin_active = false;
+    }
+    return $rvm_is_plugin_active;
 }
 ?>

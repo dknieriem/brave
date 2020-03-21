@@ -41,7 +41,10 @@
 				rvm_button_action = 'export';
 			}
 
-			
+			else if(this.id === 'rvm_custom_marker_icon_module_uploader_button') {
+				rvm_tab = 'markers';
+				rvm_button_action = 'upload_custom_icon';
+			}			
 
 			event.preventDefault();
 
@@ -67,8 +70,19 @@
 
 				// Do something with attachment.id and/or attachment.url here
 
-				jQuery("#rvm_custom_map_filename,#rvm_mbe_custom_marker_icon_path,#rvm_option_custom_marker_icon_module_path,#rvm_upload_" + rvm_tab + "_file_path").val(attachment.url);
-				jQuery("#rvm_import_" + rvm_tab + "_button").css("display","block");
+				if( rvm_tab === 'markers' && rvm_button_action === 'upload_custom_icon'  ) {//prevent the .csv file path to be inserted into input for custom icon module
+					jQuery("#rvm_mbe_custom_marker_icon_path").val(attachment.url);
+				}
+
+				else if ( rvm_tab === 'regions' || rvm_tab === 'markers' ) {
+					jQuery("#rvm_upload_" + rvm_tab + "_file_path").val(attachment.url);
+					jQuery("#rvm_import_" + rvm_tab + "_button").css("display","block");
+				}
+
+				else {
+					jQuery("#rvm_custom_map_filename").val(attachment.url);
+				}				
+				
 			});
 
 			// Finally, open the modal

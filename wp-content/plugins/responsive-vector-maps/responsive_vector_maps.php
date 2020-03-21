@@ -2,8 +2,8 @@
 /**
      * Plugin Name: RVM - Responsive Vector Maps
      * Plugin URI: https://www.responsivemapsplugin.com/
-     * Description: Use RVM to create as many responsive vector maps as you want... stop using area tag to create your linkable maps.
-     * Version: 6.0.0
+     * Description: Use RVM to create clickable and responsive vector maps in few steps.
+     * Version: 6.2.4
      * Author: Enrico Urbinati
      * Author URI: https://www.responsivemapsplugin.com/
      * Text Domain: responsive-vector-maps
@@ -12,7 +12,7 @@
      */
      
      
-     /*  Copyright 2014-2019  Enrico Urbinati  (email : info@responsivemapsplugin.com)
+     /*  Copyright 2014-2020  Enrico Urbinati  (email : info@responsivemapsplugin.com)
         This program is free software; you can redistribute it and/or modify
         it under the terms of the GNU General Public License as published by
         the Free Software Foundation; either version 2 of the License, or
@@ -26,10 +26,12 @@
         Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
     */
 
-define( 'RVM_VERSION' , '6.0.0' ) ; 
+define( 'RVM_VERSION' , '6.2.4' ) ; 
 define( 'RVM_PLUGIN_FILE' , plugin_basename( __FILE__ ) ) ;    
 define( 'RVM_PLUGIN_DIR_PATH' , plugin_dir_path( __FILE__ ) ) ;
 define( 'RVM_PLUGIN_DIR_URL' , plugin_dir_url( __FILE__ ) ) ;
+define( 'RVM_GENERAL_PLUGIN_DIR_PATH' , plugin_dir_path( __DIR__ ) ) ;
+define( 'RVM_GENERAL_PLUGIN_DIR_URL' , plugin_dir_URL( __DIR__ ) ) ;
 define( 'RVM_TEXT_DOMAIN' , 'responsive-vector-maps' ) ;
 define( 'RVM_INC_PLUGIN_DIR' , RVM_PLUGIN_DIR_PATH . 'includes' ) ;
 define( 'RVM_INC_REGIONS_PLUGIN_DIR' , RVM_PLUGIN_DIR_PATH . 'includes/regions' ) ;
@@ -70,6 +72,5 @@ define( 'RVM_DEQUEUE_WP_EMOJI' , "unchecked" ) ;
 @include_once RVM_INC_PLUGIN_DIR . '/rvm_core.php';
 @include_once RVM_INC_PLUGIN_DIR . '/rvm_shortcode.php';
 @include_once RVM_INC_PLUGIN_DIR . '/rvm_widget.php';
-
 
 ?>

@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** @noinspection PhpIncludeInspection */
 require_once PYS_FREE_PATH . '/modules/facebook/function-helpers.php';
+require_once PYS_FREE_PATH . '/modules/facebook/FDPEvent.php';
 
 use PixelYourSite\Facebook\Helpers;
 
@@ -103,6 +104,9 @@ class Facebook extends Settings implements Pixel {
 
 			case 'custom_event':
 				return $this->getCustomEventParams( $args );
+
+            case 'fdp_event':
+                return $this->getFDPEventParams( $args );
 
 			case 'woo_view_content':
 				return $this->getWooViewContentEventParams();
@@ -258,6 +262,88 @@ class Facebook extends Settings implements Pixel {
 
 	}
 
+    public function getFDPEvents() {
+        $events = array();
+        $contentType = $this->getOption("fdp_content_type");
+        if($this->getOption("fdp_view_content_enabled")) {
+            $event = new FDPEvent();
+            $event->event_name = "fdp_view_content";
+            $event->content_type = $contentType;
+            $events[] = $event;
+        }
+        if($this->getOption("fdp_view_category_enabled")) {
+            $event = new FDPEvent();
+            $event->event_name = "fdp_view_category";
+            $event->content_type = $contentType;
+            $events[] = $event;
+        }
+        if($this->getOption("fdp_add_to_cart_enabled")) {
+            $event = new FDPEvent();
+            $event->event_name = "fdp_add_to_cart";
+            $event->content_type = $contentType;
+            $event->trigger_type = "scroll_pos";
+            $event->trigger_value = $this->getOption("fdp_add_to_cart_event_fire_scroll");
+            $events[] = $event;
+        }
+        if($this->getOption("fdp_purchase_enabled")) {
+            $event = new FDPEvent();
+            $event->event_name = "fdp_purchase";
+            $event->content_type = $contentType;
+            $event->trigger_type = $this->getOption("fdp_purchase_event_fire");
+            if($event->trigger_type == "scroll_pos") {
+                $event->trigger_value = $this->getOption("fdp_purchase_event_fire_scroll");
+            }
+            if($event->trigger_type == "css_click") {
+                $event->trigger_value = $this->getOption("fdp_purchase_event_fire_css");
+            }
+
+            $events[] = $event;
+        }
+        return $events;
+    }
+
+    /**
+     * @param FDPEvent $event
+     * @return array
+     */
+
+    private function getFDPEventParams($event){
+
+        $name = "";
+        $params = "";
+
+        if($event->event_name == "fdp_view_content") {
+            $name = "ViewContent";
+            $params = Helpers\getFDPViewContentEventParams();
+        }
+
+        if($event->event_name == "fdp_view_category") {
+            $name = "ViewCategory";
+            $params = Helpers\getFDPViewCategoryEventParams();
+        }
+
+        if($event->event_name == "fdp_add_to_cart") {
+            $name = "AddToCart";
+            $params = Helpers\getFDPAddToCartEventParams();
+        }
+
+        if($event->event_name == "fdp_purchase") {
+            $name = "Purchase";
+            $params = Helpers\getFDPPurchaseEventParams();
+        }
+
+
+        if($event->content_type) {
+            $params["content_type"] = $event->content_type;
+        }
+
+        return array(
+            'name'  => $name,
+            'data'  => $params,
+            'delay' => 0,
+        );
+    }
+
 	private function getWooViewContentEventParams() {
 		global $post;
 
@@ -294,8 +380,10 @@ class Facebook extends Settings implements Pixel {
             
             $value_option = PYS()->getOption( 'woo_view_content_value_option' );
             $global_value = PYS()->getOption( 'woo_view_content_value_global', 0 );
-            
-            $params['value']    = getWooEventValue( $value_option, $amount, $global_value );
+
+			update_option('woo_content_value_cog', $value_option);
+
+            $params['value']    = getWooEventValue( $value_option, $amount, $global_value, $post->ID );
             $params['currency'] = get_woocommerce_currency();
 
 		}
@@ -515,8 +603,10 @@ class Facebook extends Settings implements Pixel {
         $amount = $order->get_total();
         $value_option = PYS()->getOption( 'woo_purchase_value_option' );
         $global_value = PYS()->getOption( 'woo_purchase_value_global', 0 );
-        
-        $params['value'] = getWooEventValue( $value_option, $amount, $global_value );
+
+		update_option('woo_purchase_value_cog', $value_option);
+
+        $params['value'] = getWooEventValueOrder( $value_option, $amount, $global_value, $order_id, $content_ids );
         $params['currency'] = get_woocommerce_currency();
         $params['transaction_id'] = $order_id;
 

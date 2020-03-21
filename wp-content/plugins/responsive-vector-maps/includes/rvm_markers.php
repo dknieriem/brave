@@ -8,27 +8,36 @@ $rvm_div_class = !isset( $rvm_tab_active_default ) && ( isset( $rvm_tab_active )
 $output .= '<div id="rvm_markers" ' . $rvm_div_class ; 
 
 //Start : marker uploader
-// Retrieve options
-$rvm_options = rvm_retrieve_options();
-//Retrieve custom marker icon 
-$rvm_custom_marker_icon_path = get_post_meta( $post->ID, '_rvm_mbe_custom_marker_icon_path', true );
-$rvm_marker_module_dir_url_array = rvm_set_absolute_upload_dir_url();
 
-//Load marker module only if there is a module installed and the module has a valid path
-if ( !empty( $rvm_options[ 'rvm_custom_icon_marker_module_path_verified' ] ) ) { 
- 
-    if( rvm_is_marker_module_in_download_dir_yet( $rvm_options['rvm_custom_icon_marker_module_path_verified']) ) {
-            @include $rvm_marker_module_dir_url_array[1] . $rvm_options['rvm_custom_icon_marker_module_path_verified'] ;
-        } else { $output .= '<div class="rvm_messages rvm_error_messages">' . __( 'It seems there is no marker module installed or maybe was deleted. Please reinstall it using RVM global settings in Settings menu' , RVM_TEXT_DOMAIN ) . '</div>'; }
+    // Retrieve options
+    $rvm_options = rvm_retrieve_options();
+    //Retrieve custom marker icon 
+    $rvm_custom_marker_icon_path = get_post_meta( $post->ID, '_rvm_mbe_custom_marker_icon_path', true );
+    $rvm_marker_module_dir_url_array = rvm_set_absolute_upload_dir_url();
+
+    // Check for active maps plugin using plugin name both for front and back end
+    if( in_array( 'rvm-custom-marker-icon/rvm-custom-marker-icon.php', apply_filters( 'active_plugins', get_option('active_plugins') ) ) ) {
+        @include RVM_GENERAL_PLUGIN_DIR_PATH . 'rvm-custom-marker-icon/rvm-custom-marker-icon-module.php';
+    }
+
+    else {
+        // We have an old marker module installed
+        //Load marker module only if there is a module installed and the module has a valid path
+        if ( !empty( $rvm_options[ 'rvm_custom_icon_marker_module_path_verified' ] ) ) { 
+         
+            if( rvm_is_marker_module_in_download_dir_yet( $rvm_options['rvm_custom_icon_marker_module_path_verified']) ) {
+                    @include $rvm_marker_module_dir_url_array[1] . $rvm_options['rvm_custom_icon_marker_module_path_verified'] ;
+                } else { $output .= '<div class="rvm_messages rvm_error_messages">' . __( 'It seems there is no marker module installed or maybe was deleted. Please reinstall it using RVM global settings in Settings menu' , RVM_TEXT_DOMAIN ) . '</div>'; }
 
 
-}//if ( !empty( $rvm_options[ 'rvm_custom_icon_marker_module_path_verified' ] ) && ( $rvm_options['rvm_custom_icon_marker_module_path_verified'] != 'default' ) )
+        }//if ( !empty( $rvm_options[ 'rvm_custom_icon_marker_module_path_verified' ] ) && ( $rvm_options['rvm_custom_icon_marker_module_path_verified'] != 'default' ) )
 
-else {
-	$output .= '<div class="rvm_messages rvm_notice_messages rvm_marker_messages"><img src="' . RVM_IMG_PLUGIN_DIR . '/map-icon-16x16.png' . '" alt="Map pintpoint icon"/>' . __( 'Tired to use the default circle icon for Markers\' pinpoints? This is the right time to <a href="https://www.responsivemapsplugin.com/redirect-to-marker-icon-module-from-plugin-dashboard/" target="_blank">download the Custom Icon Marker Module!</a>' , RVM_TEXT_DOMAIN ) . '</div>';
-}
+        else {
+            $output .= '<div class="rvm_messages rvm_notice_messages rvm_marker_messages"><img src="' . RVM_IMG_PLUGIN_DIR . '/map-icon-16x16.png' . '" alt="Map pintpoint icon"/>' . __( 'Tired to use the default circle icon for Markers\' pinpoints? This is the right time to <a href="https://www.responsivemapsplugin.com/redirect-to-marker-icon-module-from-plugin-dashboard/" target="_blank">download the Custom Icon Marker Module!</a>' , RVM_TEXT_DOMAIN ) . '</div>';
+        }
+    }//if( in_array( 'rvm-custom-marker-icon/rvm-custom-marker-icon.php', apply_filters( 'active_plugins', get_option('active_plugins') ) ) )
 
-//End : marker uploader   
+//End : marker uploader  
      
 $output .= '<div id="rvm_mbe_fields_wrap">' ;
 $output .= '<h2 class="rvm_h2_title">' . __( 'Create New Markers' , RVM_TEXT_DOMAIN ) . '</h2>' ;

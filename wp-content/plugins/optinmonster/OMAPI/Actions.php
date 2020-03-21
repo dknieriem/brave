@@ -113,7 +113,7 @@ class OMAPI_Actions {
 		switch ( $action ) {
 			case 'status' :
 				if ( $this->status() ) {
-					$args['optin_monster_api_action_type'] = 'updated';
+					$args['optin_monster_api_action_type'] = 'success';
 					$args['optin_monster_api_action_id']   = $this->optin_id;
 				} else {
 					$args['optin_monster_api_action_type'] = 'error';
@@ -122,7 +122,7 @@ class OMAPI_Actions {
 
 			case 'cookies' :
 				if ( $this->cookies() ) {
-					$args['optin_monster_api_action_type'] = 'updated';
+					$args['optin_monster_api_action_type'] = 'success';
 				} else {
 					$args['optin_monster_api_action_type'] = 'error';
 				}
@@ -221,15 +221,15 @@ class OMAPI_Actions {
 	 * @param string $type    The type of notice to retrieve.
 	 * @return string $notice The admin notice.
 	 */
-	public function get_notice( $action, $type = 'updated' ) {
+	public function get_notice( $action, $type = 'success' ) {
 		$notice = '';
 
 		switch ( $action ) {
 			case 'status' :
-				$notice = 'updated' == $type ? sprintf( __( 'The campaign status was updated successfully. You can configure more specific loading requirements by <a href="%s" title="Click here to edit the output settings for the updated campaign.">editing the output settings</a> for the campaign.', 'optin-monster-api' ), esc_url_raw( add_query_arg( array( 'page' => 'optin-monster-api-settings', 'optin_monster_api_view' => 'optins', 'optin_monster_api_action' => 'edit', 'optin_monster_api_id' => $this->optin_id ), admin_url( 'admin.php' ) ) ) ) : __( 'There was an error updating the campaign status. Please try again.', 'optin-monster-api' );
+				$notice = 'success' == $type ? sprintf( __( 'The campaign status was updated successfully. You can configure more specific loading requirements by <a href="%s" title="Click here to edit the output settings for the updated campaign.">editing the output settings</a> for the campaign.', 'optin-monster-api' ), esc_url_raw( add_query_arg( array( 'page' => 'optin-monster-api-settings', 'optin_monster_api_view' => 'optins', 'optin_monster_api_action' => 'edit', 'optin_monster_api_id' => $this->optin_id ), admin_url( 'admin.php' ) ) ) ) : __( 'There was an error updating the campaign status. Please try again.', 'optin-monster-api' );
 			break;
 			case 'cookies' :
-				$notice = 'updated' == $type ? __( 'The local cookies have been cleared successfully.', 'optin-monster-api' ) : __( 'There was an error clearing the local cookies. Please try again.', 'optin-monster-api' );
+				$notice = 'success' == $type ? __( 'The local cookies have been cleared successfully.', 'optin-monster-api' ) : __( 'There was an error clearing the local cookies. Please try again.', 'optin-monster-api' );
 			break;
 		}
 
@@ -257,7 +257,7 @@ class OMAPI_Actions {
 		}
 
 		foreach ( $this->notices as $id => $message ) {
-			echo '<div class="' . $id . '"><p>' . $message . '</p></div>';
+			echo '<div class="notice notice-' . $id . '"><p>' . $message . '</p></div>';
 		}
 
 	}

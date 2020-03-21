@@ -295,7 +295,9 @@ function getWooSingleAddToCartParams( $product_id, $qty = 1 ) {
 		$value_option = PixelYourSite\PYS()->getOption( 'woo_add_to_cart_value_option' );
 		$global_value = PixelYourSite\PYS()->getOption( 'woo_add_to_cart_value_global', 0 );
 
-		$params['value']    = PixelYourSite\getWooEventValue( $value_option, $amount, $global_value );
+		update_option('woo_add_to_cart_value_cog', $value_option);
+
+		$params['value']    = PixelYourSite\getWooEventValue( $value_option, $amount, $global_value, $product_id );
 		$params['currency'] = get_woocommerce_currency();
 
 	}
@@ -396,7 +398,9 @@ function getWooCartParams( $context = 'cart' ) {
 		$value_option = PixelYourSite\PYS()->getOption( $value_option_option );
 		$global_value = PixelYourSite\PYS()->getOption( $value_global_option, 0 );
 
-		$params['value']    = PixelYourSite\getWooEventValue( $value_option, $amount, $global_value );
+		update_option('woo_initiate_checkout_value_cog', $value_option);
+
+		$params['value']    = PixelYourSite\getWooEventValueCart( $value_option, $amount, $global_value );
 		$params['currency'] = get_woocommerce_currency();
 
 	}
@@ -453,4 +457,103 @@ function getEddCustomAudiencesOptimizationParams( $post_id ) {
 
 	return $params;
 
+}
+
+function getFDPViewContentEventParams() {
+    $tagsArray = wp_get_post_tags();
+    $catArray = get_the_category();
+
+    $tags = "";
+    if(is_array($tagsArray)) {
+        $tags = implode(", ",$tagsArray);
+    }
+
+    $func = function($value) {
+        return $value->cat_name;
+    };
+    $catArray = array_map($func,$catArray);
+    $categories = implode(", ",$catArray);
+
+
+    $params = array(
+        'content_name'     => get_the_title(),
+        'content_ids'      => get_the_ID(),
+        'tags'             => $tags,
+        'categories'       => $categories
+    );
+
+
+    return $params;
+}
+
+function getFDPViewCategoryEventParams() {
+    global $wp_query;
+    $func = function($value) {
+        return $value->ID;
+    };
+    $ids = array_map($func,$wp_query->posts);
+
+
+    $params = array(
+        'content_name'     => single_term_title('', 0),
+        'content_ids'      => json_encode($ids)
+    );
+
+    return $params;
+}
+
+function getFDPAddToCartEventParams() {
+    $tagsArray = wp_get_post_tags();
+    $catArray = get_the_category();
+
+    $tags = "";
+    if(is_array($tagsArray)) {
+        $tags = implode(", ",$tagsArray);
+    }
+
+    $func = function($value) {
+        return $value->cat_name;
+    };
+    $catArray = array_map($func,$catArray);
+    $categories = implode(", ",$catArray);
+
+
+    $params = array(
+        'content_name'     => get_the_title(),
+        'content_ids'      => get_the_ID(),
+        'tags'             => $tags,
+        'categories'       => $categories,
+        'value'            => 0
+    );
+
+
+    return $params;
+}
+
+function getFDPPurchaseEventParams() {
+    $tagsArray = wp_get_post_tags();
+    $catArray = get_the_category();
+
+    $tags = "";
+    if(is_array($tagsArray)) {
+        $tags = implode(", ",$tagsArray);
+    }
+
+    $func = function($value) {
+        return $value->cat_name;
+    };
+    $catArray = array_map($func,$catArray);
+    $categories = implode(", ",$catArray);
+
+
+    $params = array(
+        'content_name'     => get_the_title(),
+        'content_ids'      => get_the_ID(),
+        'tags'             => $tags,
+        'categories'       => $categories,
+        'value'            => 0
+    );
+
+
+    return $params;
 }

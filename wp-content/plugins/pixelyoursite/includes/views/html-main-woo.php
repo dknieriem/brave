@@ -480,6 +480,13 @@ e&utm_campaign=pro-feature' ); ?>
                         <div class="custom-controls-stacked">
                             <?php PYS()->render_radio_input( 'woo_purchase_value_option', 'price',
                                 'Products price (subtotal)' ); ?>
+	                        <?php  if ( !isPixelCogActive() ) { ?>
+		                        <?php PYS()->render_radio_input( 'woo_purchase_value_option', 'cog',
+			                        'Price minus Cost of Goods', true, true ); ?>
+	                        <?php } else { ?>
+		                        <?php PYS()->render_radio_input( 'woo_purchase_value_option', 'cog',
+			                        'Price minus Cost of Goods', false ); ?>
+							<?php } ?>
                             <?php renderDummyRadioInput( 'Percent of products value (subtotal)' ); ?>
                             <div class="form-inline">
                                 <?php renderDummyTextInput( 0 ); ?>
@@ -583,6 +590,13 @@ e&utm_campaign=pro-feature' ); ?>
                         <div class="custom-controls-stacked">
                             <?php PYS()->render_radio_input( 'woo_initiate_checkout_value_option', 'price',
                                 'Products price (subtotal)' ); ?>
+	                        <?php  if ( !isPixelCogActive() ) { ?>
+		                        <?php PYS()->render_radio_input( 'woo_initiate_checkout_value_option', 'cog',
+			                        'Price minus Cost of Goods', true, true ); ?>
+	                        <?php } else { ?>
+		                        <?php PYS()->render_radio_input( 'woo_initiate_checkout_value_option', 'cog',
+			                        'Price minus Cost of Goods', false ); ?>
+	                        <?php } ?>
                             <?php renderDummyRadioInput( 'Percent of products value (subtotal)' ); ?>
                             <div class="form-inline">
                                 <?php renderDummyTextInput( 0 ); ?>
@@ -740,6 +754,13 @@ e&utm_campaign=pro-feature' ); ?>
                         <div class="custom-controls-stacked">
                             <?php PYS()->render_radio_input( 'woo_add_to_cart_value_option', 'price',
                                 'Products price (subtotal)' ); ?>
+	                        <?php  if ( !isPixelCogActive() ) { ?>
+		                        <?php PYS()->render_radio_input( 'woo_add_to_cart_value_option', 'cog',
+			                        'Price minus Cost of Goods', true, true ); ?>
+	                        <?php } else { ?>
+		                        <?php PYS()->render_radio_input( 'woo_add_to_cart_value_option', 'cog',
+			                        'Price minus Cost of Goods', false ); ?>
+	                        <?php } ?>
                             <?php renderDummyRadioInput( 'Percent of products value (subtotal)' ) ?>
                             <div class="form-inline">
                                 <?php renderDummyTextInput( 0 ); ?>
@@ -842,6 +863,13 @@ e&utm_campaign=pro-feature' ); ?>
                         <div class="custom-controls-stacked">
                             <?php PYS()->render_radio_input( 'woo_view_content_value_option', 'price',
                                 'Product price' ); ?>
+	                        <?php  if ( !isPixelCogActive() ) { ?>
+		                        <?php PYS()->render_radio_input( 'woo_view_content_value_option', 'cog',
+			                        'Price minus Cost of Goods', true, true ); ?>
+	                        <?php } else { ?>
+		                        <?php PYS()->render_radio_input( 'woo_view_content_value_option', 'cog',
+			                        'Price minus Cost of Goods', false ); ?>
+	                        <?php } ?>
                             <?php renderDummyRadioInput( 'Percent of product price' ); ?>
                             <div class="form-inline">
                                 <?php renderDummyTextInput( 0 ); ?>
@@ -946,6 +974,38 @@ e&utm_campaign=pro-feature' ); ?>
 
     </div>
 </div>
+
+
+
+<div class="card">
+    <div class="card-header">
+        Track product list performance on Google Analytics
+        <?php renderProBadge( 'https://www.pixelyoursite.com/google-analytics?utm_source=pys-free-plugin&utm_medium=pro-badge&utm_campaign=pro-feature' ); ?>
+        <?php cardCollapseBtn(); ?>
+    </div>
+    <div class="card-body">
+        <?php if ( GA()->enabled() ) : ?>
+            <div class="row mb-1">
+                <div class="col">
+                    <?php GA()->render_switcher_input( 'woo_view_category_enabled_tmp',false,true ); ?>
+                    <h4 class="switcher-label">Enable the view_item_list event on Google Analytics(categories, related products, search, shortcodes)</h4>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col col-offset-left">
+                    <?php GA()->render_checkbox_input( 'woo_view_category_non_interactive_tmp', 'Non-interactive event',true ); ?>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col">
+                    <?php GA()->render_switcher_input( 'woo_select_content_enabled_tmp',false,true ); ?>
+                    <h4 class="switcher-label">Enable the select_content event on Google Analytics(when a product is clicked on categories, related products, search, shortcodes)</h4>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+
 
 <h2 class="section-title">PRO Events</h2>
 

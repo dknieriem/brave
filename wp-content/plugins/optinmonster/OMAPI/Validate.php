@@ -173,21 +173,21 @@ class OMAPI_Validate {
 		if ( isset( $option['is_invalid'] ) && $option['is_invalid'] ) {
 			if ( ! ( isset($_GET['page'] ) && $_GET['page'] == 'optin-monster-api-settings') && ! ( isset($_GET['page'] ) && $_GET['page'] == 'optin-monster-api-welcome') ){
 				if ( ! $this->base->menu->has_trial_link() ) {
-					echo '<div class="error"><p>' . __( 'There was an error verifying your OptinMonster API credentials. They are either missing or they are no longer valid.', 'optin-monster-api' ) . '</p>';
+					echo '<div class="notice notice-error"><p>' . __( 'There was an error verifying your OptinMonster API credentials. They are either missing or they are no longer valid.', 'optin-monster-api' ) . '</p>';
 					echo '<p><a href="' . esc_url_raw( admin_url( 'admin.php?page=optin-monster-api-settings' ) ) . '" class="button button-primary button-large omapi-new-optin" title="View API Settings">View API Settings</a></p></div>';
 				}
 			}
 		} elseif ( isset( $option['is_disabled'] ) && $option['is_disabled'] ) {
-			echo '<div class="error"><p>' . __( 'The subscription to this OptinMonster account has been disabled, likely due to a refund or other administrator action. Please contact OptinMonster support to resolve this issue.', 'optin-monster-api' ) . '</p>';
+			echo '<div class="notice notice-error"><p>' . __( 'The subscription to this OptinMonster account has been disabled, likely due to a refund or other administrator action. Please contact OptinMonster support to resolve this issue.', 'optin-monster-api' ) . '</p>';
 			echo '<p><a href="' . OPTINMONSTER_APP_URL . '/account/support/?utm_source=orgplugin&utm_medium=link&utm_campaign=wpdashboard" class="button button-primary button-large omapi-new-optin" title="Contact OptinMonster Support" target="_blank">Contact Support</a></p></div>';
 		} elseif ( isset( $option['is_expired'] ) && $option['is_expired'] ) {
-			echo '<div class="error"><p>' . __( 'The subscription to this OptinMonster account has expired. Please renew your subscription to use the OptinMonster API.', 'optin-monster-api' ) . '</p>';
+			echo '<div class="notice notice-error"><p>' . __( 'The subscription to this OptinMonster account has expired. Please renew your subscription to use the OptinMonster API.', 'optin-monster-api' ) . '</p>';
 			echo '<p><a href="' . OPTINMONSTER_APP_URL . '/account/billing/?utm_source=orgplugin&utm_medium=link&utm_campaign=wpdashboard" class="button button-primary button-large omapi-new-optin" title="Renew Subscription" target="_blank">Renew Subscription</a></p></div>';
 		} else {
 			// If user has dismissed before no point going through page checks
 			if ( $this->should_user_see_connect_nag() ) {
 				if ( ! ( isset($_GET['page'] ) && $_GET['page'] == 'optin-monster-api-settings') && ! ( isset($_GET['page'] ) && $_GET['page'] == 'optin-monster-api-welcome') && ! ( 'index.php' == $pagenow ) && ! $this->base->get_api_credentials() ){
-					echo '<div id="omapi-please-connect-notice" class="updated notice is-dismissible"><h3 style="padding:2px;font-weight:normal;margin:.5em 0 0;">' . __( 'Get More Email Subscribers with OptinMonster', 'optin-monster-api' ) . '</h3><p>' . __( 'Please connect to or create an OptinMonster account to start using OptinMonster. This will enable you to start turning website visitors into subscribers & customers.', 'optin-monster-api' ) . '</p>';
+					echo '<div id="omapi-please-connect-notice" class="notice notice-success is-dismissible"><h3 style="padding:2px;font-weight:normal;margin:.5em 0 0;">' . __( 'Get More Email Subscribers with OptinMonster', 'optin-monster-api' ) . '</h3><p>' . __( 'Please connect to or create an OptinMonster account to start using OptinMonster. This will enable you to start turning website visitors into subscribers & customers.', 'optin-monster-api' ) . '</p>';
 					echo '<p><a href="' . esc_url_raw( $this->base->menu->get_dashboard_link() ) . '" class="button button-primary button-large omapi-new-optin" title="Connect OptinMonster">Connect OptinMonster</a></p></div>';
 				}
 			}

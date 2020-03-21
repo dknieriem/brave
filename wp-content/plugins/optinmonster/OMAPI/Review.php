@@ -506,7 +506,7 @@ class OMAPI_Review {
 
 		}
 		if ( 'required-fields' === $_GET['action'] ) {
-			echo '<div class="error is-dismissible"><p>' . __( 'Your Name, Review, and Email address are required to submit your review.', 'optin-monster-api' ) . '</p></div>';
+			echo '<div class="notice notice-error is-dismissible"><p>' . __( 'Your Name, Review, and Email address are required to submit your review.', 'optin-monster-api' ) . '</p></div>';
 		}
 
 	}

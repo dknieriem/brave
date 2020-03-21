@@ -312,12 +312,14 @@ function rvm_map_shortcode( $attr ) // $attr manages the shortcode parameter - [
                                                                   $regionsparams_array = regionsparams( $map_id, $region[ 1 ] ); // get regions/countries values for links and backgrounds each region '$region[ 1 ]'
                                                                   if ( trim( $region[ 1 ] ) == 'IND' ) {
                                                                               $region[ 1 ] = 'ID';
-                                                                  } // prevent field to be filled with post ID for Indonesia               
+                                                                  } // prevent field to be filled with post ID for Indonesia 
+                                                                  $region[ 1 ] = rvm_region_match_when_numeric( $region[ 1 ] );              
                                                                   if ( is_array( $regionsparams_array ) && !empty( $regionsparams_array ) ) {
 
                                                                               // If label will be opened onto default card
                                                                               if( isset( $regionsparams_array[ 'field_region_onclick_action' ] ) && $regionsparams_array[ 'field_region_onclick_action' ] == 'open_label_onto_default_card' ) {
                                                                                     $output .= 'if(code == "' . $region[ 1 ] . '") {';
+                                                                                    $output .= ' document.body.style.cursor = "pointer" ;';
                                                                                     $output .= 'return true ;';
                                                                                     $output .= '}';
                                                                                     }
@@ -519,10 +521,10 @@ function rvm_map_shortcode( $attr ) // $attr manages the shortcode parameter - [
                                                                     $output .= 'if( markers[index].weburl ) { window.open( markers[index].weburl, "' . $map_enable_link_target . '" ) ; } }';
                                                 }
                                                         
-                                                //Display custom marker icon
+                                                //Display custom marker icon, both for old way and new installation via plugin
                                                 $rvm_marker_module_dir_url_array = rvm_set_absolute_upload_dir_url();
                                                 $rvm_options = rvm_retrieve_options();
-                                                if ( rvm_check_custom_marker_icon_available( $rvm_mbe_map_marker_custom_icon ) && !empty( $rvm_options[ 'rvm_custom_icon_marker_module_path_verified' ] ) ) {
+                                                if ( ( rvm_check_custom_marker_icon_available( $rvm_mbe_map_marker_custom_icon ) && !empty( $rvm_options[ 'rvm_custom_icon_marker_module_path_verified' ] ) ) or ( in_array( 'rvm-custom-marker-icon/rvm-custom-marker-icon.php', apply_filters( 'active_plugins', get_option('active_plugins') ) ) && rvm_check_custom_marker_icon_available( $rvm_mbe_map_marker_custom_icon ) ) ) {
                                                       $output .= ', markerStyle: { initial: { image: "' . $rvm_marker_module_dir_url_array[0] . $rvm_mbe_map_marker_custom_icon . '"}}';// Set an image as marker icon 
 
                                                 }
@@ -618,7 +620,7 @@ function rvm_map_shortcode( $attr ) // $attr manages the shortcode parameter - [
 
                                                                       /*console.log("Document ready to rock!");*/
                                                                       var checkExist = setInterval( function() { /*function to check if map points have shown up*/
-                                                                              if ( $( ".jvectormap-marker" ).length ) {
+                                                                              if ( $( "#' . $rvm_selected_map . '-map-' . $map_id . ' .jvectormap-marker" ).length ) {
                                                                                     //console.log( "Vector Map Points Exist!" );
                                                                                     $( ".jvectormap-marker" ).addClass( "rvm_show_markers_effect" ); /*adds the class to move markers off screen using css*/
                                                                                     rvm_show_markers(); /*call function rvm_show_markers*/
@@ -636,10 +638,10 @@ function rvm_map_shortcode( $attr ) // $attr manages the shortcode parameter - [
 
                                                                       function rvm_show_markers() {
                                                                           $( window ).scroll( function() { //scroll function
-                                                                              $( ".jvectormap-container" ).each( function() { //bind top of jvectormap to scrolling
+                                                                              $( "#' . $rvm_selected_map . '-map-' . $map_id . ' .jvectormap-marker" ).each( function() { //bind top of jvectormap to scrolling
                                                                                   if ( isScrolledIntoView( this ) === true) {  
                                                                                           //console.log("Element Visible On Screen!");
-                                                                                          var $rvm_markers = $( ".jvectormap-marker" ); /*array of markers*/
+                                                                                          var $rvm_markers = $( "#' . $rvm_selected_map . '-map-' . $map_id . ' .jvectormap-marker" ); /*array of markers*/
                                                                                           var time = 500; /*time interval in ms between showing them*/
                                                                                           $rvm_markers.each( function() {
                                                                                                 var self = this; /*setTimeout does not recognize "this" so we use a variable*/
@@ -657,7 +659,7 @@ function rvm_map_shortcode( $attr ) // $attr manages the shortcode parameter - [
                                                            * END  : markers' rain effect
                                                            * ----------------------------------------------------------------------------
                                                            */
-                                                }
+                                                } //if( $rvm_mbe_map_markers_rain_effect_is_active )
 
 
                              } // if( isset( $array_regions ) && !empty( $array_regions ) && is_array($array_regions) )

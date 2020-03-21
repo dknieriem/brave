@@ -5,6 +5,14 @@
  */
 
 
+/*function check_some_other_plugin() {
+  if ( is_plugin_active('responsive-vector-maps/responsive_vector_maps.php') ) {
+    echo "<script>alert('RVM is installed');</script>" ;
+  } else { echo "<script>alert('RVM is NOT installed');</script>" ; }
+}
+add_action( 'admin_init', 'check_some_other_plugin' );*/
+
+
 /* Localization and internazionalization */
 add_action( 'plugins_loaded', 'rvm_load_plugin_textdomain' );
 function rvm_load_plugin_textdomain( ) {
@@ -182,7 +190,7 @@ function rvm_fields_array( )
                         'rvm_mbe_map_get_rid_of_sub_names',
                         'checkbox',
                         __( 'Get rid of Subdivisions names', RVM_TEXT_DOMAIN ),
-                        __( 'When checked, Subdivisions names will not be displayed when mouse hovers over subdivisions', RVM_TEXT_DOMAIN ),
+                        __( 'When checked, Subdivisions names will not be displayed when mouse hovers over subdivisions on front end ( still visible in Preview )', RVM_TEXT_DOMAIN ),
                         '',
                         '',
                         1,
@@ -321,7 +329,7 @@ function rvm_countries_array( )
 
             //Here $key is the javascript name and $value the path to javascript itself
             if ( !empty( $rvm_custom_maps_options ) ) {
-                         // get last value entered temporally
+                        // get last value entered temporally
                         $rvm_custom_maps_options = array_reverse ( $rvm_custom_maps_options );
                         
                         // Sort regions alphabetically
@@ -348,7 +356,48 @@ function rvm_countries_array( )
                                     } //if ( $rvm_is_map_in_download_dir_yet ) 
                         } //$rvm_custom_maps_options as $key => $value
             } //!empty($rvm_custom_maps_options)
+
+
+            /* NEW MAP SYSTEM : INSTALLED AS PLUGIN SINCE DEC 2019*/
+
+            //Get custom maps with new plugin installation system ( since dec 2019 ) if exist on DB
+            //We're keeping old system too to allow previous doenloaded map to work anyway
+            $rvm_custom_maps_options_for_plugin_path_system = rvm_retrieve_custom_maps_options_for_plugin_path_system();
+            
+            //Check if option exist in DB
+            if ( !empty( $rvm_custom_maps_options_for_plugin_path_system ) ) {
+
+                // get last value entered temporally
+                $rvm_custom_maps_options_for_plugin_path_system = array_reverse ( $rvm_custom_maps_options_for_plugin_path_system );
+                // we need to include plugin.php to get is_plugin_active() in front end
+                //include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+                // Sort regions alphabetically
+                ksort( $rvm_custom_maps_options_for_plugin_path_system );
+                foreach ( $rvm_custom_maps_options_for_plugin_path_system as $key => $value ) {               
+                    //check if map installed via plugin is still active i.e.: rvm_usa_albers/rvm_usa_alberls.php
+                    if( rvm_is_plugin_active ( $key .'/'. $key . '.php' ) ) {                
+                        @include RVM_GENERAL_PLUGIN_DIR_PATH . $key . '/rvm-cm-settings.php';
+                        $countries[ $key ] = array(
+                                                        $key,
+                                                        $key,
+                                                        'rvm_jquery-jvectormap-' . $key,
+                                                        $key,
+                                                        $rvm_aspect_ratio,
+                                                        'custom_maps',
+                                                        RVM_GENERAL_PLUGIN_DIR_PATH . $key, // map dir
+                                                        RVM_GENERAL_PLUGIN_DIR_URL . $key // map url
+                                            );
+                    }//if( rvm_is_plugin_active ( $key .'/'. $key . '.php' )*/
+                }// foreach ( $rvm_custom_maps_options_for_plugin_path_system as $key => $value
+                
+            } //if ( !empty( $rvm_custom_maps_options_for_plugin_path_system ) 
+
+
+
             return $countries;
+
+
+
 }
 
 // Fields input arrays  for custom maps
@@ -562,8 +611,12 @@ function rvm_mb_function( $post )
                                                 $output .= '<p>' . __( 'In order to use this map upload again using the media uploader and use "Add Custom Map" in the select drop down ', RVM_TEXT_DOMAIN )   . '</p>' ;
                                                 $output .= '</div>';
                                     }// if ( $rvm_is_map_in_download_dir_yet )                        
-                         } // if ( !empty( $rvm_custom_maps_options ) && !empty( $rvm_custom_map_name ) )                       
+                         } // if ( !empty( $rvm_custom_maps_options ) && !empty( $rvm_custom_map_name ) ) 
+
+
             } //if ( rvm_is_custom_map( $post->ID ) )
+
+            elseif( rvm_is_custom_map_plugin_path_system( $post->ID ) ) {}
 
             else {//if we're using a default map
                     //Check if default map existing
@@ -640,9 +693,11 @@ function rvm_mb_function( $post )
                                                                         $output .= '<label for="' . $field[ 0 ] . '" ' . RVM_LABEL_CLASS . '>' . $field[ 2 ] . '</label>';
                                                                         $output .= '<select  ' . $id_and_class . ' name="' . $field[ 0 ] . '">';
                                                                         $output .= '<option value="select_country" ' . selected( '', $field_value, false ) . '>' . __( 'Select...', RVM_TEXT_DOMAIN ) . '</option>';
+
                                                                         $output .= '<optgroup label="' . __( 'Custom Maps', RVM_TEXT_DOMAIN ) . '" >';
                                                                         $output .= '<option value="rvm_custom_map" id="rvm_add_custom_map">' . __( 'Add Custom Map &raquo;', RVM_TEXT_DOMAIN ) . '</option>';
-                                                                        
+
+                                                                        //start looping through eventual custom maps                 
                                                                         foreach ( $array_countries as $country_field ) {
                                                                                     if ( $country_field[ 5 ] === 'custom_maps' ) {
                                                                                                 $output .= '<option value="' . $country_field[ 0 ] . '" ' . selected( $country_field[ 0 ], $field_value, false ) . '>' . rvm_retrieve_custom_map_name_without_underscore( $country_field[ 1 ] ) . '</option>';
@@ -741,7 +796,7 @@ function rvm_mb_function( $post )
                                                                         $field_value = 'default';
                                                             } //empty($field_value)*/
                                                             $output_markers_custom_icon_path = '<label for="' . $field[ 0 ] . '" >' . $field[ 2 ] . '</label>';
-                                                            $output_markers_custom_icon_path .= '<input id="' . $field[ 0 ] . '" type="' . $field[ 1 ] . '" name="' . $field[ 0 ] . '" value="" />';
+                                                            $output_markers_custom_icon_path .= '<input id="' . $field[ 0 ] . '" type="' . $field[ 1 ] . '" name="' . $field[ 0 ] . '" value="" style="margin-bottom: 5px;"/>';
                                                 } // $field[ 0 ] == 'rvm_mbe_custom_marker_icon_path'
                                                 if ( $field[ 0 ] == 'rvm_mbe_map_marker_border_color' ) {
                                                             if ( empty( $field_value ) ) {
@@ -865,7 +920,7 @@ function rvm_mb_function( $post )
                         @include_once RVM_INC_PLUGIN_DIR . '/rvm_markers.php';
                         
                         /**************** End: Markers *****************/             
-
+                        
                         
                         $output .= '<div id="rvm_shortcode" class="updated"><p>' . __( 'Copy and paste following shortcode to display this map whenever you like ( only once per post/sidebar per page ) :', RVM_TEXT_DOMAIN ) . ' <strong><span id="rvm_shortcode_to_copy">[rvm_map mapid="' . $post->ID . '"]</span></strong> .</p></div>';
                         $output .= '<div class="updated"><p>' . __( 'In order to see the map using the "View post" link of this page, please <strong>copy and paste</strong> the shortcode into the editor and save the post. If you get a 404 just go to "Settings" > "Permalinks" and save again your settings', RVM_TEXT_DOMAIN ) . '.</p></div>';

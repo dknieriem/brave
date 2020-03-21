@@ -298,7 +298,7 @@ function rvm_ajax_export_regions() {
             // function regionsparams() can be found in rvm_core.php
                 $regionsparams_array = regionsparams( $_REQUEST[ 'rvm_mbe_post_id' ], $region[ 1 ] ); // get regions/
             
-                $data[] = implode( RVM_CUSTOM_MAPS_PATHS_DELIMITER ,array( $region[ 1 ],$region[ 2 ], $regionsparams_array[ 'field_region_link' ],$regionsparams_array[ 'field_region_bg' ],$regionsparams_array[ 'field_region_popup' ],$regionsparams_array[ 'field_region_mouse_hover_over_colour' ]));
+                $data[] = implode( RVM_CUSTOM_MAPS_PATHS_DELIMITER ,array( $region[ 1 ],$region[ 2 ], $regionsparams_array[ 'field_region_link' ],$regionsparams_array[ 'field_region_bg' ],$regionsparams_array[ 'field_region_popup' ],$regionsparams_array[ 'field_region_mouse_hover_over_colour' ],$regionsparams_array[ 'field_region_onclick_action' ]));
 
             }
 

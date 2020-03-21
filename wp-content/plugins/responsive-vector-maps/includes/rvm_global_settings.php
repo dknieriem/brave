@@ -58,7 +58,7 @@ function rvm_admin_init(){
         	) 
     ) ;
     
-    add_settings_field(            
+    /*add_settings_field(            
             'rvm_option_custom_marker_icon_module_path', //id
             __('Install module for custom marker icon', RVM_TEXT_DOMAIN ), //title
             'rvm_settings_field', //callback
@@ -68,7 +68,7 @@ function rvm_admin_init(){
             	'rvm_option_custom_marker_icon_module_path',// Should match Option ID
             	'text' 
         	)
-    ) ;
+    ) ;*/
         
 }
 
@@ -89,7 +89,7 @@ function rvm_settings_field( $args ) {
     	$output .= '<input  ' .  $rvm_option_dequeue_wp_emoji  . ' type="' . $args[ 1 ] . '" name="rvm_options['.$args[ 0 ].']" id="'.$args[ 0 ].'" /><span>' . __('In case you may notice issues related to wp_emoji enable following checkbox. It\'s well documented this script has problems with svg ( vector images ) on which RVM relies on.', RVM_TEXT_DOMAIN ) . '</span>';
     }
 
-    else {
+    /*else {
     	$rvm_option_custom_marker_icon =  !empty( $rvm_options[ $args[ 0 ] ] ) ? $rvm_options[ $args[ 0 ] ] : '' ;
     	$output .= '<input type="' . $args[ 1 ] . '" name="' . $args[ 0 ] . '" id="'.$args[ 0 ].'" class="rvm_input" value="" /><input id="rvm_custom_marker_icon_module_uploader_button" class="rvm_custom_marker_icon_module_uploader_button rvm_media_uploader button-primary" name="rvm_mbe_custom_marker_icon_uploader_button" value="' . __( 'Select Marker Module', RVM_TEXT_DOMAIN ) . '" type="submit"> <input id="rvm_custom_marker_icon_module_unzipper_button" class="rvm_custom_marker_icon_module_unzipper_button button-primary" name="rvm_mbe_custom_marker_icon_module_unzipper_button" value="' . __( 'Install Marker Module', RVM_TEXT_DOMAIN ) . '" type="submit">';
 
@@ -104,7 +104,7 @@ function rvm_settings_field( $args ) {
 
         //Hidden field to save eventual marker module path in DB. All options needs to be saved always, otherwise they will be overwritten
         $output .= '<div id="rvm_custom_marker_icon_module_unzip_progress"><input type="hidden" value="' . $rvm_custom_icon_marker_module_path_verified_value . '"  name="rvm_options[rvm_custom_icon_marker_module_path_verified]" id="rvm_custom_icon_marker_module_path_verified" /></div>';
-    }
+    }*/
     
     // All options need to be declared here, otherwise WP will get rid in DB of non declared value 
     $rvm_version = !empty( $rvm_options[ 'ver' ] ) ? $rvm_options[ 'ver' ] : RVM_VERSION ;

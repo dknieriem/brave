@@ -40,52 +40,15 @@ function rvm_add_scripts( )
           wp_register_script( 'rvm_jquery-jvectormap-js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-2.0.3.min.js', array(
                          'jquery' 
             ), '2.0.3' ); //dependency from jquery
+            
             //setting the dependency of following script to the above, means it will be loaded JUST if the parent is loaded
-            wp_register_script( 'rvm_jquery-jvectormap-fr_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-fr_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-de_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-de_merc_en.js', array(
+            wp_register_script( 'rvm_jquery-jvectormap-world_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-world_merc_en.js', array(
                          'rvm_jquery-jvectormap-js' 
             ), '' );
             wp_register_script( 'rvm_jquery-jvectormap-it_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-it_merc_en.js', array(
                          'rvm_jquery-jvectormap-js' 
             ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-nl_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-nl_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-no_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-no_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-pl_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-pl_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-pt_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-pt_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-es_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-es_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-se_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-se_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-ch_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-ch_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-uk_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-uk_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-europe_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-europe_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-world_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-world_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-be_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-be_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
-            wp_register_script( 'rvm_jquery-jvectormap-us_merc_js', RVM_JS_JVECTORMAP_PLUGIN_DIR . '/jquery-jvectormap-us_merc_en.js', array(
-                         'rvm_jquery-jvectormap-js' 
-            ), '' );
+
             
             //Get custom maps if exist on DB
             $rvm_custom_maps_options = rvm_retrieve_custom_maps_options();
@@ -108,6 +71,27 @@ function rvm_add_scripts( )
                                      }//if ( $rvm_is_map_in_download_dir_yet )
                         } //$rvm_custom_maps_options as $key => $value
             } //!empty( $rvm_custom_maps_options )
+
+
+            //Get custom maps with new plugin installation system ( since dec 2019 ) if exist on DB
+            //We're keeping old system too to allow previous doenloaded map to work anyway
+            $rvm_custom_maps_options_for_plugin_path_system = rvm_retrieve_custom_maps_options_for_plugin_path_system();
+            
+            //Check if option exist in DB
+            if ( !empty( $rvm_custom_maps_options_for_plugin_path_system ) ) {
+
+                // get last value entered temporally
+                $rvm_custom_maps_options_for_plugin_path_system = array_reverse ( $rvm_custom_maps_options_for_plugin_path_system );
+                // Sort regions alphabetically
+                ksort( $rvm_custom_maps_options_for_plugin_path_system );
+                foreach ( $rvm_custom_maps_options_for_plugin_path_system as $key => $value ) {
+                    @include RVM_GENERAL_PLUGIN_DIR_PATH . $key . '/rvm-cm-settings.php';
+					wp_register_script( 'rvm_jquery-jvectormap-' . $key, RVM_GENERAL_PLUGIN_DIR_URL  . $key . '/jquery-jvectormap-' . $key . '.js', array(
+                                                             'rvm_jquery-jvectormap-js' 
+                                                ), '' );
+
+                }// foreach ( $rvm_custom_maps_options_for_plugin_path_system as $key => $value
+            } //if ( !empty( $rvm_custom_maps_options_for_plugin_path_system ) 
             
             wp_register_script( 'rvm_general_js', RVM_JS_PLUGIN_DIR . '/rvm_general.js', array(
                          'jquery' 

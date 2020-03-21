@@ -452,7 +452,7 @@ class OMAPI_Output {
 
 				echo '<div style="position:absolute;overflow:hidden;clip:rect(0 0 0 0);height:1px;width:1px;margin:-1px;padding:0;border:0">';
 					echo '<div class="omapi-shortcode-helper">' . html_entity_decode( $shortcode, ENT_COMPAT ) . '</div>';
-					echo '<div class="omapi-shortcode-parsed">' . do_shortcode( html_entity_decode( $shortcode, ENT_COMPAT ) ) . '</div>';
+					echo '<div class="omapi-shortcode-parsed omapi-encoded">' . htmlentities( do_shortcode( html_entity_decode( $shortcode, ENT_COMPAT ) ) ) . '</div>';
 				echo '</div>';
 			}
 		}
