@@ -1,52 +1,136 @@
 .navbar
 {
-    //Per feedback, removed bg from full navbar and moved to child container
-    /*background-image: url(../img/background-icons.png);
-    background-position: center top;
-    background-repeat: repeat-y;
-    background-size: 100%;*/
     border-bottom:none;
     margin-bottom: 2rem;
-    margin-left: 9px;
-    margin-right: 9px;
-    padding: 0;
     max-width: 100%;
+    padding: 0;
 
-    &-nav {
-        margin-bottom: 24px;
-    }
+    &-container 
+    {
+        @extend .justify-content-center;
 
-    //move nav background to container
-    .navbar-container {
-        //background-image: url(../img/background-icons.png);
-        background-position: center top;
-        background-repeat: repeat-y;
-        background-size: 100%;
-        min-height: 96px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        -webkit-box-align: center;
         -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: justify;
         -ms-flex-pack: justify;
+        -ms-flex-wrap: wrap;
+        -webkit-box-align: center;
+        -webkit-box-pack: justify;
+        align-items: center;
+        background: $white;
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
+        min-height: 96px;
+        position: relative;
 
-        @include media-breakpoint-up(lg){
+        @include media-breakpoint-up(lg)
+        {
             height: 96px;
         }
     }
 
-}
+    .navbar-brand {
 
-.navbar .navbar-container {
-    //@extend .container-fluid
-    //@include media-breakpoint-down(xl){
+        padding-top: 13px;
+        padding-bottom: 13px;
+        
+        @include media-breakpoint-down(md){
+            margin: auto;
+        }
 
-    //}
+        img {
+            max-height: 70px;
+            width: auto;
+            @include media-breakpoint-down(sm) {
+                max-width:300px; 
+                max-height: 180px;
+                
+            }
+        }
+    }
+
+    &-collapse
+    {
+        flex-grow: 0;
+    }
+
+    .nav-item 
+    {
+        .highlighted
+        {
+            background-color:$primary;
+            border-radius:100px;
+            a
+            {
+                color:white !important;
+            }
+        }
+    }
+
+    .nav-link //, .dropdown-item
+    {
+        @extend .font-oswald;
+
+        color: $blue;
+        font-size:1.3rem; 
+        font-weight:400 !important;
+        text-transform: uppercase !important;
+        padding: .7rem 1rem;
+        padding-left:1rem;
+        padding-right:1rem;
+    }
+
+    &-toggler {
+        position: absolute;
+        right: 0;
+
+        // Mobile Nav Toggle Icon //
+        &-icon {
+            //@extend .fas;
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 2rem;
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            color: $blue;
+            width: auto;
+            height: auto;
+
+            //@extend .fa-bars;
+            &:before {
+                content: "\f0c9";
+            }
+        }
+    }
+
+    #main-menu 
+    {
+        width: 100%;
+        margin-top: 12px;
+        margin-bottom: 12px;    
+
+
+        li.nav-item:last-child
+        {
+            margin: auto;
+        }
+        //Turn the get tickets link into a button
+        a[title='Get Tickets'] 
+        {
+            @extend .button;
+            font-family: 'Oswald', sans-serif !important;
+            font-weight: bold;
+            font-size: 1.6rem;
+            padding-top: .1rem;
+            padding-bottom: .2rem;
+            margin: auto;
+        }
+    }
 }
 
 body.admin-bar .fixed-top
@@ -57,79 +141,14 @@ body.admin-bar .fixed-top
         top: 32px !important;
     }
 }
-
-.nav-link, .dropdown-item
-{
-    color: $blue;
-    font-weight:300 !important;
-    text-transform: uppercase !important;
-    font-size:1.3rem; 
-
-    @include media-breakpoint-up(md){
-        margin-left:2rem;
-        margin-right:1rem;
-}
-}
-
-.dropdown-item
-{
-    margin-top:0.5rem;
-    margin-bottom:0.5rem;
-    margin-left:0rem;
-}
-
-
-.navbar-brand {
-
-    padding-top: 13px;
-    padding-bottom: 13px;
-    
-    @media (max-width: 768px){
-        margin: auto;
-    }
-
-    img {
-        max-height: 70px;
-        width: auto;
-        @media (max-width: 768px) {
-            max-width:300px; 
-            max-height: 180px;
-            
-        }
-    }
-}
-
-.navbar-light .navbar-toggler
-{
-    border:none;
-}
-
-.nav-item.highlighted
-{
-    background-color:$primary;
-    border-radius:100px;
-    a
-    {
-        color:white !important;
-    }
-}
-
-.dropdown-menu
-{
-    border: solid 1px #d4d4d4;
-    border-radius:0;
-}
-
-@media (max-width: 1199px) { //was 768px
+@include media-breakpoint-down(md) { //1199, was 768px
     .navbar
     {
         align-items: flex-start;
         text-align: center;
         .nav-link, .dropdown-menu .nav-link, .dropdown-item
         {
-            padding: 1rem 0rem !important;
-            font-size:1.2rem !important;
-            font-weight:300 !important;
+            font-size:1.2rem;
         }
         .dropdown-item
         {
@@ -147,15 +166,6 @@ body.admin-bar .fixed-top
             display: inline-block;
         }
 
-        .dropdown-menu .nav-link
-        {
-           //margin-left:1.5rem;
-            color:rgba(255,255,255,0.7) !important; 
-        }
-        #main-menu
-        {
-            //margin-top:2rem !important;
-        }
         li.search
         {
             margin-top: 35px;
@@ -164,93 +174,4 @@ body.admin-bar .fixed-top
 
         }
     }
-}
-
-#main-menu {
-    width: 100%; // Don's nav hack
-    margin-top: 12px;
-    margin-bottom: 12px;
-            
-    @media(min-width: 980px){ 
-        
-        li:last-child {
-            flex-grow: 1;
-            margin: auto;
-
-            a {
-                float: right;
-                margin-right: 0;
-            }
-        }
-    }
-}
-
-@media (min-width: 1199px) { //was 768px
-.navbar-expand-md .navbar-nav .nav-link
-{
-    padding-left:1rem;
-    padding-right:1rem;
-}
-
-
-}
-/* custom css */
-
-/* Nav Button */
-.navbar {
-    a[title='Get Tickets'] {
-        @extend .button;
-        @extend .shadow;
-
-        font-weight: bold;
-        font-size: 1.6rem;
-        padding: .5rem 1.3rem .6rem !important;
-
-        @media (max-width: 1199px) {
-            //@extend .button;
-            padding: .5rem 1.3rem .6rem !important;
-        }
-    }
-
- /*   @media (max-width: 1199px){
-        margin-left: unset;
-    }*/
-
-}
-
-.navbar .navbar-container {
-    position: relative;
-}
-
-.navbar-toggler {
-    position: absolute;
-    right: 0;
-}
-
-.navbar-toggler-icon {
-    //@extend .fas;
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 2rem;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-    color: $white;
-    width: auto;
-    height: auto;
-
-    //@extend .fa-bars;
-    &:before {
-        content: "\f0c9";
-    }
-}
-
-/* Tim's Nav Styles */
-
-#main-menu .nav-link {
-    //display: block;
-    padding: .7rem 1rem;
 }

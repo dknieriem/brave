@@ -1,10 +1,11 @@
 .button
 {
+    @extend .font-bangers;
     background-color: $red;
-    padding: .5rem 2rem;
+    padding: .5rem 2rem .6rem;
     border: 0;
     border-radius:100px;
-    color:white;
+    color: $white;
     font-weight:300;
     font-size: 1.75rem;
     display: inline-block;
@@ -20,9 +21,9 @@
         color:$pink;
     }
 
-    &--teal 
+    &--blue 
     {
-        background-color: $teal;
+        background-color: $blue;
         color: $white;
     }
     &--gray
@@ -68,19 +69,9 @@
         }
     }
 
- /*   &--jumbo {
-        font-size: 1.875rem;
-        text-align: center;
-
-        @include media-breakpoint-down(sm)
-        {
-            font-size: 3.5rem;
-        }
-    }*/
-
     &:hover
     {
-        color:white;
+        color: $white;
         cursor: pointer;
     }
 }
