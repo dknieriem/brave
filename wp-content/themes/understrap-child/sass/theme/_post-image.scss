@@ -10,6 +10,13 @@
 
     }
 
+    &.image-polaroid
+    {
+        border-radius: 0;
+        background-color: white;
+        padding: 10px 10px 50px;
+    }
+
 }
 
 .page-section__single-column.no-inner-margin, .row.no-inner-margin {

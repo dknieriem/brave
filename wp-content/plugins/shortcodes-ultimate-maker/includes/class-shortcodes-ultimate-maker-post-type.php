@@ -172,7 +172,7 @@ final class Shortcodes_Ultimate_Maker_Post_Type {
 
 			// FontAwesome icon
 			else {
-				$icon_template = '<i class="fa fa-%1$s" style="display:block;width:%2$spx;line-height:%2$spx;text-align:center;font-size:%3$spx;color:#888"></i>';
+				$icon_template = '<i class="sui sui-%1$s" style="display:block;width:%2$spx;line-height:%2$spx;text-align:center;font-size:%3$spx;color:#888"></i>';
 			}
 
 			printf(

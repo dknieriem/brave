@@ -218,15 +218,19 @@ final class Shortcodes_Ultimate_Maker {
 		 */
 		$license_notice = new Shortcodes_Ultimate_Addon_License_Notice( $this->addon_id, $this->plugin_path . 'admin/partials/notices/license.php' );
 
-		add_action( 'admin_notices',                array( $license_notice, 'display_notice' ) );
+		add_action( 'admin_notices', array( $license_notice, 'display_notice' ) );
 		add_action( 'admin_post_su_dismiss_notice', array( $license_notice, 'dismiss_notice' ) );
 
 		/**
 		 * The 'Install Core' notice.
 		 */
-		$core_notice = new Shortcodes_Ultimate_Addon_Core_Notice( $this->addon_id, $this->plugin_path . 'admin/partials/notices/core.php' );
+		$core_notice = new Shortcodes_Ultimate_Addon_Core_Notice(
+			$this->addon_id,
+			$this->plugin_path . 'admin/partials/notices/core.php',
+			'5.2.0'
+		);
 
-		add_action( 'admin_notices',                array( $core_notice, 'display_notice' ) );
+		add_action( 'admin_notices', array( $core_notice, 'display_notice' ) );
 		add_action( 'admin_post_su_dismiss_notice', array( $core_notice, 'dismiss_notice' ) );
 
 		/**
@@ -234,20 +238,20 @@ final class Shortcodes_Ultimate_Maker {
 		 */
 		$editor = new Shortcodes_Ultimate_Maker_Editor( $this->plugin_file, $this->plugin_version );
 
-		add_action( 'add_meta_boxes',               array( $editor, 'add_meta_box' )   );
-		add_action( 'admin_enqueue_scripts',        array( $editor, 'enqueue_assets' ) );
-		add_action( 'save_post_shortcodesultimate', array( $editor, 'save_post' )      );
+		add_action( 'add_meta_boxes', array( $editor, 'add_meta_box' ) );
+		add_action( 'admin_enqueue_scripts', array( $editor, 'enqueue_assets' ) );
+		add_action( 'save_post_shortcodesultimate', array( $editor, 'save_post' ) );
 
 		/**
 		 * Register custom post type.
 		 */
 		$cpt = new Shortcodes_Ultimate_Maker_Post_Type();
 
-		add_action( 'init',                                          array( $cpt, 'register_post_type' )         );
-		add_filter( 'post_updated_messages',                         array( $cpt, 'custom_updated_messages' )    );
-		add_filter( 'manage_shortcodesultimate_posts_columns',       array( $cpt, 'add_posts_columns' ), -10     );
+		add_action( 'init', array( $cpt, 'register_post_type' ) );
+		add_filter( 'post_updated_messages', array( $cpt, 'custom_updated_messages' ) );
+		add_filter( 'manage_shortcodesultimate_posts_columns', array( $cpt, 'add_posts_columns' ), -10 );
 		add_action( 'manage_shortcodesultimate_posts_custom_column', array( $cpt, 'posts_custom_column' ), 10, 2 );
-		add_filter( 'post_row_actions',                              array( $cpt, 'post_row_actions' ), 10, 2    );
+		add_filter( 'post_row_actions', array( $cpt, 'post_row_actions' ), 10, 2 );
 
 		/**
 		 * Import demo shortcodes.
@@ -261,8 +265,9 @@ final class Shortcodes_Ultimate_Maker {
 		 */
 		$settings = new Shortcodes_Ultimate_Maker_Settings( $this->plugin_file );
 
-		add_action( 'admin_init',     array( $settings, 'register_settings' ) );
-		add_action( 'current_screen', array( $settings, 'add_help_tab' )      );
+		add_action( 'admin_init', array( $settings, 'register_settings' ) );
+		add_action( 'current_screen', array( $settings, 'add_help_tab' ) );
+		add_action( 'admin_enqueue_scripts', array( $settings, 'enqueue_scripts' ) );
 
 		/**
 		 * Validate license before updating.
@@ -301,13 +306,13 @@ final class Shortcodes_Ultimate_Maker {
 			return;
 		}
 
-		$screen->add_help_tab( array(
+		$screen->add_help_tab(
+			array(
 				'id'      => 'shortcodes-ultimate-maker-common',
 				'title'   => __( 'Shortcode Creator', 'shortcodes-ultimate-maker' ),
 				'content' => $this->get_template( 'admin/partials/help/general' ),
-			) );
-
-		// $screen->set_help_sidebar( $this->get_template( 'admin/partials/help/sidebar' ) );
+			)
+		);
 
 	}
 
@@ -326,11 +331,11 @@ final class Shortcodes_Ultimate_Maker {
 			return false;
 		}
 
-		if ( ! in_array( $screen->base, array( 'edit', 'post' ) ) ) {
+		if ( ! in_array( $screen->base, array( 'edit', 'post' ), true ) ) {
 			return false;
 		}
 
-		if ( $screen->post_type !== 'shortcodesultimate' ) {
+		if ( 'shortcodesultimate' !== $screen->post_type ) {
 			return false;
 		}
 

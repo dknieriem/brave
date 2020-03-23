@@ -17,4 +17,8 @@ $callback = '
 	return su_maker_do_shortcode( $args );
 ';
 
+// @codingStandardsIgnoreStart
+// phpcs:disable
 $this->shortcode_callbacks[ $id ] = create_function( '$atts, $content, $tag', $callback );
+// phpcs:enable
+// @codingStandardsIgnoreEnd

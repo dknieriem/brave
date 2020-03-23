@@ -132,15 +132,17 @@ final class Shortcodes_Ultimate_Maker_Upgrade {
 		/**
 		 * 1. Modify custom shortcodes.
 		 */
-		$shortcode_posts = get_posts( array(
+		$shortcode_posts = get_posts(
+			array(
 				'post_type'      => 'shortcodesultimate',
 				'posts_per_page' => -1,
 				'post_status'    => 'publish',
-			) );
+			)
+		);
 
 		foreach ( $shortcode_posts as $shortcode_post ) {
 
-			$post_id = $shortcode_post->ID;
+			$post_id        = $shortcode_post->ID;
 			$plugin_version = get_post_meta( $post_id, 'sumk_plugin_version', true );
 
 			// Skip updated shortcodes
@@ -174,7 +176,6 @@ final class Shortcodes_Ultimate_Maker_Upgrade {
 				}
 
 			}
-
 
 			/**
 			 * 1.2. Convert base64-encoded attributes into array.
@@ -210,7 +211,6 @@ final class Shortcodes_Ultimate_Maker_Upgrade {
 
 			}
 
-
 			/**
 			 * 1.3. Encode shortcode code into base64.
 			 */
@@ -228,7 +228,6 @@ final class Shortcodes_Ultimate_Maker_Upgrade {
 
 			}
 
-
 			/**
 			 * 1.4. Trash old demo shortcodes.
 			 */
@@ -241,7 +240,6 @@ final class Shortcodes_Ultimate_Maker_Upgrade {
 			if ( in_array( $shortcode_post->post_title, $demos ) ) {
 				wp_trash_post( $post_id );
 			}
-
 
 			/**
 			 * 1.5. Add post meta with plugin version.

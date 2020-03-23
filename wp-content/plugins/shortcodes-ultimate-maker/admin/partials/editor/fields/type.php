@@ -11,4 +11,4 @@ $types = $this->get_code_types( $deprecated );
 	<?php endforeach; ?>
 </select>
 
-<p class="description"><?php printf( __( 'This setting determines what type of code will be used below in the code editor. %sLearn more about code types%s.', 'shortcodes-ultimate-maker' ), '<a href="http://docs.getshortcodes.com/article/61-custom-shortcode#Code_types" target="_blank"><nobr>', '</nobr></a>' ); ?></p>
+<p class="description"><?php printf( __( 'This setting determines what type of code will be used below in the code editor. %sLearn more about code types%s.', 'shortcodes-ultimate-maker' ), '<a href="https://getshortcodes.com/docs/creating-custom-shortcodes-with-the-shortcode-creator-add-on/" target="_blank"><nobr>', '</nobr></a>' ); ?></p>

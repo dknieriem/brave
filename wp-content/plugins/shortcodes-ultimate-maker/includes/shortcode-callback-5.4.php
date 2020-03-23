@@ -2,6 +2,9 @@
 
 $this->shortcode_callbacks[ $id ] = function( $atts, $content, $tag ) {
 
+	// @codingStandardsIgnoreStart
+	// phpcs:disable
+
 	$id = $this->maybe_remove_prefix( $tag );
 
 	$args = array(
@@ -15,6 +18,10 @@ $this->shortcode_callbacks[ $id ] = function( $atts, $content, $tag ) {
 		'css'       => $this->custom_shortcodes[ $id ]['css'],
 	);
 
+	// phpcs:enable
+	// @codingStandardsIgnoreEnd
+
 	return su_maker_do_shortcode( $args );
 
 };
+

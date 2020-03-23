@@ -81,12 +81,12 @@ final class Shortcodes_Ultimate_Maker_Editor {
 	 */
 	public function __construct( $plugin_file, $plugin_version ) {
 
-		$this->plugin_file        = $plugin_file;
-		$this->plugin_version     = $plugin_version;
-		$this->plugin_path        = plugin_dir_path( $plugin_file );
-		$this->plugin_url         = plugin_dir_url( $plugin_file );
-		$this->editor_fields      = array();
-		$this->attribute_defaults = array(
+		$this->plugin_file           = $plugin_file;
+		$this->plugin_version        = $plugin_version;
+		$this->plugin_path           = plugin_dir_path( $plugin_file );
+		$this->plugin_url            = plugin_dir_url( $plugin_file );
+		$this->editor_fields         = array();
+		$this->attribute_defaults    = array(
 			'slug'    => '',
 			'default' => '',
 			'type'    => 'text',
@@ -96,6 +96,16 @@ final class Shortcodes_Ultimate_Maker_Editor {
 			'max'     => 100,
 			'step'    => 1,
 			'options' => '',
+		);
+		$this->attribute_field_types = array(
+			'text'         => __( 'Text', 'shortcodes-ultimate-maker' ),
+			'number'       => __( 'Number', 'shortcodes-ultimate-maker' ),
+			'color'        => __( 'Color', 'shortcodes-ultimate-maker' ),
+			'select'       => __( 'Dropdown', 'shortcodes-ultimate-maker' ),
+			'bool'         => __( 'Switch', 'shortcodes-ultimate-maker' ),
+			'icon'         => __( 'Icon', 'shortcodes-ultimate-maker' ),
+			'upload'       => __( 'Media library', 'shortcodes-ultimate-maker' ),
+			'image_source' => __( 'Image source', 'shortcodes-ultimate-maker' ),
 		);
 
 	}
@@ -142,44 +152,50 @@ final class Shortcodes_Ultimate_Maker_Editor {
 
 		wp_enqueue_media();
 
+		wp_enqueue_code_editor( array( 'mode' => 'php' ) );
+
 		wp_enqueue_style(
 			'shortcodes-ultimate-maker-editor',
-			$this->plugin_url . 'admin/css/editor.css',
+			plugins_url( 'css/editor.css', __FILE__ ),
 			array(),
-			$this->plugin_version,
+			filemtime( plugin_dir_path( __FILE__ ) . 'css/editor.css' ),
 			'all'
 		);
 
 		wp_enqueue_script(
 			'shortcodes-ultimate-maker-editor',
-			$this->plugin_url . 'admin/js/editor.js',
+			plugins_url( 'js/editor/index.js', __FILE__ ),
 			array(
 				'jquery',
 				'jquery-ui-core',
 				'jquery-ui-widget',
 				'jquery-ui-mouse',
 				'jquery-ui-sortable',
-				'ace',
+				'underscore',
 			),
-			$this->plugin_version,
+			filemtime( plugin_dir_path( __FILE__ ) . 'js/editor/index.js' ),
 			true
 		);
+
+		$icons = is_callable( 'su_get_config' )
+			? su_get_config( 'icons' )
+			: array( 'cog' );
 
 		wp_localize_script(
 			'shortcodes-ultimate-maker-editor',
 			'ShortcodesUltimateMakerEditorData',
 			array(
-				'icons' => Su_Data::icons(),
+				'icons'      => $icons,
 				'attributes' => array(
 					'defaults' => $this->attribute_defaults,
-					'types'    => $this->get_attribute_field_types(),
+					'types'    => $this->attribute_field_types,
 				),
-				'l10n' => array(
-					'Editor' => array(
+				'l10n'       => array(
+					'Editor'     => array(
 						'createShortcode' => __( 'Create shortcode', 'shortcodes-ultimate-maker' ),
 						'updateShortcode' => __( 'Update shortcode', 'shortcodes-ultimate-maker' ),
 					),
-					'Icon' => array(
+					'Icon'       => array(
 						'selectIcon'        => __( 'Select icon', 'shortcodes-ultimate-maker' ),
 						'close'             => __( 'Close', 'shortcodes-ultimate-maker' ),
 						'useCustomImage'    => __( 'Use custom image', 'shortcodes-ultimate-maker' ),
@@ -195,38 +211,38 @@ final class Shortcodes_Ultimate_Maker_Editor {
 							'add'     => __( 'Add attribute', 'shortcodes-ultimate-maker' ),
 							'option'  => __( 'Option', 'shortcodes-ultimate-maker' ),
 						),
-						'item' => array(
+						'item'    => array(
 							'edit'           => __( 'Edit', 'shortcodes-ultimate-maker' ),
 							'close'          => __( 'Close', 'shortcodes-ultimate-maker' ),
 							'delete'         => __( 'Delete', 'shortcodes-ultimate-maker' ),
 							'deleted'        => __( 'Attribute will be deleted.', 'shortcodes-ultimate-maker' ),
 							'restore'        => __( 'Restore', 'shortcodes-ultimate-maker' ),
 							'label'          => __( 'Field label', 'shortcodes-ultimate-maker' ),
-							'labelDesc'      => sprintf( __( 'This text will be used as field label in the Insert Shortcode window. %sLearn more%s.', 'shortcodes-ultimate-maker' ), '<a href="http://docs.getshortcodes.com/article/63-attributes-of-custom-shortcodes#Field_name_and_description" target="_blank">', '</a>' ),
+							'labelDesc'      => sprintf( __( 'This text will be used as field label in the Insert Shortcode window. %1$sLearn more%2$s.', 'shortcodes-ultimate-maker' ), '<a href=https://getshortcodes.com/docs/attributes-of-custom-shortcodes/" target="_blank">', '</a>' ),
 							'noLabel'        => _x( 'none', 'Field name not set', 'shortcodes-ultimate-maker' ),
 							'newName'        => __( 'Attribute %s', 'shortcodes-ultimate-maker' ),
 							'name'           => __( 'Attribute name', 'shortcodes-ultimate-maker' ),
 							'invalidName'    => sprintf( __( 'Invalid attribute name. Please use only allowed characters: %s', 'shortcodes-ultimate-maker' ), '<code><nobr>a-z, 0-9, _</nobr></code>' ),
 							'emptyName'      => __( 'Attribute name could not be empty.', 'shortcodes-ultimate-maker' ),
-							'nameDesc1'      => sprintf( __( 'This name will be used at insertion of shortcode into post editor. You can use only Latin letters in lower case %s, digits %s, and underscores %s in this field.', 'shortcodes-ultimate-maker' ), '<code>[a..z]</code>', '<code>[0..9]</code>', '<code>_</code>' ),
+							'nameDesc1'      => sprintf( __( 'This name will be used at insertion of shortcode into post editor. You can use only Latin letters in lower case %1$s, digits %2$s, and underscores %3$s in this field.', 'shortcodes-ultimate-maker' ), '<code>[a..z]</code>', '<code>[0..9]</code>', '<code>_</code>' ),
 							'nameDesc2'      => __( 'Also, this name will be used as name of a variable in the code editor below.', 'shortcodes-ultimate-maker' ),
-							'nameDesc3'      => sprintf( __( 'Example: use %s as attribute name and you will create the following shortcode: %s', 'shortcodes-ultimate-maker' ), '<code>style</code>', '<code><nobr>[shortcode style=""]</nobr></code>' ),
+							'nameDesc3'      => sprintf( __( 'Example: use %1$s as attribute name and you will create the following shortcode: %2$s', 'shortcodes-ultimate-maker' ), '<code>style</code>', '<code><nobr>[shortcode style=""]</nobr></code>' ),
 							'default'        => __( 'Default value', 'shortcodes-ultimate-maker' ),
 							'defaultDesc'    => __( 'This text will be used as attribute value, unless any other value is specified at insertion of shortcode into page editor.', 'shortcodes-ultimate-maker' ),
 							'noDefault'      => _x( 'none', 'Default field value not set', 'shortcodes-ultimate-maker' ),
 							'type'           => __( 'Field type', 'shortcodes-ultimate-maker' ),
-							'typeDesc'       => sprintf( __( 'This setting indicates the field type which will be used in shortcode generator at insertion of shortcode to page editor. %sLearn more%s.', 'shortcodes-ultimate-maker' ), '<a href="http://docs.getshortcodes.com/article/63-attributes-of-custom-shortcodes#Field_types" target="_blank">', '</a>' ),
+							'typeDesc'       => sprintf( __( 'This setting indicates the field type which will be used in shortcode generator at insertion of shortcode to page editor. %1$sLearn more%2$s.', 'shortcodes-ultimate-maker' ), '<a href="https://getshortcodes.com/docs/attributes-of-custom-shortcodes/" target="_blank">', '</a>' ),
 							'desc'           => __( 'Field description', 'shortcodes-ultimate-maker' ),
-							'descDesc'       => sprintf( __( 'This text will be used as field description in the Insert Shortcode window. %sLearn more%s.', 'shortcodes-ultimate-maker' ), '<a href="http://docs.getshortcodes.com/article/63-attributes-of-custom-shortcodes#Field_name_and_description" target="_blank">', '</a>' ),
+							'descDesc'       => sprintf( __( 'This text will be used as field description in the Insert Shortcode window. %1$sLearn more%2$s.', 'shortcodes-ultimate-maker' ), '<a href="https://getshortcodes.com/docs/attributes-of-custom-shortcodes/" target="_blank">', '</a>' ),
 							'options'        => __( 'Dropdown options', 'shortcodes-ultimate-maker' ),
-							'optionsDesc'    => sprintf( __( 'This text will be used to create dropdown options list. Each option must be placed on a separate line. Option values and labels must be separated with pipe symbol %s. %sLearn more%s.', 'shortcodes-ultimate-maker' ), '<code>|</code>', '<a href="http://docs.getshortcodes.com/article/63-attributes-of-custom-shortcodes#Field_type_dropdown" target="_blank">', '</a>' ),
+							'optionsDesc'    => sprintf( __( 'This text will be used to create dropdown options list. Each option must be placed on a separate line. Option values and labels must be separated with pipe symbol %1$s. %2$sLearn more%3$s.', 'shortcodes-ultimate-maker' ), '<code>|</code>', '<a href="https://getshortcodes.com/docs/attributes-of-custom-shortcodes/" target="_blank">', '</a>' ),
 							'min'            => __( 'Minimum value', 'shortcodes-ultimate-maker' ),
 							'max'            => __( 'Maximum value', 'shortcodes-ultimate-maker' ),
 							'step'           => __( 'Step size', 'shortcodes-ultimate-maker' ),
 							'closeAttribute' => __( 'Close attribute', 'shortcodes-ultimate-maker' ),
 						),
 					),
-					'Code' => array(
+					'Code'       => array(
 						'fullscreen' => __( 'Toggle fullscreen', 'shortcodes-ultimate-maker' ),
 					),
 				),
@@ -239,17 +255,18 @@ final class Shortcodes_Ultimate_Maker_Editor {
 	 * Retrieve the list of shortcode fields and their defaults.
 	 *
 	 * @since  1.5.5
-	 * @access private
 	 * @return mixed Array with field names and default values.
 	 */
-	private function get_fields() {
+	public function get_fields() {
 
 		if ( ! empty( $this->editor_fields ) ) {
 			return $this->editor_fields;
 		}
 
-		$this->editor_fields = apply_filters( 'su/maker/admin/fields', array(
-				'title' => array(
+		$this->editor_fields = apply_filters(
+			'su/maker/admin/fields',
+			array(
+				'title'       => array(
 					'id'      => 'title',
 					'title'   => __( 'Shortcode title', 'shortcodes-ultimate-maker' ),
 					'default' => '',
@@ -259,42 +276,43 @@ final class Shortcodes_Ultimate_Maker_Editor {
 					'title'   => __( 'Shortcode description', 'shortcodes-ultimate-maker' ),
 					'default' => '',
 				),
-				'tag-name' => array(
+				'tag-name'    => array(
 					'id'      => 'tag-name',
 					'title'   => __( 'Shortcode tag name', 'shortcodes-ultimate-maker' ),
 					'default' => '',
 				),
-				'content' => array(
+				'content'     => array(
 					'id'      => 'content',
 					'title'   => __( 'Default content', 'shortcodes-ultimate-maker' ),
 					'default' => __( 'Default content', 'shortcodes-ultimate-maker' ),
 				),
-				'icon' => array(
+				'icon'        => array(
 					'id'      => 'icon',
 					'title'   => __( 'Icon', 'shortcodes-ultimate-maker' ),
 					'default' => 'icon:cog',
 				),
-				'attributes' => array(
+				'attributes'  => array(
 					'id'      => 'attributes',
 					'title'   => __( 'Attributes', 'shortcodes-ultimate-maker' ),
 					'default' => array(),
 				),
-				'type' => array(
+				'type'        => array(
 					'id'      => 'type',
 					'title'   => __( 'Editor mode', 'shortcodes-ultimate-maker' ),
 					'default' => 'html',
 				),
-				'code' => array(
+				'code'        => array(
 					'id'      => 'code',
 					'title'   => __( 'Shortcode code', 'shortcodes-ultimate-maker' ),
 					'default' => '',
 				),
-				'custom-css' => array(
+				'custom-css'  => array(
 					'id'      => 'custom-css',
 					'title'   => __( 'Custom CSS', 'shortcodes-ultimate-maker' ),
 					'default' => '',
 				),
-			) );
+			)
+		);
 
 		return $this->editor_fields;
 
@@ -336,10 +354,12 @@ final class Shortcodes_Ultimate_Maker_Editor {
 
 			remove_action( 'save_post_shortcodesultimate', array( $this, 'save_post' ) );
 
-			wp_update_post( array(
+			wp_update_post(
+				array(
 					'ID'         => $post_id,
 					'post_title' => $name,
-				) );
+				)
+			);
 
 			add_action( 'save_post_shortcodesultimate', array( $this, 'save_post' ) );
 
@@ -428,7 +448,7 @@ final class Shortcodes_Ultimate_Maker_Editor {
 			/**
 			 * Save code editor mode.
 			 */
-			$code_type = preg_replace( '/[^a-z_]/', '', $_POST['sumk_code_type'] );
+			$code_type  = preg_replace( '/[^a-z_]/', '', $_POST['sumk_code_type'] );
 			$code_types = array_keys( $this->get_code_types( true ) );
 
 			if ( ! in_array( $code_type, $code_types ) ) {
@@ -510,12 +530,11 @@ final class Shortcodes_Ultimate_Maker_Editor {
 	 * Utility function to get specified template by it's name.
 	 *
 	 * @since 1.5.5
-	 * @access private
 	 * @param string  $name Template name (without extension).
 	 * @param mixed   $data Template data to be passed to the template.
 	 * @return string           Template content.
 	 */
-	private function get_template( $name, $data = null ) {
+	public function get_template( $name, $data = null ) {
 
 		// Sanitize name
 		$name = preg_replace( '/[^A-Za-z0-9\/_-]/', '', $name );
@@ -544,11 +563,10 @@ final class Shortcodes_Ultimate_Maker_Editor {
 	 * Utility function to display specified template by it's name.
 	 *
 	 * @since 1.5.5
-	 * @access private
 	 * @param string  $name Template name (without extension).
 	 * @param mixed   $data Template data to be passed to the template.
 	 */
-	private function the_template( $name, $data = null ) {
+	public function the_template( $name, $data = null ) {
 		echo $this->get_template( $name, $data );
 	}
 
@@ -558,7 +576,7 @@ final class Shortcodes_Ultimate_Maker_Editor {
 	 * @since  1.5.5
 	 * @return string Current value of the icon field.
 	 */
-	private function get_icon_field_value() {
+	public function get_icon_field_value() {
 
 		$icon = get_post_meta( get_the_ID(), 'sumk_icon', true );
 
@@ -583,7 +601,7 @@ final class Shortcodes_Ultimate_Maker_Editor {
 	 * @since  1.5.5
 	 * @return string Current value of the attributes field.
 	 */
-	private function get_attributes_field_value() {
+	public function get_attributes_field_value() {
 
 		$attributes = get_post_meta( get_the_ID(), 'sumk_attr', true );
 
@@ -606,10 +624,10 @@ final class Shortcodes_Ultimate_Maker_Editor {
 	 * @param bool    $deprecated Include deprecated code types or not.
 	 * @return mixed              The list of available code types.
 	 */
-	private function get_code_types( $deprecated = false ) {
+	public function get_code_types( $deprecated = false ) {
 
 		$types = array(
-			'html' => array(
+			'html'     => array(
 				'id'    => 'html',
 				'title' => __(
 					'HTML code - simple mode, perfect for beginners',
@@ -625,8 +643,8 @@ final class Shortcodes_Ultimate_Maker_Editor {
 		if ( $deprecated ) {
 
 			$types['php_return'] = array(
-				'id'       => 'php_return',
-				'title'    => __( 'PHP return - deprecated', 'shortcodes-ultimate-maker' ),
+				'id'    => 'php_return',
+				'title' => __( 'PHP return - deprecated', 'shortcodes-ultimate-maker' ),
 			);
 
 		}
@@ -677,7 +695,7 @@ final class Shortcodes_Ultimate_Maker_Editor {
 	 */
 	private function validate_attribute( $attribute ) {
 
-		$defaults = $this->attribute_defaults;
+		$defaults  = $this->attribute_defaults;
 		$attribute = wp_parse_args( $attribute, $defaults );
 
 		/**
@@ -704,7 +722,7 @@ final class Shortcodes_Ultimate_Maker_Editor {
 		/**
 		 * Validate field type.
 		 */
-		if ( ! array_key_exists( $attribute['type'], $this->get_attribute_field_types() ) ) {
+		if ( ! array_key_exists( $attribute['type'], $this->attribute_field_types ) ) {
 			$attribute['type'] = $defaults['type'];
 		}
 
@@ -803,34 +821,6 @@ final class Shortcodes_Ultimate_Maker_Editor {
 		}
 
 		return implode( PHP_EOL, $valid_options );
-
-	}
-
-	/**
-	 * Retrieve attribute field types.
-	 *
-	 * @since  1.5.5
-	 * @access private
-	 * @return mixed   Array with field types and their labels.
-	 */
-	private function get_attribute_field_types() {
-
-		if ( ! empty( $this->attribute_field_types ) ) {
-			return $this->attribute_field_types;
-		}
-
-		$this->attribute_field_types = array(
-			'text'         => __( 'Text', 'shortcodes-ultimate-maker' ),
-			'number'       => __( 'Number', 'shortcodes-ultimate-maker' ),
-			'color'        => __( 'Color', 'shortcodes-ultimate-maker' ),
-			'select'       => __( 'Dropdown', 'shortcodes-ultimate-maker' ),
-			'bool'         => __( 'Switch', 'shortcodes-ultimate-maker' ),
-			'icon'         => __( 'Icon', 'shortcodes-ultimate-maker' ),
-			'upload'       => __( 'Media library', 'shortcodes-ultimate-maker' ),
-			'image_source' => __( 'Image source', 'shortcodes-ultimate-maker' ),
-		);
-
-		return $this->attribute_field_types;
 
 	}
 

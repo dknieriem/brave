@@ -17,7 +17,7 @@
 
 <!-- FontAwesome icon -->
 <script type="text/html" id="sum-icon-fa-tpl" class="su-maker-editor-js-template">
-	<i class="fa fa-%ICON%" title="%ICON%"></i>
+	<i class="sui sui-%ICON%" title="%ICON%"></i>
 </script>
 <!-- /FontAwesome icon -->
 
@@ -80,8 +80,8 @@
 					</th>
 					<td>
 						<input type="text" data-name="slug" id="sum-attributes-item-name-%index%" class="sum-attributes-item-name regular-text">
-						<p class="description sum-validation-failed-message">%invalidName%</p>
-						<p class="description sum-validation-required-message">%emptyName%</p>
+						<p class="description sum-validation-message sum-validation-failed-message">%invalidName%</p>
+						<p class="description sum-validation-message sum-validation-required-message">%emptyName%</p>
 						<p class="description">%nameDesc1%</p>
 						<p class="description">%nameDesc2%</p>
 						<p class="description">%nameDesc3%</p>

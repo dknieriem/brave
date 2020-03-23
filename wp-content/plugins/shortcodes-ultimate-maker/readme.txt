@@ -20,23 +20,52 @@ Provides UI for creating custom shortcodes. [Add-on page](https://getshortcodes.
 
 = Support =
 
-* [Getting started](http://docs.getshortcodes.com/category/27-common-questions)
-* [Add-on documentation](http://docs.getshortcodes.com/category/28-shortcode-creator-add-on)
+* [Add-on documentation](https://getshortcodes.com/docs/#addons)
 * [Get support](https://getshortcodes.com/support/)
 
 
 == Installation ==
 
-This add-on is distributed as a regular zipped plugin. You can install it like any other plugin. Navigate to Dashboard -> Plugins -> Add New -> Upload plugin. Then select downloaded zip-archive and click on "Install now" button. [Learn more](http://docs.getshortcodes.com/article/56-how-to-install-add-on).
+This add-on is distributed as a regular zipped plugin. You can install it like any other plugin. Navigate to Dashboard -> Plugins -> Add New -> Upload plugin. Then select downloaded zip-archive and click on "Install now" button. [Learn more](https://getshortcodes.com/docs/how-to-install-add-on/).
 
 
 == Changelog ==
 
+= 1.5.14 =
+
+Fix warnings in PHP compatibility checks (PHP Compatibility Checker plugin)
+
+
+= 1.5.13 =
+
+Improved compatibility with OptimizePress
+
+
+= 1.5.12 =
+
+**Improvements**
+
+- License key at plugin settings page can now be revealed by focusing the *License key* field
+- Compatibility with Shortcodes Ultimate 5.2.0
+
+
+**Fixes**
+
+- Fixed validation errors at shortcode editing screen
+
+
 = 1.5.11 =
-Fixes:
-* Plugin updates now also available from within iThemes sync control panel
-* Plugin updates will be visible even without license key
-* Fullscreen mode for shortcode code editor
+
+**Fixes**
+
+- Plugin updates now also available from within iThemes sync control panel
+- Plugin updates will be visible even without license key
+- Fullscreen mode for shortcode code editor
+
+**Added**
+
+- Compatibility with SU v5.0.5
+
 
 = 1.5.10 =
 * Added: default attribute value can now contain new lines
@@ -54,7 +83,7 @@ Fixes:
 * Fixed: PHP warning at settings page, when license key is saved
 
 = 1.5.6 =
-__IMPORTANT:__ this add-on requires __Shortcodes Ultimate version 5.0.0__ (or higher). Please update Shortcodes Ultimate before updating this add-on. [Upgrade guide](http://docs.getshortcodes.com/article/77-full-guidance-for-update-of-shortcodes-ultimate-from-version-4-to-version-5).
+__IMPORTANT:__ this add-on requires __Shortcodes Ultimate version 5.0.0__ (or higher). Please update Shortcodes Ultimate before updating this add-on.
 
 * Fixed: bug preventing replacement of default shortcodes with custom ones;
 * Fixed: bug when after plugin update some attributes of custom shortcodes are removed;

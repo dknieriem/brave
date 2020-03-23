@@ -1,14 +1,14 @@
 <?php
-/*
-  Plugin Name: Shortcodes Ultimate: Shortcode Creator
-  Plugin URI: https://getshortcodes.com/add-ons/shortcode-creator/
-  Version: 1.5.11
-  Author: Vladimir Anokhin
-  Author URI: https://vanokhin.com/
-  Description: Provides UI for creating custom shortcodes
-  Text Domain: shortcodes-ultimate-maker
-  Domain Path: /languages
-  License: license.txt
+/**
+ * Plugin Name: Shortcodes Ultimate: Shortcode Creator
+ * Plugin URI: https://getshortcodes.com/add-ons/shortcode-creator/
+ * Version: 1.5.14
+ * Author: Vladimir Anokhin
+ * Author URI: https://vanokhin.com/
+ * Description: Provides UI for creating custom shortcodes
+ * Text Domain: shortcodes-ultimate-maker
+ * Domain Path: /languages
+ * License: license.txt
  */
 
 /**
@@ -20,7 +20,7 @@ function run_shortcodes_ultimate_maker() {
 
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-shortcodes-ultimate-maker.php';
 
-	$plugin = new Shortcodes_Ultimate_Maker( __FILE__, '1.5.11' );
+	$plugin = new Shortcodes_Ultimate_Maker( __FILE__, '1.5.14' );
 
 	do_action( 'su/maker/ready', $plugin );
 
@@ -37,7 +37,7 @@ function update_shortcodes_ultimate_maker() {
 
 	require_once plugin_dir_path( __FILE__ ) . 'admin/plugin-update-check.php';
 
-	$updater = new PluginUpdateChecker_2_0 (
+	$updater = new PluginUpdateChecker_2_0(
 		'https://kernl.us/api/v1/updates/5991a5d26c27485243c652ce/',
 		__FILE__,
 		'shortcodes-ultimate-maker',
@@ -86,8 +86,10 @@ register_deactivation_hook( __FILE__, 'deactivate_shortcodes_ultimate_maker' );
 /**
  * Make plugin meta available for translation via POEdit.
  */
+// phpcs:disable
 if ( false ) {
 	__( 'Vladimir Anokhin', 'shortcodes-ultimate-maker' );
 	__( 'Shortcodes Ultimate: Shortcode Creator', 'shortcodes-ultimate-maker' );
 	__( 'Provides UI for creating custom shortcodes', 'shortcodes-ultimate-maker' );
 }
+// phpcs:enable

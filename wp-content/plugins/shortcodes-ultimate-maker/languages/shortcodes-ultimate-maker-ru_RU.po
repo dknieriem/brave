@@ -2,163 +2,198 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Shortcodes Ultimate: Shortcode Creator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-23 07:01+0300\n"
-"PO-Revision-Date: 2017-12-23 07:02+0300\n"
+"POT-Creation-Date: 2019-08-12 15:20+0300\n"
+"PO-Revision-Date: 2019-08-12 15:21+0300\n"
 "Last-Translator: Vladimir Anokhin <ano.vladimir@gmail.com>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _e;__;_x:1,2c;_ex:1,2c\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;_x:1,2c;_ex:1,2c;esc_html_x:1,2c\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: gulpfile.js\n"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:182
+#: admin/class-shortcodes-ultimate-maker-editor.php:101
+msgid "Text"
+msgstr "Текст"
+
+#: admin/class-shortcodes-ultimate-maker-editor.php:102
+msgid "Number"
+msgstr "Число"
+
+#: admin/class-shortcodes-ultimate-maker-editor.php:103
+msgid "Color"
+msgstr "Цвет"
+
+#: admin/class-shortcodes-ultimate-maker-editor.php:104
+msgid "Dropdown"
+msgstr "Выпадающий список"
+
+#: admin/class-shortcodes-ultimate-maker-editor.php:105
+msgid "Switch"
+msgstr "Переключатель"
+
+#: admin/class-shortcodes-ultimate-maker-editor.php:106
+#: admin/class-shortcodes-ultimate-maker-editor.php:292
+#: includes/class-shortcodes-ultimate-maker-post-type.php:144
+msgid "Icon"
+msgstr "Иконка"
+
+#: admin/class-shortcodes-ultimate-maker-editor.php:107
+msgid "Media library"
+msgstr "Медиа библиотека"
+
+#: admin/class-shortcodes-ultimate-maker-editor.php:108
+msgid "Image source"
+msgstr "Источник изображений"
+
+#: admin/class-shortcodes-ultimate-maker-editor.php:195
 #: admin/partials/editor/editor.php:31
 #: includes/class-shortcodes-ultimate-maker-post-type.php:44
 msgid "Create shortcode"
 msgstr "Создать шорткод"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:183
+#: admin/class-shortcodes-ultimate-maker-editor.php:196
 #: admin/partials/editor/editor.php:25
 msgid "Update shortcode"
 msgstr "Обновить шорткод"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:186
+#: admin/class-shortcodes-ultimate-maker-editor.php:199
 msgid "Select icon"
 msgstr "Выбрать иконку"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:187
-#: admin/class-shortcodes-ultimate-maker-editor.php:203
+#: admin/class-shortcodes-ultimate-maker-editor.php:200
+#: admin/class-shortcodes-ultimate-maker-editor.php:216
 msgid "Close"
 msgstr "Закрыть"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:188
+#: admin/class-shortcodes-ultimate-maker-editor.php:201
 msgid "Use custom image"
 msgstr "Использовать свое изображение"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:189
+#: admin/class-shortcodes-ultimate-maker-editor.php:202
 msgid "Select custom image"
 msgstr "Выберите изображение"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:190
+#: admin/class-shortcodes-ultimate-maker-editor.php:203
 msgid "Use selected image"
 msgstr "Использовать выбранное изображение"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:194
 #: admin/class-shortcodes-ultimate-maker-editor.php:207
+#: admin/class-shortcodes-ultimate-maker-editor.php:220
 msgid "Field label"
 msgstr "Название поля"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:195
-#: admin/class-shortcodes-ultimate-maker-editor.php:220
+#: admin/class-shortcodes-ultimate-maker-editor.php:208
+#: admin/class-shortcodes-ultimate-maker-editor.php:233
 msgid "Field type"
 msgstr "Тип поля"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:196
-#: admin/class-shortcodes-ultimate-maker-editor.php:217
+#: admin/class-shortcodes-ultimate-maker-editor.php:209
+#: admin/class-shortcodes-ultimate-maker-editor.php:230
 msgid "Default value"
 msgstr "Значение по умолчанию"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:197
+#: admin/class-shortcodes-ultimate-maker-editor.php:210
 msgid "No attribues yet."
 msgstr "Пока нет атрибутов."
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:198
+#: admin/class-shortcodes-ultimate-maker-editor.php:211
 msgid "Add attribute"
 msgstr "Добавить атрибут"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:199
+#: admin/class-shortcodes-ultimate-maker-editor.php:212
 #: includes/class-shortcodes-ultimate-maker-demos.php:114
 #: includes/class-shortcodes-ultimate-maker-demos.php:196
 #: includes/class-shortcodes-ultimate-maker-demos.php:211
 msgid "Option"
 msgstr "Вариант"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:202
+#: admin/class-shortcodes-ultimate-maker-editor.php:215
 msgid "Edit"
 msgstr "Изменить"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:204
+#: admin/class-shortcodes-ultimate-maker-editor.php:217
 msgid "Delete"
 msgstr "Удалить"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:205
+#: admin/class-shortcodes-ultimate-maker-editor.php:218
 msgid "Attribute will be deleted."
 msgstr "Атрибут будет удален."
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:206
+#: admin/class-shortcodes-ultimate-maker-editor.php:219
 msgid "Restore"
 msgstr "Восстановить"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:208
+#: admin/class-shortcodes-ultimate-maker-editor.php:221
 #, php-format
 msgid ""
 "This text will be used as field label in the Insert Shortcode window. "
-"%sLearn more%s."
+"%1$sLearn more%2$s."
 msgstr ""
 "Этот текст будет использован в качестве названия поля в окне Вставить "
-"Шорткод. %sПодробнее%s."
+"Шорткод. %1$sПодробнее%2$s."
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:209
+#: admin/class-shortcodes-ultimate-maker-editor.php:222
 msgctxt "Field name not set"
 msgid "none"
 msgstr "отсутствует"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:210
+#: admin/class-shortcodes-ultimate-maker-editor.php:223
 #, php-format
 msgid "Attribute %s"
 msgstr "Атрибут %s"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:211
+#: admin/class-shortcodes-ultimate-maker-editor.php:224
 msgid "Attribute name"
 msgstr "Имя атрибута"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:212
+#: admin/class-shortcodes-ultimate-maker-editor.php:225
 #, php-format
 msgid "Invalid attribute name. Please use only allowed characters: %s"
 msgstr ""
 "Некорректное имя атрибута. Пожалуйста используйте только разрешенные "
 "символы: %s"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:213
+#: admin/class-shortcodes-ultimate-maker-editor.php:226
 msgid "Attribute name could not be empty."
 msgstr "Имя атрибута не может быть пустым."
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:214
-#: admin/partials/editor/fields/tag-name.php:7
+#: admin/class-shortcodes-ultimate-maker-editor.php:227
 #, php-format
 msgid ""
 "This name will be used at insertion of shortcode into post editor. You can "
-"use only Latin letters in lower case %s, digits %s, and underscores %s in "
-"this field."
+"use only Latin letters in lower case %1$s, digits %2$s, and underscores %3$s "
+"in this field."
 msgstr ""
 "Это имя будет использовано во время вставки шорткода в редактор страницы. В "
-"этом поле можно использовать Латинские буквы в нижнем регистре %s, цифры %s, "
-"и символы подчеркивания %s."
+"этом поле можно использовать Латинские буквы в нижнем регистре %1$s, цифры "
+"%2$s, и символы подчеркивания %3$s."
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:215
+#: admin/class-shortcodes-ultimate-maker-editor.php:228
 msgid ""
 "Also, this name will be used as name of a variable in the code editor below."
 msgstr ""
 "Также, это имя будет использовано ниже, в качестве имени переменной в "
 "редакторе кода."
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:216
+#: admin/class-shortcodes-ultimate-maker-editor.php:229
 #, php-format
 msgid ""
-"Example: use %s as attribute name and you will create the following "
-"shortcode: %s"
+"Example: use %1$s as attribute name and you will create the following "
+"shortcode: %2$s"
 msgstr ""
-"Пример: используйте %s в качестве имени атрибута и будет создан следующий "
-"шорткод: %s"
+"Пример: используйте %1$s в качестве имени атрибута и будет создан следующий "
+"шорткод: %2$s"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:218
+#: admin/class-shortcodes-ultimate-maker-editor.php:231
 msgid ""
 "This text will be used as attribute value, unless any other value is "
 "specified at insertion of shortcode into page editor."
@@ -166,151 +201,118 @@ msgstr ""
 "Этот текст будет использован в качестве значения атрибута, если во время "
 "вставки шорткода в редактор страницы не будет указано другое значение."
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:219
+#: admin/class-shortcodes-ultimate-maker-editor.php:232
 msgctxt "Default field value not set"
 msgid "none"
 msgstr "отсутствует"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:221
+#: admin/class-shortcodes-ultimate-maker-editor.php:234
 #, php-format
 msgid ""
 "This setting indicates the field type which will be used in shortcode "
-"generator at insertion of shortcode to page editor. %sLearn more%s."
+"generator at insertion of shortcode to page editor. %1$sLearn more%2$s."
 msgstr ""
 "Этот параметр указывает тип поля, которое будет отображено в генераторе "
-"шорткодов при вставке шорткода в редактор страницы. %sПодробнее%s."
+"шорткодов при вставке шорткода в редактор страницы. %1$sПодробнее%2$s."
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:222
+#: admin/class-shortcodes-ultimate-maker-editor.php:235
 msgid "Field description"
 msgstr "Описание поля"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:223
+#: admin/class-shortcodes-ultimate-maker-editor.php:236
 #, php-format
 msgid ""
 "This text will be used as field description in the Insert Shortcode window. "
-"%sLearn more%s."
+"%1$sLearn more%2$s."
 msgstr ""
 "Этот текст будет использован в качестве описания поля в окне Вставить "
-"Шорткод. %sПодробнее%s."
+"Шорткод. %1$sПодробнее%2$s."
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:224
+#: admin/class-shortcodes-ultimate-maker-editor.php:237
 msgid "Dropdown options"
 msgstr "Варианты выпадающего списка"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:225
+#: admin/class-shortcodes-ultimate-maker-editor.php:238
 #, php-format
 msgid ""
 "This text will be used to create dropdown options list. Each option must be "
 "placed on a separate line. Option values and labels must be separated with "
-"pipe symbol %s. %sLearn more%s."
+"pipe symbol %1$s. %2$sLearn more%3$s."
 msgstr ""
 "Этот текст будет использован для создания вариантов выпадающего списка. "
 "Каждый вариант должен быть на отдельной строке. Значения и названия "
-"вариантов должны быть разделены символом прямой черты %s. %sПодробнее%s."
+"вариантов должны быть разделены символом прямой черты %1$s. %2$sПодробнее"
+"%3$s."
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:226
+#: admin/class-shortcodes-ultimate-maker-editor.php:239
 msgid "Minimum value"
 msgstr "Минимальное значение"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:227
+#: admin/class-shortcodes-ultimate-maker-editor.php:240
 msgid "Maximum value"
 msgstr "Максимальное значение"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:228
+#: admin/class-shortcodes-ultimate-maker-editor.php:241
 msgid "Step size"
 msgstr "Размер шага"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:229
+#: admin/class-shortcodes-ultimate-maker-editor.php:242
 msgid "Close attribute"
 msgstr "Закрыть атрибут"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:233
+#: admin/class-shortcodes-ultimate-maker-editor.php:246
 msgid "Toggle fullscreen"
 msgstr "Полноэкранный режим"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:257
+#: admin/class-shortcodes-ultimate-maker-editor.php:272
 msgid "Shortcode title"
 msgstr "Название шорткода"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:262
+#: admin/class-shortcodes-ultimate-maker-editor.php:277
 msgid "Shortcode description"
 msgstr "Описание шорткода"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:267
+#: admin/class-shortcodes-ultimate-maker-editor.php:282
 msgid "Shortcode tag name"
 msgstr "Имя тега шорткода"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:272
-#: admin/class-shortcodes-ultimate-maker-editor.php:273
+#: admin/class-shortcodes-ultimate-maker-editor.php:287
+#: admin/class-shortcodes-ultimate-maker-editor.php:288
 #: admin/partials/editor/fields/content.php:6
 msgid "Default content"
 msgstr "Содержимое по умолчанию"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:277
-#: admin/class-shortcodes-ultimate-maker-editor.php:831
-#: includes/class-shortcodes-ultimate-maker-post-type.php:144
-msgid "Icon"
-msgstr "Иконка"
-
-#: admin/class-shortcodes-ultimate-maker-editor.php:282
+#: admin/class-shortcodes-ultimate-maker-editor.php:297
 msgid "Attributes"
 msgstr "Атрибуты"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:287
+#: admin/class-shortcodes-ultimate-maker-editor.php:302
 msgid "Editor mode"
 msgstr "Режим редактора"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:292
+#: admin/class-shortcodes-ultimate-maker-editor.php:307
 msgid "Shortcode code"
 msgstr "Код шорткода"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:297
+#: admin/class-shortcodes-ultimate-maker-editor.php:312
 msgid "Custom CSS"
 msgstr "Произвольный CSS"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:618
+#: admin/class-shortcodes-ultimate-maker-editor.php:636
 msgid "HTML code - simple mode, perfect for beginners"
 msgstr "HTML код - простой режим, подходит для начинающих"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:624
+#: admin/class-shortcodes-ultimate-maker-editor.php:642
 msgid "PHP code - advanced mode"
 msgstr "PHP код - продвинутый режим"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:632
+#: admin/class-shortcodes-ultimate-maker-editor.php:650
 msgid "PHP return - deprecated"
 msgstr "PHP return - устаревший"
 
-#: admin/class-shortcodes-ultimate-maker-editor.php:826
-msgid "Text"
-msgstr "Текст"
-
-#: admin/class-shortcodes-ultimate-maker-editor.php:827
-msgid "Number"
-msgstr "Число"
-
-#: admin/class-shortcodes-ultimate-maker-editor.php:828
-msgid "Color"
-msgstr "Цвет"
-
-#: admin/class-shortcodes-ultimate-maker-editor.php:829
-msgid "Dropdown"
-msgstr "Выпадающий список"
-
-#: admin/class-shortcodes-ultimate-maker-editor.php:830
-msgid "Switch"
-msgstr "Переключатель"
-
-#: admin/class-shortcodes-ultimate-maker-editor.php:832
-msgid "Media library"
-msgstr "Медиа библиотека"
-
-#: admin/class-shortcodes-ultimate-maker-editor.php:833
-msgid "Image source"
-msgstr "Источник изображений"
-
 #: admin/class-shortcodes-ultimate-maker-settings.php:106
 #: admin/partials/settings/sections/general.php:4
-#: includes/class-shortcodes-ultimate-maker.php:340
+#: includes/class-shortcodes-ultimate-maker.php:312
 msgid "Shortcode Creator"
 msgstr "Пользовательские Шорткоды"
 
@@ -360,8 +362,8 @@ msgstr "Лицензионный ключ успешно деактивиров�
 msgid "License key"
 msgstr "Лицензионный ключ"
 
-#: admin/class-shortcodes-ultimate-maker-settings.php:255
-#: admin/class-shortcodes-ultimate-maker-settings.php:286
+#: admin/class-shortcodes-ultimate-maker-settings.php:270
+#: admin/class-shortcodes-ultimate-maker-settings.php:301
 msgid "error code"
 msgstr "код ошибки"
 
@@ -460,12 +462,23 @@ msgstr ""
 "символы: %s"
 
 #: admin/partials/editor/fields/tag-name.php:5
-msgid "Shortcode tag name could not be empty."
+msgid "Shortcode tag name can not be empty."
 msgstr "Имя тега шорткода не может быть пустым."
 
 #: admin/partials/editor/fields/tag-name.php:6
 msgid "Short name of the shortcode."
 msgstr "Короткое имя шорткода."
+
+#: admin/partials/editor/fields/tag-name.php:7
+#, php-format
+msgid ""
+"This name will be used at insertion of shortcode into post editor. You can "
+"use only Latin letters in lower case %s, digits %s, and underscores %s in "
+"this field."
+msgstr ""
+"Это имя будет использовано во время вставки шорткода в редактор страницы. В "
+"этом поле можно использовать Латинские буквы в нижнем регистре %s, цифры %s, "
+"и символы подчеркивания %s."
 
 #: admin/partials/editor/fields/tag-name.php:8
 #, php-format
@@ -505,49 +518,46 @@ msgstr "Документация"
 msgid "Add-on documentation"
 msgstr "Документация дополнения"
 
-#: admin/partials/help/general.php:6
-msgid "Common questions"
-msgstr "Общие вопросы"
-
-#: admin/partials/help/general.php:6
-msgid "downloading, installation, license keys"
-msgstr "скачивание, установка, лицензионные ключи"
-
-#: admin/partials/help/general.php:9
+#: admin/partials/help/general.php:8
 msgid "Frequently Asked Questions"
 msgstr "Часто задаваемые вопросы"
 
-#: admin/partials/help/general.php:11
+#: admin/partials/help/general.php:10
 msgid "How to create custom shortcode"
 msgstr "Как создать пользовательский шорткод"
 
-#: admin/partials/help/general.php:12
+#: admin/partials/help/general.php:11
 msgid "How to replace default shortcodes"
 msgstr "Как заменить стандартные шорткоды"
 
-#: admin/partials/help/general.php:13
+#: admin/partials/help/general.php:12
 msgid "How to export and import custom shortcodes"
 msgstr "Как экспортировать и импортировать пользовательские шорткоды"
 
-#: admin/partials/notices/core.php:4
-msgid ""
-"Please install and activate Shortcodes Ultimate core plugin in order to use "
-"<strong>Shortcode Creator</strong> add-on."
-msgstr ""
-"Пожалуйста установите и активируйте основной плагин Shortcodes Ultimate "
-"чтобы использовать дополнение <strong>Пользовательские Шорткоды</strong>"
-
-#: admin/partials/notices/core.php:6
-msgid "Install Shortcodes Ultimate"
-msgstr "Установить Shortcodes Ultimate"
-
-#: admin/partials/notices/core.php:7 admin/partials/notices/license.php:9
-msgid "Dismiss"
-msgstr "Закрыть"
-
-#: admin/partials/notices/license.php:4 shortcodes-ultimate-maker.php:66
+#: admin/partials/notices/core.php:4 admin/partials/notices/license.php:4
+#: shortcodes-ultimate-maker.php:92
 msgid "Shortcodes Ultimate: Shortcode Creator"
 msgstr "Шорткоды: Пользовательские Шорткоды"
+
+#: admin/partials/notices/core.php:5
+msgid ""
+"Please install and activate the latest version of Shortcodes Ultimate (core "
+"plugin) in order to use this add-on."
+msgstr ""
+"Пожалуйста установите и активируйте последнюю версию плагина Шорткоды "
+"(основной плагин) чтобы использовать это дополнение."
+
+#: admin/partials/notices/core.php:10
+msgid "Install Now"
+msgstr "Установить сейчас"
+
+#: admin/partials/notices/core.php:11 admin/partials/notices/license.php:8
+msgid "Remind me later"
+msgstr "Напомнить позже"
+
+#: admin/partials/notices/core.php:12 admin/partials/notices/license.php:9
+msgid "Dismiss"
+msgstr "Закрыть"
 
 #: admin/partials/notices/license.php:5
 msgid "Activate your license key to enable automatic updates."
@@ -557,10 +567,6 @@ msgstr ""
 #: admin/partials/notices/license.php:7
 msgid "Enter license key"
 msgstr "Ввести лицензионный ключ"
-
-#: admin/partials/notices/license.php:8
-msgid "Remind me later"
-msgstr "Напомнить позже"
 
 #: admin/partials/settings/fields/license-key.php:6
 msgctxt "License key is active"
@@ -727,17 +733,17 @@ msgstr "Шорткод обновлен. %s."
 #: includes/class-shortcodes-ultimate-maker-post-type.php:121
 #, php-format
 msgid "Shortcode added. %s."
-msgstr "Шорткод добавлен. %s"
+msgstr "Шорткод добавлен. %s."
 
 #: includes/class-shortcodes-ultimate-maker-post-type.php:122
 #, php-format
 msgid "Shortcode saved. %s."
-msgstr "Шорткод сохранен. %s"
+msgstr "Шорткод сохранен. %s."
 
 #: includes/class-shortcodes-ultimate-maker-post-type.php:123
 #, php-format
 msgid "Shortcode submitted. %s."
-msgstr "Шорткод добавлен. %s"
+msgstr "Шорткод добавлен. %s."
 
 #: includes/class-shortcodes-ultimate-maker-post-type.php:125
 msgid "Shortcode draft updated"
@@ -755,15 +761,15 @@ msgstr "Демо шорткод #2: пример кода  PHP return"
 msgid "Demo shortcode #3: PHP echo code example"
 msgstr "Демо шорткод #3: пример кода PHP echo"
 
-#: includes/class-shortcodes-ultimate-maker.php:320
+#: includes/class-shortcodes-ultimate-maker.php:291
 msgctxt "Custom shortcodes group name"
 msgid "Custom"
 msgstr "Пользовательские"
 
-#: shortcodes-ultimate-maker.php:65
+#: shortcodes-ultimate-maker.php:91
 msgid "Vladimir Anokhin"
 msgstr "Владимир Анохин"
 
-#: shortcodes-ultimate-maker.php:67
+#: shortcodes-ultimate-maker.php:93
 msgid "Provides UI for creating custom shortcodes"
 msgstr "Позволяет создавать пользовательские шорткоды"

@@ -179,12 +179,11 @@ abstract class Shortcodes_Ultimate_Addon_Notice {
 	 * Retrieve the link to dismiss the notice.
 	 *
 	 * @since  1.5.8
-	 * @access protected
 	 * @param bool    $defer    Defer the notice instead of dismissing.
 	 * @param string  $redirect Custom redirect URL.
 	 * @return string           The admin url.
 	 */
-	protected function get_dismiss_link( $defer = false, $redirect = '' ) {
+	public function get_dismiss_link( $defer = false, $redirect = '' ) {
 
 		$link = admin_url( sprintf(
 				'admin-post.php?action=%s&nonce=%s&id=%s',

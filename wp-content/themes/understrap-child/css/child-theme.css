@@ -13626,6 +13626,12 @@ body.admin-bar .fixed-top {
 
 .image-item {
   display: block; }
+  .image-item:hover {
+    text-decoration: none; }
+  @media (max-width: 767.98px) {
+    .image-item {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem; } }
   .image-item__image {
     background-position: 50% 50%;
     background-size: contain;
@@ -13643,14 +13649,6 @@ body.admin-bar .fixed-top {
   .image-item__content {
     text-align: center;
     color: #20c997; }
-
-.image-item:hover {
-  text-decoration: none; }
-
-@media (max-width: 767.98px) {
-  .image-item {
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem; } }
 
 .filter-button {
   display: inline-block;
@@ -14509,6 +14507,10 @@ body.single {
   margin-top: 2rem;
   margin-bottom: 2rem;
   border-radius: 6px; }
+  .post-image.image-polaroid {
+    border-radius: 0;
+    background-color: white;
+    padding: 10px 10px 50px; }
 
 .page-section__single-column.no-inner-margin .post-image, .row.no-inner-margin .post-image, .no-inner-margin.podcast-intro .post-image {
   margin-top: 0;

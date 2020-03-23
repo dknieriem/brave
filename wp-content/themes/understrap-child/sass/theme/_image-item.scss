@@ -1,6 +1,18 @@
 .image-item
 {
     display: block;
+
+    &:hover
+    {
+        text-decoration: none;
+    }
+
+    @include media-breakpoint-down(sm)
+    {
+        margin-top:2.5rem;
+        margin-bottom:2.5rem;
+    }
+
    &__image
     {
         background-position: 50% 50%;
@@ -12,6 +24,7 @@
         padding-top:128px;
         width: 128px;
     }
+
     &__title
     {
         font-family:$header-font;
@@ -19,32 +32,10 @@
         font-size:1.5rem;
         color:$teal;
     }
+
     &__content
     {
         text-align: center;
         color:$teal;
     }
 }
-
-.image-item:hover
-{
-    text-decoration: none;
-}
-
-
-@media (max-width: 767.98px) {
-    .image-item
-    {
-        margin-top:2.5rem;
-        margin-bottom:2.5rem;
-    }
-    // .image-item:first-child
-    // {
-    //     margin-top:0rem;
-    // }
-    // .image-item:last-child
-    // {
-    //     margin-bottom: 0rem;
-    // }
-
- }

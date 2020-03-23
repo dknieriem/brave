@@ -106,7 +106,7 @@ final class Shortcodes_Ultimate_Maker_Settings {
 		$this->addon_name = __( 'Shortcode Creator', 'shortcodes-ultimate-maker' );
 
 		$this->license_key_api_url = 'https://getshortcodes.com/api/v1';
-		$this->license_key_pattern = "/^([A-Z0-9]{4}-){3}[A-Z0-9]{4}$/";
+		$this->license_key_pattern = '/^([A-Z0-9]{4}-){3}[A-Z0-9]{4}$/';
 		$this->license_key_option  = "su_option_{$this->addon_id}_license";
 		$this->license_key_mask    = '****-****-****-%s';
 
@@ -123,12 +123,12 @@ final class Shortcodes_Ultimate_Maker_Settings {
 			'not-activated-001'         => __( 'Unknown error', 'shortcodes-ultimate-maker' ),
 
 			// Deactivation messages
-			'deactivated-202'     => __( 'License key successfully deactivated', 'shortcodes-ultimate-maker' ),
-			'not-deactivated-400' => __( 'Invalid license key', 'shortcodes-ultimate-maker' ),
-			'not-deactivated-409' => __( 'Invalid license key', 'shortcodes-ultimate-maker' ),
-			'not-deactivated-500' => __( 'Invalid license key', 'shortcodes-ultimate-maker' ),
-			'not-deactivated-503' => __( 'Unable to connect to activation server, please try again later', 'shortcodes-ultimate-maker' ),
-			'not-deactivated-001' => __( 'Unknown error', 'shortcodes-ultimate-maker' ),
+			'deactivated-202'           => __( 'License key successfully deactivated', 'shortcodes-ultimate-maker' ),
+			'not-deactivated-400'       => __( 'Invalid license key', 'shortcodes-ultimate-maker' ),
+			'not-deactivated-409'       => __( 'Invalid license key', 'shortcodes-ultimate-maker' ),
+			'not-deactivated-500'       => __( 'Invalid license key', 'shortcodes-ultimate-maker' ),
+			'not-deactivated-503'       => __( 'Unable to connect to activation server, please try again later', 'shortcodes-ultimate-maker' ),
+			'not-deactivated-001'       => __( 'Unknown error', 'shortcodes-ultimate-maker' ),
 
 		);
 
@@ -155,8 +155,8 @@ final class Shortcodes_Ultimate_Maker_Settings {
 			'shortcodes-ultimate-settings',
 			'shortcodes-ultimate-' . $this->addon_id . '-general',
 			array(
-				'id'          => $this->license_key_option,
-				'type'        => 'license-key',
+				'id'   => $this->license_key_option,
+				'type' => 'license-key',
 			)
 		);
 
@@ -176,18 +176,33 @@ final class Shortcodes_Ultimate_Maker_Settings {
 	 */
 	public function add_help_tab( $screen ) {
 
-		if (
-			empty( $_GET['page'] ) ||
-			$_GET['page'] !== 'shortcodes-ultimate-settings'
-		) {
+		if ( ! $this->is_settings_page() ) {
 			return;
 		}
 
-		$screen->add_help_tab( array(
+		$screen->add_help_tab(
+			array(
 				'id'      => 'shortcodes-ultimate-' . $this->addon_id,
 				'title'   => $this->addon_name,
 				'content' => $this->get_template( 'help/general' ),
-			) );
+			)
+		);
+
+	}
+
+	public function enqueue_scripts() {
+
+		if ( ! $this->is_settings_page() ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'shortcodes-ultimate-maker-settings',
+			plugins_url( 'js/settings/index.js', __FILE__ ),
+			array(),
+			filemtime( plugin_dir_path( __FILE__ ) . 'js/settings/index.js' ),
+			true
+		);
 
 	}
 
@@ -226,30 +241,28 @@ final class Shortcodes_Ultimate_Maker_Settings {
 	 */
 	public function sanitize_license_key( $value ) {
 
-		$value = trim( $value );
+		$value      = trim( $value );
 		$prev_value = get_option( $this->license_key_option, '' );
 
 		// Value is not changed - do nothing
-		if ( $value === $prev_value ) {
+		if (
+			$value === $prev_value ||
+			$value === $this->mask_license_key( $prev_value )
+		) {
 			return $prev_value;
 		}
 
-		// Masked value is not changed - do nothing
-		if ( $value === $this->mask_license_key( $prev_value ) ) {
-			return $prev_value;
-		}
+		// Deactivation
 
-		// Activate license key
-		if ( ! empty( $value ) ) {
+		if ( empty( $value ) ) {
 
-			$status = $this->remote_activate_license_key( $value );
-			$message = $this->get_license_key_activation_message( $status );
+			$status          = $this->remote_deactivate_license_key( $prev_value );
+			$message         = $this->get_license_key_activation_message( $status, false );
 			$message['type'] = 'updated';
 
-			// Key not activated
-			if ( $status !== 'activated-202' ) {
+			// Not deactivated
+			if ( 'deactivated-202' !== $status ) {
 
-				// Add error code
 				$message['text'] .= sprintf(
 					'&nbsp;&nbsp;<code><small>%s: %s</small></code>',
 					__( 'error code', 'shortcodes-ultimate-maker' ),
@@ -257,7 +270,7 @@ final class Shortcodes_Ultimate_Maker_Settings {
 				);
 
 				$message['type'] = 'error';
-				$value = $prev_value;
+				$value           = $prev_value;
 
 			}
 
@@ -268,38 +281,36 @@ final class Shortcodes_Ultimate_Maker_Settings {
 				$message['type']
 			);
 
+			return $value;
+
 		}
 
-		// Deactivate license key
-		else {
+		// Activation
 
-			$status = $this->remote_deactivate_license_key( $prev_value );
-			$message = $this->get_license_key_activation_message( $status, false );
-			$message['type'] = 'updated';
+		$status          = $this->remote_activate_license_key( $value );
+		$message         = $this->get_license_key_activation_message( $status );
+		$message['type'] = 'updated';
 
-			// Key not deactivated
-			if ( $status !== 'deactivated-202' ) {
+		// Not activated
+		if ( 'activated-202' !== $status ) {
 
-				// Add error code
-				$message['text'] .= sprintf(
-					'&nbsp;&nbsp;<code><small>%s: %s</small></code>',
-					__( 'error code', 'shortcodes-ultimate-maker' ),
-					$message['id']
-				);
-
-				$message['type'] = 'error';
-				$value = $prev_value;
-
-			}
-
-			add_settings_error(
-				$this->license_key_option,
-				$this->license_key_option,
-				sprintf( '%s: %s', $this->addon_name, $message['text'] ),
-				$message['type']
+			$message['text'] .= sprintf(
+				'&nbsp;&nbsp;<code><small>%s: %s</small></code>',
+				__( 'error code', 'shortcodes-ultimate-maker' ),
+				$message['id']
 			);
 
+			$message['type'] = 'error';
+			$value           = $prev_value;
+
 		}
+
+		add_settings_error(
+			$this->license_key_option,
+			$this->license_key_option,
+			sprintf( '%s: %s', $this->addon_name, $message['text'] ),
+			$message['type']
+		);
 
 		return $value;
 
@@ -319,17 +330,22 @@ final class Shortcodes_Ultimate_Maker_Settings {
 			return 'not-activated-409';
 		}
 
-		$response = wp_remote_post( $this->license_key_api_url . '/activate-license-key', array(
+		$response = wp_remote_post(
+			$this->license_key_api_url . '/activate-license-key',
+			array(
 				'timeout' => 10,
 				'headers' => array(
-					'Content-Type' => 'application/json'
+					'Content-Type' => 'application/json',
 				),
-				'body'    => json_encode( array(
+				'body'    => wp_json_encode(
+					array(
 						'site'    => $this->get_domain_name(),
 						'key'     => $key,
 						'product' => $this->addon_id,
-					) ),
-			) );
+					)
+				),
+			)
+		);
 
 		$response = json_decode( wp_remote_retrieve_body( $response ), true );
 
@@ -355,17 +371,22 @@ final class Shortcodes_Ultimate_Maker_Settings {
 			return 'not-deactivated-409';
 		}
 
-		$response = wp_remote_post( $this->license_key_api_url . '/deactivate-license-key', array(
+		$response = wp_remote_post(
+			$this->license_key_api_url . '/deactivate-license-key',
+			array(
 				'timeout' => 10,
 				'headers' => array(
-					'Content-Type' => 'application/json'
+					'Content-Type' => 'application/json',
 				),
-				'body'    => json_encode( array(
+				'body'    => wp_json_encode(
+					array(
 						'site'    => $this->get_domain_name(),
 						'key'     => $key,
 						'product' => $this->addon_id,
-					) ),
-			) );
+					)
+				),
+			)
+		);
 
 		$response = json_decode( wp_remote_retrieve_body( $response ), true );
 
@@ -406,7 +427,7 @@ final class Shortcodes_Ultimate_Maker_Settings {
 
 		return array(
 			'id'   => $id,
-			'text' => $this->license_key_activation_messages[ $id ]
+			'text' => $this->license_key_activation_messages[ $id ],
 		);
 
 	}
@@ -419,17 +440,16 @@ final class Shortcodes_Ultimate_Maker_Settings {
 	 * @return string Site's domain name.
 	 */
 	private function get_domain_name() {
-		return parse_url( home_url(), PHP_URL_HOST );
+		return wp_parse_url( home_url(), PHP_URL_HOST );
 	}
 
 	/**
 	 * Helper to hide license key at settings page.
 	 *
 	 * @since  1.5.6
-	 * @access protected
 	 * @return string Masked license key.
 	 */
-	protected function mask_license_key( $value ) {
+	public function mask_license_key( $value ) {
 
 		if ( ! $this->is_valid_license_key( $value ) ) {
 			return $value;
@@ -477,12 +497,15 @@ final class Shortcodes_Ultimate_Maker_Settings {
 	 * Utility function to display specified template by it's name.
 	 *
 	 * @since 1.5.5
-	 * @access protected
 	 * @param string  $name Template name (without extension).
 	 * @param mixed   $data Template data to be passed to the template.
 	 */
-	protected function the_template( $name, $data = null ) {
+	public function the_template( $name, $data = null ) {
 		echo $this->get_template( $name, $data );
+	}
+
+	private function is_settings_page() {
+		return isset( $_GET['page'] ) && 'shortcodes-ultimate-settings' === $_GET['page'];
 	}
 
 }
