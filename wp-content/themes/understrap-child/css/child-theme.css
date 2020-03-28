@@ -11647,7 +11647,7 @@ a.skip-link {
 .gallery-caption {
   display: block; }
 
-.shadowed, .page-hero, .footer__input, .footer__submit-button, .page-wrapper {
+.shadowed, .page-hero, .footer__input, .footer__submit-button, .footer input[type='submit'], .page-wrapper {
   -webkit-box-shadow: 0px 0px 28px -2px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 28px -2px rgba(0, 0, 0, 0.2); }
 
@@ -13480,7 +13480,8 @@ ol > li {
     margin-top: 12px;
     margin-bottom: 12px; }
     .navbar #main-menu li.nav-item:last-child {
-      margin: auto; }
+      margin: auto;
+      padding-left: 1rem; }
     .navbar #main-menu a[title='Get Tickets'] {
       font-family: 'Oswald', sans-serif !important;
       font-weight: bold;
@@ -13583,8 +13584,11 @@ body.admin-bar .fixed-top {
 
 .icon-item {
   display: block; }
+  .icon-item:hover {
+    text-decoration: none; }
   .icon-item__icon {
     display: block;
+    text-align: center;
     width: 150px;
     margin: 0px auto 15px auto; }
     .icon-item__icon img {
@@ -13594,7 +13598,7 @@ body.admin-bar .fixed-top {
         .icon-item__icon img {
           max-width: 250px; } }
   .icon-item__title {
-    color: #20c997;
+    color: #ffffff;
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
@@ -13602,15 +13606,12 @@ body.admin-bar .fixed-top {
     max-width: 100%;
     margin: auto; }
   .icon-item__content {
-    color: #20c997;
+    color: #ffffff;
     text-align: center;
     font-size: 1.2rem;
     width: 150px;
     max-width: 100%;
     margin: auto; }
-
-.icon-item:hover {
-  text-decoration: none; }
 
 @media (max-width: 767.98px) {
   .icon-item {
@@ -13805,6 +13806,13 @@ body.admin-bar .fixed-top {
     padding-bottom: 0; }
   .page-section .row, .page-section .podcast-intro {
     padding-bottom: 1rem; }
+    .page-section .row .js-wpv-view-layout, .page-section .podcast-intro .js-wpv-view-layout {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-flex: 1;
+          -ms-flex-positive: 1;
+              flex-grow: 1; }
   .page-section__overlay-image {
     min-width: 100%;
     height: 100%;
@@ -14510,7 +14518,7 @@ body.single {
   .post-image.image-polaroid {
     border-radius: 0;
     background-color: white;
-    padding: 10px 10px 50px; }
+    padding: 2.5% 2.5% 15.5%; }
 
 .page-section__single-column.no-inner-margin .post-image, .row.no-inner-margin .post-image, .no-inner-margin.podcast-intro .post-image {
   margin-top: 0;
@@ -14730,20 +14738,20 @@ body.single {
   background-color: #0c3657;
   padding: 4rem 50px 1rem; }
   .footer__copyright {
-    color: #4d4d4f;
+    color: #ffffff;
     font-size: 0.8rem;
     margin-top: 2.5rem; }
   .footer__link {
-    color: #4d4d4f;
+    color: #ffffff;
     -webkit-transition: color 0.5s ease;
     transition: color 0.5s ease;
     font-size: 0.8rem; }
     .footer__link:hover {
-      color: white; }
+      color: #c9c9c9; }
   .footer__heading {
     font-family: "Ubuntu";
     font-size: 1rem;
-    color: #4d4d4f;
+    color: #ffffff;
     font-weight: 400;
     font-size: 0.8rem;
     text-transform: uppercase; }
@@ -14756,15 +14764,15 @@ body.single {
     font-weight: 300;
     font-size: 0.8rem; }
   .footer__social-link {
-    color: #4d4d4f;
+    color: #ffffff;
     font-size: 1.5rem;
     display: inline-block;
     margin-right: 1rem;
     -webkit-transition: color 0.5s ease;
     transition: color 0.5s ease; }
     .footer__social-link:hover {
-      color: #4d4d4f; }
-  .footer__email-signup-form {
+      color: #c9c9c9; }
+  .footer__email-signup-form, .footer .wpcf7-form p {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -14780,15 +14788,17 @@ body.single {
     border: none;
     font-size: 0.8rem;
     padding: .75rem 1rem; }
-  .footer__submit-button {
+  .footer__submit-button, .footer input[type='submit'] {
     -ms-flex-preferred-size: 20%;
         flex-basis: 20%;
+    background-color: #bf2821;
+    color: #ffffff;
     border: none;
     font-weight: 300; }
   .footer__text {
     font-size: 0.8rem;
     line-height: 1.5;
-    color: #4d4d4f; }
+    color: #ffffff; }
   .footer__logo {
     /*max-width:200px;*/
     max-height: 125px;
@@ -17723,14 +17733,14 @@ figcaption.wp-caption-text {
   padding-bottom: 20px; }
 
 .page-item.active .page-link {
-  background-color: #e83e8c;
-  border-color: #e83e8c; }
+  background-color: #0c3657;
+  border-color: #0c3657; }
 
 li.page-item {
   font-size: 1.25em; }
 
 .page-link {
-  color: #e83e8c;
+  color: #0c3657;
   border: none;
   padding: .5em 1em; }
 
@@ -17741,14 +17751,11 @@ li.page-item {
 
 /* Custom CSS */
 table.table-borderless td {
-  color: #20c997;
+  color: #0c3657;
   padding: 1rem; }
   @media (max-width: 767.98px) {
     table.table-borderless td {
       padding: 0.5rem 0.25rem; } }
-
-.video-mobile-bg {
-  background-image: url("https://staging4.mytruegirl.com/wp-content/uploads/2019/07/LiveEventsBkgd.jpg") !important; }
 
 @media (min-width: 768px) {
   .about-page-heading {

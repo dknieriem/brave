@@ -53,8 +53,6 @@ body
     padding-top:96px;
     background-color: color(white);
     line-height: 1.2;
-
-
     
     @include media-breakpoint-down(sm)
     {
@@ -71,8 +69,6 @@ body
 {
     padding-top:0px;
     padding-bottom:0px;
-    //margin-left: 9px;
-    //margin-right: 9px;
 }
 
 .navbar .navbar-container, #content {
@@ -82,8 +78,6 @@ body
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;
-        //margin-left: 9px;
-        //margin-right: 9px;
     }
 
     @include media-breakpoint-up(dx){
@@ -155,8 +149,8 @@ figcaption.wp-caption-text
 
 .page-item.active .page-link
 {
-    background-color: $pink;
-    border-color: $pink;
+    background-color: $blue;
+    border-color: $blue;
 }
 
 li.page-item {
@@ -165,7 +159,7 @@ li.page-item {
 
 .page-link
 {
-    color: $pink;
+    color: $blue;
     border: none;
     padding:.5em 1em;
 }
@@ -182,7 +176,7 @@ li.page-item {
 // Basic Table Styles - DON: We should pull out into a _table.scss file and BEMify to the extent possible
 table.table-borderless {
     td {
-        color: $teal;
+        color: $blue;
         padding:1rem;
 
         @include media-breakpoint-down(sm)
@@ -192,10 +186,10 @@ table.table-borderless {
     }
 }
 
-.video-mobile-bg {
-    background-image:url('https://staging4.mytruegirl.com/wp-content/uploads/2019/07/LiveEventsBkgd.jpg') !important;
+//.video-mobile-bg {
+//    background-image:url('https://staging4.mytruegirl.com/wp-content/uploads/2019/07/LiveEventsBkgd.jpg') !important;
     // DON: Very ugly hack here! We should clean up the shortcode for background videos
-}
+//}
 
 .about-page-heading
 {
@@ -221,19 +215,8 @@ strong
 //TODO: might be irrelevant now;
 @media (max-width: 767px)
 {
-
-    // .page-section__content-wrapper {
-    //     padding-left: 0;
-    //     padding-right: 0;
-    // }
-
-    // .col, .col-sm-4, .col-sm-8, .col-md-4, .col-md-8 {
-    //     &:not(.mobile-full-width) {
-    //         padding: 0px 50px;
-    //     }
-    // }
-
-    #content>.row>.col-12 {
+    #content>.row>.col-12
+    {
         padding: 0;
     }
 }
@@ -241,17 +224,14 @@ strong
 
 .wp-block-column
 {
-
     @media (min-width: 600px)
-    {
-        
+    {   
         flex-basis: 100%;
 
         &:nth-child(2n)
         {
             margin-left:inherit;
         }
-
     }
 }
 

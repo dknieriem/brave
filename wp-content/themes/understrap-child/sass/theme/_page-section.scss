@@ -7,7 +7,6 @@
     padding-left: 7%;
     padding-right: 7%;
     justify-content: center;
-    //overflow: hidden;
     position: relative;
 
     @include media-breakpoint-down(sm)
@@ -149,6 +148,12 @@
     // Page Section Row
     .row {
         padding-bottom: 1rem;
+
+        .js-wpv-view-layout
+        {
+            display: flex;
+            flex-grow: 1;
+        }
     }
 
     &__overlay-image

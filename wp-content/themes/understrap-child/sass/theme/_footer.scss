@@ -5,20 +5,20 @@
 
     &__copyright
     {
-        color: $gray;
+        color: $white;
         font-size: 0.8rem;
         margin-top:2.5rem;
     }
 
     &__link
     {
-        color: $gray;
+        color: $white;
         transition: color 0.5s ease;
         font-size:0.8rem;
 
         &:hover
         {
-            color:white;
+            color:$light-gray;
         }
     }
 
@@ -26,7 +26,7 @@
     {
         font-family:$body-font;
         font-size:1rem;
-        color: $gray;
+        color: $white;
         font-weight:400;
         font-size:0.8rem;
         text-transform: uppercase;
@@ -48,7 +48,7 @@
 
     &__social-link
     {
-        color: $gray;
+        color: $white;
         font-size: 1.5rem;
         display: inline-block;
         margin-right:1rem;
@@ -56,11 +56,11 @@
 
         &:hover
         {
-            color: $gray;
+            color: $light-gray;
         }
     }
     
-    &__email-signup-form
+    &__email-signup-form, .wpcf7-form p
     {
         //@extend .form-inline;
         display: flex;
@@ -79,11 +79,11 @@
         @extend .shadowed;
     }
 
-    &__submit-button
+    &__submit-button, input[type='submit']
     {
         flex-basis:20%;
-        //background-color:$rose;
-        //color:white;
+        background-color:$red;
+        color:$white;
         border:none;
         font-weight:300;
         @extend .shadowed;  
@@ -93,7 +93,7 @@
     {
         font-size: 0.8rem;
         line-height: 1.5;
-        color: $gray;
+        color: $white;
     }
     
     &__logo
