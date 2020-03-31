@@ -12989,17 +12989,19 @@ a.skip-link {
 .font-bebas, .text-bebas {
   font-family: "Bebas Neue", cursive !important; }
 
-.font-ubuntu, .text-ubuntu {
+.font-ubuntu, .faq-item__body--answer p, .text-ubuntu {
   font-family: "Ubuntu", sans-serif !important; }
 
 .font-bangers, .button, .blog__sidebar .search-form__search-button, .search__sidebar .search-form__search-button, .blog__sidebar .mc4wp-form input[type='submit'], .search__sidebar .mc4wp-form input[type='submit'], .navbar #main-menu a[title='Get Tickets'], .post-preview__button, .post-card__card-button, .search-page-form .search-form__search-button, section.no-results form button, .text-bangers, .faq-item__button {
   font-family: "Bangers", cursive !important; }
 
+.font-bangers, .button, .blog__sidebar .search-form__search-button, .search__sidebar .search-form__search-button, .blog__sidebar .mc4wp-form input[type='submit'], .search__sidebar .mc4wp-form input[type='submit'], .navbar #main-menu a[title='Get Tickets'], .post-preview__button, .post-card__card-button, .search-page-form .search-form__search-button, section.no-results form button {
+  letter-spacing: 1px; }
+
 body {
   color: #0c3657;
   font-family: "Ubuntu";
-  font-weight: 300;
-  line-height: 1.2; }
+  font-weight: 300; }
 
 a {
   text-decoration: none !important; }
@@ -13178,7 +13180,7 @@ ol > li {
 .text-center, .blog__sidebar .custom-html-widget, .search__sidebar .custom-html-widget, .blog__sidebar .search-form, .search__sidebar .search-form, .post-card__heading, .post-card__title, .post-card__text, .accordion-category, .search-page-form .search-form {
   text-align: center; }
 
-.text-bold, .faq-item__button, .font-bold {
+.text-bold, .font-bold {
   font-weight: bold; }
 
 .all-caps {
@@ -13430,16 +13432,9 @@ ol > li {
   .navbar .navbar-brand {
     padding-top: 13px;
     padding-bottom: 13px; }
-    @media (max-width: 991.98px) {
-      .navbar .navbar-brand {
-        margin: auto; } }
     .navbar .navbar-brand img {
       max-height: 70px;
       width: auto; }
-      @media (max-width: 767.98px) {
-        .navbar .navbar-brand img {
-          max-width: 300px;
-          max-height: 180px; } }
   .navbar-collapse {
     -webkit-box-flex: 0;
         -ms-flex-positive: 0;
@@ -14441,51 +14436,24 @@ body.single {
 .hr {
   width: 100%;
   margin: 0 auto; }
-  .hr--dotted {
-    background-image: url("../img/dot-white.svg");
-    background-repeat: repeat-x;
-    background-position: left center;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    min-height: 10px; }
-    .hr--dotted__text {
-      color: white;
-      text-transform: uppercase;
-      font-size: 1.2rem;
-      background-color: #20c997;
-      padding: .5rem 2rem;
-      font-family: "Ubuntu";
-      display: inline-block;
-      font-weight: 300;
-      line-height: 1;
-      margin-bottom: 0; }
-    .hr--dotted__text--pink {
-      background-color: #e83e8c; }
-    .hr--dotted--gray {
-      background-image: url("../img/dot-gray.svg"); }
-    .hr--dotted--pink {
-      background-image: url("../img/dot-pink.svg"); }
   .hr__inner {
     height: 0px;
-    margin: 1rem auto; }
-    .hr__inner.hr--slim {
+    margin: 1rem auto;
+    background-size: 100% 100%; }
+    .hr__inner.left-aligned {
+      margin: 1rem auto 1rem 0; }
+    .hr__inner .right-aligned {
+      margin: 1rem 0 1rem auto; }
+    .hr__inner--slim {
       margin: 0.25rem auto; }
     .hr__inner--solid {
-      padding-top: 3px; }
-    .hr__inner--bold {
-      padding-top: 8px; }
-    .hr__inner--left-aligned {
-      margin: .25rem auto .25rem 0; }
-    .hr__inner--teal {
-      background-color: #20c997; }
-    .hr__inner--pink {
-      background-color: #e83e8c; }
+      padding-top: 14px; }
+    .hr__inner--red {
+      background-image: url(../img/hr-red-bold.png); }
     .hr__inner--white {
-      background-color: #ffffff; }
+      background-image: url(../img/hr-white-bold.png); }
+      .hr__inner--white.hr__inner--thin {
+        background-image: url(../img/hr-white.png); }
 
 @media (max-width: 767.98px) {
   .post-thumb {
@@ -14874,6 +14842,7 @@ body.single {
       .newsletter-signup input[type="text"]:placeholder-shown, .newsletter-signup input[type="text"]:-webkit-input-placeholder, .newsletter-signup input[type="text"]:-ms-input-placeholder, .newsletter-signup input[type="text"]::placeholder, .newsletter-signup input[type="email"]:placeholder-shown, .newsletter-signup input[type="email"]:-webkit-input-placeholder, .newsletter-signup input[type="email"]:-ms-input-placeholder, .newsletter-signup input[type="email"]::placeholder {
         color: #c9c9c9; }
     .newsletter-signup input.button, .newsletter-signup .blog__sidebar input.search-form__search-button, .blog__sidebar .newsletter-signup input.search-form__search-button, .newsletter-signup .search__sidebar input.search-form__search-button, .search__sidebar .newsletter-signup input.search-form__search-button, .newsletter-signup .blog__sidebar .mc4wp-form input[type='submit'], .blog__sidebar .mc4wp-form .newsletter-signup input[type='submit'], .newsletter-signup .search__sidebar .mc4wp-form input[type='submit'], .search__sidebar .mc4wp-form .newsletter-signup input[type='submit'], .newsletter-signup input.post-preview__button, .newsletter-signup input.post-card__card-button, .newsletter-signup .search-page-form input.search-form__search-button, .search-page-form .newsletter-signup input.search-form__search-button {
+      color: #ffffff;
       border: none;
       font-size: 1.1rem;
       font-weight: 300;
@@ -14997,6 +14966,13 @@ body.single {
 .events-hero {
   padding-left: 0;
   padding-right: 0; }
+  .events-hero .page-section__content-wrapper {
+    position: absolute;
+    bottom: 0; }
+
+@media (min-width: 768px) {
+  .w-md-100 {
+    width: 100% !important; } }
 
 .events-hero-banner img {
   margin-top: 2.3rem;
@@ -15016,16 +14992,17 @@ body.single {
   color: white; }
   .events-hero-header .heading, .events-hero-header .faq-header {
     font-size: 2.7rem;
-    line-height: 75px;
+    line-height: 46px;
     padding: 8px 0;
     color: #ffffff; }
     .events-hero-header .heading .background-black, .events-hero-header .faq-header .background-black {
       -webkit-box-shadow: 10px 0 0 #000000, -10px 0 0 #000000;
       box-shadow: 10px 0 0 #000000, -10px 0 0 #000000; }
+  .events-hero-header .hero-logo {
+    height: 100px;
+    width: auto; }
   .events-hero-header a {
-    padding: .6rem 1.75rem;
-    font-weight: 700;
-    font-size: 2.4rem; }
+    font-size: 1.5rem; }
   .events-hero-header .mt-md {
     margin-top: 2.5rem !important; }
 
@@ -15108,6 +15085,28 @@ body.single {
     margin-top: 8px;
     font-size: 1.5rem; }
 
+.event-card .card-header {
+  background-color: #bf2821;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-size: 85%;
+  background-repeat: no-repeat;
+  background-position: center; }
+  .event-card .card-header svg {
+    fill: black; }
+  .event-card .card-header .bg-padding {
+    padding-top: 100%; }
+
+.event-card-city {
+  margin: auto 0; }
+
+.bg-state-Minnesota {
+  background-image: url(../img/states/mn.svg); }
+
 .events-tickets img {
   width: 12%;
   margin-top: 0;
@@ -15177,12 +15176,13 @@ body.single {
 .faq-item {
   background-color: transparent; }
   .faq-item__button {
-    font-size: 2.375rem;
     border-color: transparent;
+    color: #ffffff;
     text-align: left; }
     .faq-item__button:hover, .faq-item__button:focus {
-      color: #1b7cc7;
-      text-decoration: none; }
+      color: #c9c9c9;
+      text-decoration: none;
+      cursor: pointer; }
     .faq-item__button--q {
       font-weight: normal;
       font-size: 3rem;
@@ -15200,15 +15200,11 @@ body.single {
         -ms-flex-direction: row;
             flex-direction: row; }
     .faq-item__body--a {
-      font-weight: normal;
-      font-size: 3rem;
-      margin-left: 1.6rem;
-      letter-spacing: 3px; }
+      display: none; }
     .faq-item__body--answer {
       padding: 0 1.6rem; }
       .faq-item__body--answer p {
-        font-size: 1.5rem;
-        font-weight: bold;
+        color: white;
         line-height: 1.2; }
 
 .music-column__text {
@@ -17662,8 +17658,7 @@ li.slick-active button {
 /* Main Styles */
 body {
   padding-top: 96px;
-  background-color: #ffffff;
-  line-height: 1.2; }
+  background-color: #ffffff; }
   @media (max-width: 767.98px) {
     body {
       padding-top: 126px; }

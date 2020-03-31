@@ -6,6 +6,17 @@
 {
     padding-left: 0;
     padding-right: 0;
+
+    .page-section__content-wrapper {
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+@media (min-width:768px){
+    .w-md-100 {
+        width: 100% !important;
+    }
 }
 
 .events-hero-banner
@@ -38,7 +49,7 @@
     .heading
     {
         font-size: 2.7rem;
-        line-height: 75px;
+        line-height: 46px;
         padding: 8px 0;
         color: $white;
         @extend .font-oswald;
@@ -50,11 +61,15 @@
         }
     }
 
+    .hero-logo
+    {
+        height: 100px;
+        width: auto;
+    }
+
     a
     {
-        padding: .6rem 1.75rem;
-        font-weight: 700;
-        font-size: 2.4rem
+        font-size: 1.5rem
     }
 
     .mt-md
@@ -213,6 +228,44 @@
             margin-top: 8px;
             font-size: 1.5rem;
         }
+    }
+}
+
+.event-card
+{
+    .card-header 
+    {
+        background-color: $red;
+        display: flex;
+        justify-content: center;
+        background-size: 85%;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        svg
+        {
+            fill: black;
+        }
+
+        .bg-padding
+        {
+            padding-top: 100%;
+
+
+        }
+    }
+
+    &-city
+    {
+        margin: auto 0;
+    }
+}
+
+.bg-state
+{
+    &-Minnesota
+    {
+        background-image: url(../img/states/mn.svg);
     }
 }
 

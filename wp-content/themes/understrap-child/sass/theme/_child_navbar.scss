@@ -34,19 +34,20 @@
 
         padding-top: 13px;
         padding-bottom: 13px;
-        
-        @include media-breakpoint-down(md){
-            margin: auto;
-        }
+
+        // commented out to center entire nav        
+        // @include media-breakpoint-down(md){
+        //     margin: auto;
+        // }
 
         img {
             max-height: 70px;
             width: auto;
-            @include media-breakpoint-down(sm) {
-                max-width:300px; 
-                max-height: 180px;
+            // @include media-breakpoint-down(sm) {
+            //     max-width:300px; 
+            //     max-height: 180px;
                 
-            }
+            // }
         }
     }
 

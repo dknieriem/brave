@@ -16,11 +16,16 @@
     }
 }
 
+.font-bangers
+{
+    letter-spacing: 1px;
+}
+
 body{
     color:$body-color;
     font-family: $body-font;
     font-weight:300;
-    line-height: 1.2;
+    //line-height: 1.2;
 }
 
 a
