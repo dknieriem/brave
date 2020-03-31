@@ -14444,8 +14444,8 @@ body.single {
       margin: 1rem auto 1rem 0; }
     .hr__inner .right-aligned {
       margin: 1rem 0 1rem auto; }
-    .hr__inner--slim {
-      margin: 0.25rem auto; }
+    .hr__inner--thin {
+      padding-top: 5px; }
     .hr__inner--solid {
       padding-top: 14px; }
     .hr__inner--red {
@@ -17683,8 +17683,7 @@ body {
     margin-right: auto;
     margin-left: auto;
     margin-left: none;
-    margin-right: none;
-    max-width: 1458px; } }
+    margin-right: none; } }
 
 figcaption.wp-caption-text {
   color: #0c3657;
