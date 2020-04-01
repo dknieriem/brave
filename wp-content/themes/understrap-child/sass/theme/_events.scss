@@ -1,15 +1,12 @@
 /* Events page specific styles */
 
-/* Events Page Hacks - Tim */
-
 .events-hero
 {
     padding-left: 0;
     padding-right: 0;
 
     .page-section__content-wrapper {
-        position: absolute;
-        bottom: 0;
+        margin: auto;
     }
 }
 
@@ -258,6 +255,7 @@
     &-city
     {
         margin: auto 0;
+        color: $white;
     }
 }
 
@@ -266,6 +264,11 @@
     &-Minnesota
     {
         background-image: url(../img/states/mn.svg);
+    }
+
+    &-Colorado
+    {
+        background-image: url(../img/states/co.svg);
     }
 }
 

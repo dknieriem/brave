@@ -68,25 +68,33 @@
         margin-bottom:1rem;
     }
 
-    &__input
+    &__input, input.wpcf7-text
     {
         //@extend .form-control;
-        border-radius:0px;
+        border-radius:0;
         flex-basis:70%;
         border:none;
         font-size:0.8rem;
         padding:.75rem 1rem;
-        @extend .shadowed;
+        //@extend .shadowed;
     }
 
-    &__submit-button, input[type='submit']
+    &__submit-button, input[type='submit'].wpcf7-submit
     {
         flex-basis:20%;
         background-color:$red;
         color:$white;
         border:none;
         font-weight:300;
-        @extend .shadowed;  
+        border-radius: 0;
+
+        &:hover, &:active
+        {
+            background-color: lighten($red, 25%);
+            color: $white;
+        }
+
+
     }
 
     &__text
