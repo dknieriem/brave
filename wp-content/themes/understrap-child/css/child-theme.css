@@ -15100,14 +15100,17 @@ body.single {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    margin-bottom: 2rem; }
+    margin: 0 auto 2rem;
+    max-width: 600px;
+    width: 100%; }
     .events-map .wpv-filter-form .form-group, .events-map .wpv-filter-form .wpcf7 .wpcf7-form p, .wpcf7 .wpcf7-form .events-map .wpv-filter-form p {
-      margin-bottom: 0; }
+      margin-bottom: 0;
+      width: 100%; }
     .events-map .wpv-filter-form .js-toolset-maps-distance-value,
     .events-map .wpv-filter-form .js-toolset-maps-distance-unit {
       display: none; }
     .events-map .wpv-filter-form .js-toolset-maps-distance-center {
-      width: auto;
+      width: 100%;
       padding-left: 3rem;
       background: url("../img/MagnifyingGlass.svg");
       background-repeat: no-repeat;
