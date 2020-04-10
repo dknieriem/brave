@@ -50,13 +50,13 @@
 // body styles. See typography for default text styles
 body
 {
-    padding-top:96px;
+    padding-top:80px;
     background-color: color(white);
     //line-height: 1.2;
     
     @include media-breakpoint-down(sm)
     {
-        padding-top:126px;
+        //padding-top:126px;
         
         #page
         {

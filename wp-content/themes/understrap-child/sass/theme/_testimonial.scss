@@ -44,6 +44,7 @@
         }
     }
     &__slide--name {
+        @extend .font-bangers;
         font-size:1.5rem;
         margin-top: 12px;
     }

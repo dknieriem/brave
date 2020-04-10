@@ -2,12 +2,12 @@
 {
     @extend .font-bangers;
     background-color: $red;
-    padding: .5rem 2rem .6rem;
+    padding: 0 1rem .1rem;
     border: 0;
     border-radius:100px;
     color: $white;
     font-weight:300;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     display: inline-block;
 
     @include media-breakpoint-down(sm)

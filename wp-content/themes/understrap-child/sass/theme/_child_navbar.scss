@@ -1,7 +1,7 @@
 .navbar
 {
     border-bottom:none;
-    margin-bottom: 2rem;
+    //margin-bottom: 2rem;
     max-width: 100%;
     padding: 0;
 
@@ -21,12 +21,12 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        min-height: 96px;
+        min-height: 80px;
         position: relative;
 
         @include media-breakpoint-up(lg)
         {
-            height: 96px;
+            height: 80px;
         }
     }
 
@@ -35,13 +35,14 @@
         padding-top: 13px;
         padding-bottom: 13px;
 
-        // commented out to center entire nav        
-        // @include media-breakpoint-down(md){
-        //     margin: auto;
-        // }
+        @include media-breakpoint-down(sm)
+        {
+            margin: auto;
+        }
 
-        img {
-            max-height: 70px;
+        img 
+        {
+            max-height: 50px;
             width: auto;
             // @include media-breakpoint-down(sm) {
             //     max-width:300px; 
@@ -75,7 +76,7 @@
 
         color: $blue;
         font-size:1.3rem; 
-        font-weight:400 !important;
+        font-weight:500 !important;
         text-transform: uppercase !important;
         padding: .7rem 1rem;
         padding-left:1rem;
@@ -120,6 +121,11 @@
         {
             margin: auto;
             padding-left: 1rem;
+
+            @include media-breakpoint-down(sm)
+            {
+                padding-left: 0;
+            }
         }
         //Turn the get tickets link into a button
         a[title='Get Tickets'] 
@@ -127,9 +133,9 @@
             @extend .button;
             font-family: 'Oswald', sans-serif !important;
             font-weight: bold;
-            font-size: 1.6rem;
-            padding-top: .1rem;
-            padding-bottom: .2rem;
+            font-size: 1.5rem;
+            padding-top: 0rem;
+            padding-bottom: .1rem;
             margin: auto;
         }
     }
@@ -139,7 +145,8 @@ body.admin-bar .fixed-top
 {
     top:46px !important;
 
-    @include media-breakpoint-up(md){
+    @include media-breakpoint-up(md)
+    {
         top: 32px !important;
     }
 }

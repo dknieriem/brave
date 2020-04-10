@@ -40,13 +40,15 @@
 
 .events-hero-header
 {
-    margin-top: 6%;
+    //margin-top: 6%;
     color: white;
 
     .heading
     {
-        font-size: 2.7rem;
+        font-size: 3rem;
+        letter-spacing: 1px;
         line-height: 46px;
+        margin: 0;
         padding: 8px 0;
         color: $white;
         @extend .font-oswald;
@@ -60,7 +62,7 @@
 
     .hero-logo
     {
-        height: 100px;
+        height: 75px;
         width: auto;
     }
 
