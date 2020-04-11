@@ -112,6 +112,24 @@
             margin-top: 3rem;
         }
     }
+
+    .wheel-img
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: absolute;
+        top: -4rem;
+        left: 0;
+        right: 0;
+
+        .footer-img
+        {
+            max-height: 200px;
+            width: auto;
+        }
+    }
+
 }
 
 #wrapper-footer-full,

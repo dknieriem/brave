@@ -43,10 +43,21 @@
             font-size:1rem;
         }
     }
-    &__slide--name {
-        @extend .font-bangers;
-        font-size:1.5rem;
-        margin-top: 12px;
+    &__slide
+    {
+        &--name
+        {
+            @extend .font-bangers;
+            font-size:1.5rem;
+            // margin-top: 12px;
+        }
+
+        &--text p
+        {
+            margin-bottom: 0 !important;
+        }
+
+
     }
 
     &__source-img

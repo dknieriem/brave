@@ -68,7 +68,7 @@
 
     a
     {
-        font-size: 1.5rem
+        //font-size: 1.5rem;
     }
 
     .mt-md
@@ -212,10 +212,16 @@
     }
 }
 
-.events-map {
-    padding: 0 10%;
+.events-map 
+{
     display: flex;
     flex-direction: column;
+
+    @include media-breakpoint-up(xl)
+    {
+        padding: 0 10%;
+    
+    }
 
     &__header {
         img {
@@ -236,7 +242,7 @@
     {
         display: flex;
         justify-content: center;
-        margin: 0 auto 2rem;
+        margin: 0 auto 4rem;
         max-width: 600px;
         width: 100%;
 
@@ -265,6 +271,8 @@
             border-radius: 0;
             border: none;
             font-size: 1.2rem;
+            padding: .8rem .75rem .8rem 5rem;
+            height: auto;
 
             &::placeholder {
                 color: $placeholder-gray;
@@ -278,11 +286,12 @@
             background-color:$red;
             color:$white;
             border:none;
-            font-weight:300;
+            font-weight:400;
             border-radius: 0;
             font-size: 1.2rem;
             letter-spacing: initial;
             padding: .3rem 2rem;
+            // height: calc(2.25rem + 2px);
 
             &:hover, &:active
             {
@@ -296,6 +305,7 @@
 .event-card
 {
     @extend .post-image.image-polaroid;
+    padding-bottom: 10%;
     border: none;
 
     .card-header 
@@ -325,6 +335,24 @@
     {
         margin: auto 0;
         color: $white;
+    }
+
+    .card-body
+    {
+        text-align: left;
+        padding: 0;
+    }
+
+    .event-date
+    {
+        @extend p;
+        font-weight: bold;
+    }
+
+    .event-location
+    {
+        font-size: 0.8rem;
+        color: $event-gray;
     }
 }
 
@@ -392,16 +420,6 @@
 
         a {
             margin: 5px 2% 0;
-        }
-    }
-    &__arrow-left {
-        @media (max-width: 600px) {
-            display: none;
-        }
-    }
-    &__arrow-right {
-        @media (max-width: 770px) {
-            display: none;
         }
     }
 }
