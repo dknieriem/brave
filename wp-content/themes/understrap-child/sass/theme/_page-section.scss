@@ -149,11 +149,11 @@
     .row {
         padding-bottom: 1rem;
 
-        .js-wpv-view-layout
-        {
-            display: flex;
-            flex-grow: 1;
-        }
+        // .js-wpv-view-layout
+        // {
+        //     display: flex;
+        //     flex-grow: 1;
+        // }
     }
 
     &__overlay-image
@@ -460,4 +460,10 @@
         margin-bottom: 3rem;
   
   margin-bottom: 3rem;  }
+}
+
+.max-800
+{
+    max-width: 675px;
+    margin: auto;
 }

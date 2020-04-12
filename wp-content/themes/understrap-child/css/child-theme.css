@@ -12989,7 +12989,7 @@ a.skip-link {
 .font-bebas, .text-bebas {
   font-family: "Bebas Neue", cursive !important; }
 
-.font-ubuntu, .events-map .wpv-filter-form button.button-search, .faq-item__body--answer p, .faq-item__body--answer .event-card .event-date, .event-card .faq-item__body--answer .event-date, .text-ubuntu {
+.font-ubuntu, .events-map .wpv-filter-form button, .faq-item__body--answer p, .faq-item__body--answer .event-card .event-date, .event-card .faq-item__body--answer .event-date, .text-ubuntu {
   font-family: "Ubuntu", sans-serif !important; }
 
 .font-bangers, .testimonial__slide--name, .button, .blog__sidebar .search-form__search-button, .search__sidebar .search-form__search-button, .blog__sidebar .mc4wp-form input[type='submit'], .search__sidebar .mc4wp-form input[type='submit'], .navbar #main-menu a[title='Get Tickets'], .post-preview__button, .post-card__card-button, .search-page-form .search-form__search-button, section.no-results form button, .text-bangers, .faq-item__button {
@@ -13594,7 +13594,7 @@ body.admin-bar .fixed-top {
   .icon-item__icon {
     display: block;
     text-align: center;
-    width: 150px;
+    width: 250px;
     margin: 0px auto 15px auto; }
     @media (max-width: 767.98px) {
       .icon-item__icon img {
@@ -13808,13 +13808,6 @@ body.admin-bar .fixed-top {
     padding-bottom: 0; }
   .page-section .row, .page-section .podcast-intro {
     padding-bottom: 1rem; }
-    .page-section .row .js-wpv-view-layout, .page-section .podcast-intro .js-wpv-view-layout {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-flex: 1;
-          -ms-flex-positive: 1;
-              flex-grow: 1; }
   .page-section__overlay-image {
     min-width: 100%;
     height: 100%;
@@ -14073,6 +14066,10 @@ body.admin-bar .fixed-top {
   font-weight: 900;
   margin-bottom: 3rem;
   margin-bottom: 3rem; }
+
+.max-800 {
+  max-width: 675px;
+  margin: auto; }
 
 .post-preview__heading {
   letter-spacing: 3px;
@@ -15117,6 +15114,8 @@ body.single {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column; }
+  .events-map .pagination .page-item {
+    padding: 0 2rem; }
   @media (min-width: 1200px) {
     .events-map {
       padding: 0 10%; } }
@@ -15168,18 +15167,26 @@ body.single {
         color: #aaaaaa; }
       .events-map .wpv-filter-form .js-toolset-maps-distance-center::placeholder {
         color: #aaaaaa; }
-    .events-map .wpv-filter-form button.button-search {
-      background-color: #e7091e;
-      color: #ffffff;
-      border: none;
+    .events-map .wpv-filter-form button {
       font-weight: 400;
       border-radius: 0;
       font-size: 1.2rem;
       letter-spacing: initial;
       padding: .3rem 2rem; }
-      .events-map .wpv-filter-form button.button-search:hover, .events-map .wpv-filter-form button.button-search:active {
-        background-color: #fa7682;
-        color: #ffffff; }
+      .events-map .wpv-filter-form button.button-search {
+        background-color: #e7091e;
+        color: #ffffff;
+        border: none; }
+        .events-map .wpv-filter-form button.button-search:hover, .events-map .wpv-filter-form button.button-search:active {
+          background-color: #fa7682;
+          color: #ffffff; }
+      .events-map .wpv-filter-form button.button-reset {
+        background: transparent;
+        color: #e7091e;
+        border: 2px solid #e7091e; }
+        .events-map .wpv-filter-form button.button-reset:hover, .events-map .wpv-filter-form button.button-reset:active {
+          border: 2px solid #fa7682;
+          color: #fa7682; }
 
 .event-card {
   padding-bottom: 10%;
