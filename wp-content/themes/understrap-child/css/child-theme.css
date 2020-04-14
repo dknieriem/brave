@@ -15029,9 +15029,18 @@ body.single {
     margin: 0;
     padding: 8px 0;
     color: #ffffff; }
+    .events-hero-header .heading .get-bg {
+      position: relative;
+      z-index: 1; }
     .events-hero-header .heading .background-black {
       -webkit-box-shadow: 10px 0 0 #000000, -10px 0 0 #000000;
-      box-shadow: 10px 0 0 #000000, -10px 0 0 #000000; }
+      box-shadow: 10px 0 0 #000000, -10px 0 0 #000000;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 10px;
+      bottom: 10px;
+      z-index: -1; }
   .events-hero-header .hero-logo {
     height: 75px;
     width: auto;

@@ -53,10 +53,22 @@
         color: $white;
         @extend .font-oswald;
 
+        .get-bg
+        {
+            position: relative;
+            z-index: 1;
+        }
+
         .background-black
         {
             -webkit-box-shadow: 10px 0 0 $black, -10px 0 0 $black;
             box-shadow: 10px 0 0 $black, -10px 0 0 $black;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 10px;
+            bottom: 10px;
+            z-index: -1;
         }
     }
 
