@@ -315,17 +315,14 @@ template {
   display: none !important; }
 
 h1, h2, h3, h4, h5, h6,
-.h1,
-.faq-header, .h2, .accordion-category__header, .h3, .h4, .h5, .h6 {
+.h1, .h2, .accordion-category__header, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
   font-family: inherit;
   font-weight: 500;
   line-height: 1.2;
   color: inherit; }
 
-h1,
-.h1,
-.faq-header {
+h1, .h1 {
   font-size: 2.5rem; }
 
 h2, .h2, .accordion-category__header {
@@ -6492,7 +6489,7 @@ button.bg-dark:focus {
 .d-inline {
   display: inline !important; }
 
-.d-inline-block, .faq-header {
+.d-inline-block {
   display: inline-block !important; }
 
 .d-block {
@@ -12983,7 +12980,7 @@ a.skip-link {
   src: url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.eot);
   src: url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"), url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.woff2) format("woff2"), url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.woff) format("woff"), url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.ttf) format("truetype"), url(https://use.fontawesome.com/releases/v5.6.3/webfonts/fa-solid-900.svg#fontawesome) format("svg"); }
 
-.font-oswald, .navbar .nav-link, .events-hero-header .heading, .events-hero-header .faq-header, .text-oswald {
+.font-oswald, .navbar .nav-link, .events-hero-header .heading, .text-oswald {
   font-family: "Oswald", sans-serif !important; }
 
 .font-bebas, .text-bebas {
@@ -13082,7 +13079,7 @@ p, .event-card .event-date {
 .text-black {
   color: #000000; }
 
-.heading, .faq-header {
+.heading {
   font-family: "Bebas Neue";
   color: #000000;
   margin-top: 1rem;
@@ -13103,10 +13100,13 @@ p, .event-card .event-date {
     color: #0c3657; }
   .heading--yellow {
     color: #ffc107; }
-  .heading.background-circle, .background-circle.faq-header {
+  .heading.background-circle {
     border-radius: 50%;
     margin: 1rem auto;
     width: 3rem; }
+
+h1 {
+  font-size: 3.5rem; }
 
 h1, h2, h3, h4, h5 {
   /*color: $white;*/
@@ -13983,15 +13983,15 @@ body.admin-bar .fixed-top {
     z-index: 999;
     top: -35px;
     left: -135px; }
-  .about-hero__video .heading, .about-hero__video .faq-header {
+  .about-hero__video .heading {
     letter-spacing: 3px;
     margin: 0; }
     @media (min-width: 768px) {
-      .about-hero__video .heading, .about-hero__video .faq-header {
+      .about-hero__video .heading {
         margin-left: -5rem !important;
         margin-top: -5.75rem !important; } }
     @media (min-width: 993px) {
-      .about-hero__video .heading, .about-hero__video .faq-header {
+      .about-hero__video .heading {
         margin-left: -3.5rem !important;
         margin-top: -7.25rem !important; } }
   .about-hero__video .embed-container {
@@ -14029,7 +14029,7 @@ body.admin-bar .fixed-top {
   padding-left: 1rem;
   padding-right: 1rem; }
 
-.mt-n6 .heading, .mt-n6 .faq-header, .about-other .heading, .about-other .faq-header {
+.mt-n6 .heading, .about-other .heading {
   margin-top: 5px;
   font-size: 2rem;
   letter-spacing: 3px;
@@ -14067,7 +14067,7 @@ body.admin-bar .fixed-top {
   margin-bottom: 3rem;
   margin-bottom: 3rem; }
 
-.max-800 {
+.max-800, .testimonial__slider {
   max-width: 675px;
   margin: auto; }
 
@@ -14343,8 +14343,7 @@ body.single {
     font-weight: bold;
     text-decoration: underline !important; }
   .post-block h1, .post-block h2, .post-block h3, .post-block h4, .post-block h5,
-  .post-block .h1,
-  .post-block .faq-header, .post-block .h2, .post-block .accordion-category__header, .post-block .h3, .post-block .h4, .post-block .h5 {
+  .post-block .h1, .post-block .h2, .post-block .accordion-category__header, .post-block .h3, .post-block .h4, .post-block .h5 {
     color: #000000; }
   .post-block ul {
     font-size: 1rem;
@@ -14798,7 +14797,7 @@ body.single {
     left: 0;
     right: 0; }
     .footer .wheel-img .footer-img {
-      max-height: 200px;
+      max-height: 300px;
       width: auto; }
 
 #wrapper-footer-full,
@@ -15012,7 +15011,7 @@ body.single {
   margin-top: 2.3rem;
   margin-bottom: 0; }
 
-.events-hero-banner .heading, .events-hero-banner .faq-header {
+.events-hero-banner .heading {
   margin-top: .6rem;
   margin-bottom: .6rem;
   font-size: 2.1rem;
@@ -15023,19 +15022,20 @@ body.single {
 
 .events-hero-header {
   color: white; }
-  .events-hero-header .heading, .events-hero-header .faq-header {
-    font-size: 3rem;
+  .events-hero-header .heading {
+    font-size: 4rem;
     letter-spacing: 1px;
-    line-height: 46px;
+    line-height: 50px;
     margin: 0;
     padding: 8px 0;
     color: #ffffff; }
-    .events-hero-header .heading .background-black, .events-hero-header .faq-header .background-black {
+    .events-hero-header .heading .background-black {
       -webkit-box-shadow: 10px 0 0 #000000, -10px 0 0 #000000;
       box-shadow: 10px 0 0 #000000, -10px 0 0 #000000; }
   .events-hero-header .hero-logo {
     height: 75px;
-    width: auto; }
+    width: auto;
+    margin-bottom: 30px; }
   .events-hero-header .mt-md {
     margin-top: 2.5rem !important; }
 
@@ -15078,7 +15078,7 @@ body.single {
       margin-top: 3rem !important;
       font-size: 1.75rem; } }
 
-.events-header-sm .heading, .events-header-sm .faq-header {
+.events-header-sm .heading {
   margin-top: 0;
   margin-bottom: 3px;
   padding: 4px 10px 3px;
@@ -15092,7 +15092,7 @@ body.single {
   font-weight: 300;
   letter-spacing: 3px; }
 
-.events-3steps .heading.background-circle, .events-3steps .background-circle.faq-header {
+.events-3steps .heading.background-circle {
   width: 5rem;
   margin: 2rem auto;
   font-size: 4rem; }
@@ -15114,8 +15114,33 @@ body.single {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column; }
+  .events-map .pagination__prev {
+    position: absolute;
+    left: -55px;
+    top: 0;
+    bottom: 0; }
+  .events-map .pagination__next {
+    position: absolute;
+    right: -55px;
+    top: 0;
+    bottom: 0; }
   .events-map .pagination .page-item {
-    padding: 0 2rem; }
+    padding: 0 2rem;
+    margin: auto; }
+    .events-map .pagination .page-item__prev {
+      background-image: url(../img/chevron-left.svg);
+      background-repeat: no-repeat;
+      width: 20px;
+      height: 60px;
+      background-size: contain;
+      display: block; }
+    .events-map .pagination .page-item__next {
+      background-image: url(../img/chevron-right.svg);
+      background-repeat: no-repeat;
+      width: 20px;
+      height: 60px;
+      background-size: contain;
+      display: block; }
   @media (min-width: 1200px) {
     .events-map {
       padding: 0 10%; } }
@@ -15187,6 +15212,8 @@ body.single {
         .events-map .wpv-filter-form button.button-reset:hover, .events-map .wpv-filter-form button.button-reset:active {
           border: 2px solid #fa7682;
           color: #fa7682; }
+  .events-map .js-wpv-loop {
+    position: relative; }
 
 .event-card {
   padding-bottom: 10%;
@@ -15255,7 +15282,7 @@ body.single {
 .events-tickets__montage img {
   width: 100%; }
 
-.events-faq .heading, .events-faq .faq-header {
+.events-faq .heading {
   margin: 2rem 0 2.25rem;
   letter-spacing: 5px; }
 
@@ -15272,18 +15299,8 @@ body.single {
   display: inline;
   margin: auto; }
 
-.faq-header {
-  z-index: 999;
-  position: relative;
-  margin: auto;
-  letter-spacing: 3px; }
-  .faq-header__image {
-    position: absolute;
-    top: 0;
-    left: calc(50% - 66px);
-    margin: auto; }
-
 .faq-item {
+  margin-bottom: 8px;
   background-color: transparent; }
   .faq-item__button {
     border-color: transparent;
@@ -15318,7 +15335,8 @@ body.single {
       padding: 0 1.6rem; }
       .faq-item__body--answer p, .faq-item__body--answer .event-card .event-date, .event-card .faq-item__body--answer .event-date {
         color: white;
-        line-height: 1.2; }
+        line-height: 1.2;
+        margin-bottom: 0.5rem; }
 
 .music-column__text {
   max-width: 375px;

@@ -45,9 +45,9 @@
 
     .heading
     {
-        font-size: 3rem;
+        font-size: 4rem;
         letter-spacing: 1px;
-        line-height: 46px;
+        line-height: 50px;
         margin: 0;
         padding: 8px 0;
         color: $white;
@@ -64,6 +64,7 @@
     {
         height: 75px;
         width: auto;
+        margin-bottom: 30px;
     }
 
     a
@@ -219,10 +220,50 @@
 
     .pagination
     {
+
+        &__prev
+        {
+            position: absolute;
+            left: -55px;
+            top: 0;
+            bottom: 0;
+
+        }
+
+        &__next
+        {
+            position: absolute;
+            right: -55px;
+            top: 0;
+            bottom: 0;
+        }
         .page-item
         {
             padding: 0 2rem;
+            margin: auto;
+
+            &__prev
+            {
+                background-image: url(../img/chevron-left.svg);
+                background-repeat: no-repeat;
+                width: 20px;
+                height: 60px;
+                background-size: contain;
+                display: block;
+            }
+
+            &__next
+            {
+                background-image: url(../img/chevron-right.svg);
+                background-repeat: no-repeat;
+                width: 20px;
+                height: 60px;
+                background-size: contain;
+                display: block;
+            }
         }
+
+
     }
 
     @include media-breakpoint-up(xl)
@@ -324,8 +365,11 @@
                 }
             }
         }
+    }
 
-
+    .js-wpv-loop
+    {
+        position: relative;
     }
 }
 

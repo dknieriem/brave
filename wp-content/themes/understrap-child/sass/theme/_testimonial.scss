@@ -31,6 +31,11 @@
         padding-bottom:3rem;
     }
 
+    &__slider
+    {
+        @extend .max-800;
+    }
+
     &__source
     {
         text-transform: uppercase;

@@ -19,38 +19,14 @@
 
 .faq
 {
-
-	@extend .text-left;
-
-	&-header
-	{
-
-		@extend .d-inline-block; 
-		@extend .h1;
-		@extend .heading;
-		//@extend .heading-normal;
-
-	    z-index: 999;
-	    position: relative;
-	    margin: auto;
-	    //text-align: center;
-	    letter-spacing: 3px;
-
-		&__image 
-		{
-			position: absolute;
-			top: 0;
-			left: calc(50% - 66px);
-			margin: auto;
-		}
-	}
-	
+	@extend .text-left;	
 }
 
 .faq-item
 {
 	@extend .card;
 	@extend .border-0;
+	margin-bottom: 8px;
 
 	background-color: transparent;
 	&__header
@@ -107,10 +83,6 @@
 		&--a
 		{
 			display: none;
-			// font-weight: normal;
-			// font-size: 3rem;
-			// margin-left: 1.6rem;
-			// letter-spacing: 3px;
 		}
 
 		&--answer
@@ -121,9 +93,8 @@
 			{
 				@extend .font-ubuntu;
 				color: white;
-				//font-size: 1.5rem;
-				//font-weight: bold;
 				line-height: 1.2;
+				margin-bottom: 0.5rem; //default is 1rem
 			}
 
 		}
