@@ -123,6 +123,11 @@
         left: 0;
         right: 0;
 
+        @include media-breakpoint-down(sm)
+        {
+            position: relative;
+        }
+
         .footer-img
         {
             max-height: 300px;

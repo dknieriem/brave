@@ -466,4 +466,9 @@
 {
     max-width: 675px;
     margin: auto;
+
+    @include media-breakpoint-down(sm)
+    {
+        max-width: none;
+    }
 }

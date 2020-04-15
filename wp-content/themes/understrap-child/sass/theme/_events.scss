@@ -53,10 +53,21 @@
         color: $white;
         @extend .font-oswald;
 
+        @include media-breakpoint-down(sm)
+        {
+            font-size: 3rem;
+            padding: 0;
+        }
+
         .get-bg
         {
             position: relative;
             z-index: 1;
+
+            @include media-breakpoint-down(sm)
+            {
+                display: inline-block;
+            }
         }
 
         .background-black
@@ -69,6 +80,13 @@
             top: 10px;
             bottom: 10px;
             z-index: -1;
+
+            @include media-breakpoint-down(sm)
+            {
+                top: 1px;
+                bottom: -1px;
+
+            }
         }
     }
 
@@ -76,7 +94,7 @@
     {
         height: 75px;
         width: auto;
-        margin-bottom: 30px;
+        margin: 30px auto;  
     }
 
     a
@@ -306,6 +324,11 @@
         margin: 0 auto 4rem;
         max-width: 600px;
         width: 100%;
+
+        @include media-breakpoint-down(sm)
+        {
+            flex-direction: column;
+        }
 
         .form-group
         {
