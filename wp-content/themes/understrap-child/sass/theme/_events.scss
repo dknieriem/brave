@@ -248,6 +248,38 @@
     display: flex;
     flex-direction: column;
 
+    &.d-md-none
+    {
+        position: relative;
+    }
+
+    .view-and-pagination-container
+    {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+
+        .pagination
+        {
+
+            &__prev
+            {
+                position: absolute;
+                left: 15%;
+                z-index: 11;
+            }
+
+            &__next
+            {
+                position: absolute;
+                right: 15%;
+                z-index:11;
+            }
+        }
+
+    }
+
     .pagination
     {
 
@@ -267,6 +299,7 @@
             top: 0;
             bottom: 0;
         }
+
         .page-item
         {
             padding: 0 2rem;
@@ -274,9 +307,10 @@
 
             &__prev
             {
-                background-image: url(../img/chevron-left.svg);
+                background-image: url(../img/chevron-left.png);
                 background-repeat: no-repeat;
-                width: 20px;
+                background-position: center center;
+                width: 30px;
                 height: 60px;
                 background-size: contain;
                 display: block;
@@ -284,9 +318,10 @@
 
             &__next
             {
-                background-image: url(../img/chevron-right.svg);
+                background-image: url(../img/chevron-right.png);
                 background-repeat: no-repeat;
-                width: 20px;
+                background-position: center center;
+                width: 30px;
                 height: 60px;
                 background-size: contain;
                 display: block;
@@ -464,14 +499,209 @@
 
 .bg-state
 {
-    &-Minnesota
+    &-AL
+    {
+        background-image: url(../img/states/al.svg);
+    }
+    &-AK
+    {
+        background-image: url(../img/states/ak.svg);
+    }
+    &-AZ
+    {
+        background-image: url(../img/states/az.svg);
+    }
+    &-AR
+    {
+        background-image: url(../img/states/ar.svg);
+    }
+    &-CA
+    {
+        background-image: url(../img/states/ca.svg);
+    }
+    &-CO
+    {
+        background-image: url(../img/states/co.svg);
+    }
+    &-CT
+    {
+        background-image: url(../img/states/ct.svg);
+    }
+    &-DE
+    {
+        background-image: url(../img/states/de.svg);
+    }
+    &-DC
+    {
+        background-image: url(../img/states/dc.svg);
+    }
+    &-FL
+    {
+        background-image: url(../img/states/fl.svg);
+    }
+    &-GA
+    {
+        background-image: url(../img/states/ga.svg);
+    }
+    &-HI
+    {
+        background-image: url(../img/states/hi.svg);
+    }
+    &-ID
+    {
+        background-image: url(../img/states/id.svg);
+    }
+    &-IL
+    {
+        background-image: url(../img/states/il.svg);
+    }
+    &-IN
+    {
+        background-image: url(../img/states/in.svg);
+    }
+    &-IA
+    {
+        background-image: url(../img/states/ia.svg);
+    }
+    &-KS
+    {
+        background-image: url(../img/states/ks.svg);
+    }
+    &-KY
+    {
+        background-image: url(../img/states/ky.svg);
+    }
+    &-LA
+    {
+        background-image: url(../img/states/la.svg);
+    }
+    &-ME
+    {
+        background-image: url(../img/states/me.svg);
+    }
+    &-MD
+    {
+        background-image: url(../img/states/md.svg);
+    }
+    &-MA
+    {
+        background-image: url(../img/states/ma.svg);
+    }
+    &-MI
+    {
+        background-image: url(../img/states/mi.svg);
+    }
+    &-MN
     {
         background-image: url(../img/states/mn.svg);
     }
-
-    &-Colorado
+    &-MS
     {
-        background-image: url(../img/states/co.svg);
+        background-image: url(../img/states/ms.svg);
+    }
+    &-MO
+    {
+        background-image: url(../img/states/mo.svg);
+    }
+    &-MT
+    {
+        background-image: url(../img/states/mt.svg);
+    }
+    &-NE
+    {
+        background-image: url(../img/states/ne.svg);
+    }
+    &-NV
+    {
+        background-image: url(../img/states/nv.svg);
+    }
+    &-NH
+    {
+        background-image: url(../img/states/nh.svg);
+    }
+    &-NJ
+    {
+        background-image: url(../img/states/nj.svg);
+    }
+    &-NM
+    {
+        background-image: url(../img/states/nm.svg);
+    }
+    &-NY
+    {
+        background-image: url(../img/states/ny.svg);
+    }
+    &-NC
+    {
+        background-image: url(../img/states/nc.svg);
+    }
+    &-ND
+    {
+        background-image: url(../img/states/nd.svg);
+    }
+    &-OH
+    {
+        background-image: url(../img/states/oh.svg);
+    }
+    &-OK
+    {
+        background-image: url(../img/states/ok.svg);
+    }
+    &-OR
+    {
+        background-image: url(../img/states/or.svg);
+    }
+    &-PA
+    {
+        background-image: url(../img/states/pa.svg);
+    }
+    &-RI
+    {
+        background-image: url(../img/states/ri.svg);
+    }
+    &-SC
+    {
+        background-image: url(../img/states/sc.svg);
+    }
+    &-SD
+    {
+        background-image: url(../img/states/sd.svg);
+    }
+    &-TN
+    {
+        background-image: url(../img/states/tn.svg);
+    }
+    &-TX
+    {
+        background-image: url(../img/states/tx.svg);
+    }
+    &-UT
+    {
+        background-image: url(../img/states/ut.svg);
+    }
+    &-VT
+    {
+        background-image: url(../img/states/vt.svg);
+    }
+    &-VA
+    {
+        background-image: url(../img/states/va.svg);
+    }
+    &-WA
+    {
+        background-image: url(../img/states/wa.svg);
+    }
+    &-WV
+    {
+        background-image: url(../img/states/wv.svg);
+    }
+    &-WI
+    {
+        background-image: url(../img/states/wi.svg);
+    }
+    &-WY
+    {
+        background-image: url(../img/states/wy.svg);
     }
 }
 

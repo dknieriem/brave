@@ -14911,37 +14911,6 @@ body.single {
       .background-video__text {
         position: absolute;
         top: 25%; } }
-    .background-video__text .heading__on-pink {
-      font-size: 1.2rem;
-      line-height: 48px;
-      letter-spacing: 2px;
-      padding: 8px 0;
-      -webkit-box-shadow: 10px 0 0 #c83b94, -10px 0 0 #c83b94;
-      box-shadow: 10px 0 0 #c83b94, -10px 0 0 #c83b94; }
-      @media (min-width: 768px) and (max-width: 991.98px) {
-        .background-video__text .heading__on-pink {
-          font-size: 1.2rem;
-          line-height: 40px;
-          letter-spacing: 2px;
-          padding: 6px 0;
-          -webkit-box-shadow: 8px 0 0 #c83b94, -8px 0 0 #c83b94;
-          box-shadow: 8px 0 0 #c83b94, -8px 0 0 #c83b94; } }
-      @media (min-width: 992px) and (max-width: 1199.98px) {
-        .background-video__text .heading__on-pink {
-          font-size: 1.5rem;
-          line-height: 48px;
-          letter-spacing: 2px;
-          padding: 6px 0;
-          -webkit-box-shadow: 8px 0 0 #c83b94, -8px 0 0 #c83b94;
-          box-shadow: 8px 0 0 #c83b94, -8px 0 0 #c83b94; } }
-      @media (min-width: 1200px) {
-        .background-video__text .heading__on-pink {
-          font-size: 2rem;
-          line-height: 60px;
-          letter-spacing: 3px;
-          padding: 8px 0;
-          -webkit-box-shadow: 10px 0 0 #c83b94, -10px 0 0 #c83b94;
-          box-shadow: 10px 0 0 #c83b94, -10px 0 0 #c83b94; } }
   .background-video__button--desktop {
     margin-top: 15px; }
   .background-video__button--mobile {
@@ -14955,7 +14924,7 @@ body.single {
 /* Modal Video */
 @media (min-width: 576px) {
   #bgVideoFeatureModal .modal-dialog {
-    max-width: 100%; } }
+    max-height: 75%; } }
 
 #bgVideoFeatureModal .modal-body {
   padding: 0; }
@@ -15140,6 +15109,21 @@ body.single {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column; }
+  .events-map.d-md-none {
+    position: relative; }
+  .events-map .view-and-pagination-container {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0; }
+    .events-map .view-and-pagination-container .pagination__prev {
+      position: absolute;
+      left: 15%;
+      z-index: 11; }
+    .events-map .view-and-pagination-container .pagination__next {
+      position: absolute;
+      right: 15%;
+      z-index: 11; }
   .events-map .pagination__prev {
     position: absolute;
     left: -55px;
@@ -15154,16 +15138,18 @@ body.single {
     padding: 0 2rem;
     margin: auto; }
     .events-map .pagination .page-item__prev {
-      background-image: url(../img/chevron-left.svg);
+      background-image: url(../img/chevron-left.png);
       background-repeat: no-repeat;
-      width: 20px;
+      background-position: center center;
+      width: 30px;
       height: 60px;
       background-size: contain;
       display: block; }
     .events-map .pagination .page-item__next {
-      background-image: url(../img/chevron-right.svg);
+      background-image: url(../img/chevron-right.png);
       background-repeat: no-repeat;
-      width: 20px;
+      background-position: center center;
+      width: 30px;
       height: 60px;
       background-size: contain;
       display: block; }
@@ -15278,11 +15264,158 @@ body.single {
     font-size: 0.8rem;
     color: #757575; }
 
-.bg-state-Minnesota {
+.bg-state-AL {
+  background-image: url(../img/states/al.svg); }
+
+.bg-state-AK {
+  background-image: url(../img/states/ak.svg); }
+
+.bg-state-AZ {
+  background-image: url(../img/states/az.svg); }
+
+.bg-state-AR {
+  background-image: url(../img/states/ar.svg); }
+
+.bg-state-CA {
+  background-image: url(../img/states/ca.svg); }
+
+.bg-state-CO {
+  background-image: url(../img/states/co.svg); }
+
+.bg-state-CT {
+  background-image: url(../img/states/ct.svg); }
+
+.bg-state-DE {
+  background-image: url(../img/states/de.svg); }
+
+.bg-state-DC {
+  background-image: url(../img/states/dc.svg); }
+
+.bg-state-FL {
+  background-image: url(../img/states/fl.svg); }
+
+.bg-state-GA {
+  background-image: url(../img/states/ga.svg); }
+
+.bg-state-HI {
+  background-image: url(../img/states/hi.svg); }
+
+.bg-state-ID {
+  background-image: url(../img/states/id.svg); }
+
+.bg-state-IL {
+  background-image: url(../img/states/il.svg); }
+
+.bg-state-IN {
+  background-image: url(../img/states/in.svg); }
+
+.bg-state-IA {
+  background-image: url(../img/states/ia.svg); }
+
+.bg-state-KS {
+  background-image: url(../img/states/ks.svg); }
+
+.bg-state-KY {
+  background-image: url(../img/states/ky.svg); }
+
+.bg-state-LA {
+  background-image: url(../img/states/la.svg); }
+
+.bg-state-ME {
+  background-image: url(../img/states/me.svg); }
+
+.bg-state-MD {
+  background-image: url(../img/states/md.svg); }
+
+.bg-state-MA {
+  background-image: url(../img/states/ma.svg); }
+
+.bg-state-MI {
+  background-image: url(../img/states/mi.svg); }
+
+.bg-state-MN {
   background-image: url(../img/states/mn.svg); }
 
-.bg-state-Colorado {
-  background-image: url(../img/states/co.svg); }
+.bg-state-MS {
+  background-image: url(../img/states/ms.svg); }
+
+.bg-state-MO {
+  background-image: url(../img/states/mo.svg); }
+
+.bg-state-MT {
+  background-image: url(../img/states/mt.svg); }
+
+.bg-state-NE {
+  background-image: url(../img/states/ne.svg); }
+
+.bg-state-NV {
+  background-image: url(../img/states/nv.svg); }
+
+.bg-state-NH {
+  background-image: url(../img/states/nh.svg); }
+
+.bg-state-NJ {
+  background-image: url(../img/states/nj.svg); }
+
+.bg-state-NM {
+  background-image: url(../img/states/nm.svg); }
+
+.bg-state-NY {
+  background-image: url(../img/states/ny.svg); }
+
+.bg-state-NC {
+  background-image: url(../img/states/nc.svg); }
+
+.bg-state-ND {
+  background-image: url(../img/states/nd.svg); }
+
+.bg-state-OH {
+  background-image: url(../img/states/oh.svg); }
+
+.bg-state-OK {
+  background-image: url(../img/states/ok.svg); }
+
+.bg-state-OR {
+  background-image: url(../img/states/or.svg); }
+
+.bg-state-PA {
+  background-image: url(../img/states/pa.svg); }
+
+.bg-state-RI {
+  background-image: url(../img/states/ri.svg); }
+
+.bg-state-SC {
+  background-image: url(../img/states/sc.svg); }
+
+.bg-state-SD {
+  background-image: url(../img/states/sd.svg); }
+
+.bg-state-TN {
+  background-image: url(../img/states/tn.svg); }
+
+.bg-state-TX {
+  background-image: url(../img/states/tx.svg); }
+
+.bg-state-UT {
+  background-image: url(../img/states/ut.svg); }
+
+.bg-state-VT {
+  background-image: url(../img/states/vt.svg); }
+
+.bg-state-VA {
+  background-image: url(../img/states/va.svg); }
+
+.bg-state-WA {
+  background-image: url(../img/states/wa.svg); }
+
+.bg-state-WV {
+  background-image: url(../img/states/wv.svg); }
+
+.bg-state-WI {
+  background-image: url(../img/states/wi.svg); }
+
+.bg-state-WY {
+  background-image: url(../img/states/wy.svg); }
 
 .events-tickets img {
   width: 12%;
