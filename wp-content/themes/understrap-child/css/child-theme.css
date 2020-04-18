@@ -15115,15 +15115,19 @@ body.single {
     position: absolute;
     top: 50%;
     left: 0;
-    right: 0; }
+    right: 0;
+    margin-left: -30px;
+    margin-right: -30px; }
     .events-map .view-and-pagination-container .pagination__prev {
       position: absolute;
-      left: 15%;
+      left: 10px;
       z-index: 11; }
     .events-map .view-and-pagination-container .pagination__next {
       position: absolute;
-      right: 15%;
+      right: 10px;
       z-index: 11; }
+    .events-map .view-and-pagination-container .pagination .page-item {
+      padding: 0; }
   .events-map .pagination__prev {
     position: absolute;
     left: -55px;
