@@ -25,7 +25,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<p class="footer__copyright">Copyright <?php echo date('Y'); ?> Dannah Gresh | <a href="#" class="footer__link">Privacy Policy</a></p>
+				<p class="footer__copyright">Copyright <?php echo date('Y'); ?> Pure Freedom</p>
 			</div>
 		</div>
 
